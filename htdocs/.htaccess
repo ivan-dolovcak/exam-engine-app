@@ -1,0 +1,13 @@
+# Note: the include path is different on the production server
+<IfModule mod_php.c>
+    php_value include_path ".:/srv/http/partials:/srv/http/partials:/srv/http/include"
+</IfModule>
+
+# Set .phtml files as executable:
+AddType application/x-httpd-php .phtml
+
+# Deny directories without an index page:
+Options -Indexes
+
+# Recognize index.phtml as valid index files:
+DirectoryIndex index.php index.phtml index.html

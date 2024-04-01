@@ -1,0 +1,32 @@
+<?php include "config.php"; ?>
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Početna &bull; Exam Engine</title>
+</head>
+<body>
+<header>
+    <?php include "header.php"; ?>
+</header>
+<body>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Maxime voluptas libero, praesentium aperiam, eligendi a deserunt dolorum
+        non laudantium ab reprehenderit, eius quos harum! Tenetur esse sed eos
+        voluptatem consectetur!
+    </p>
+
+    <?php
+        if (isset($_SERVER["DEVELOPMENT"])) {
+            echo "yay";
+        }
+        else echo "nay";
+    ?>
+</body>
+<footer>
+    <?php include "footer.php"; ?>
+</footer>
+</body>
+</html>
