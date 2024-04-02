@@ -1,6 +1,6 @@
 # Note: the include path is different on the production server.
 <IfModule mod_php.c>
-    php_value include_path ".:/srv/http/partials:/srv/http/partials:/srv/http/include"
+    php_value include_path ".:/srv/http/partials:/srv/http/app"
 </IfModule>
 
 # Set .phtml files as executable:
