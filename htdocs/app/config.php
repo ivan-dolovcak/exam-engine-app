@@ -13,3 +13,7 @@ date_default_timezone_set("UTC");
 
 # Auto-require classes:
 spl_autoload_register(fn($className) => require "$className.php");
+
+# Multi-language support:
+$lang = "en";
+require_once "lang_$lang.php";
