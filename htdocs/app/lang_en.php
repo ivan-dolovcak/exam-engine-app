@@ -12,4 +12,8 @@ const LANG = [
     "usernameTakenError" => "Username is taken.",
     "emailTakenError" => "Email is taken.",
     "dbError" => "Database error.",
+    "logIn" => "Log in",
+    "usernameOrEmail" => "Username / email",
+    "invalidLogin" => "Invalid login.",
+    "logOut" => "Log out",
 ];

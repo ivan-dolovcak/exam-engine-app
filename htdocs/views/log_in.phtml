@@ -1,0 +1,35 @@
+<?php
+require_once "config.php";
+session_start();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <?php include "head.phtml"; ?>
+    <title><?=LANG["logIn"]?> &bull; Exam Engine</title>
+</head>
+<body>
+<header>
+    <?php include "header.phtml"; ?>
+</header>
+<main>
+    <h2><?=LANG["logIn"]?></h2>
+
+    <form action="/app/forms/log_in.php" method="post">
+        <label for="username"><?=LANG["usernameOrEmail"]?></label>
+        <input autofocus required type="text" name="usernameOrEmail"
+            id="username-or-email">
+        <br>
+        <label for="password"><?=LANG["password"]?></label>
+        <input required type="password" name="password" id="password">
+        <br>
+        <button><?=LANG["logIn"]?></button>
+
+        <p><?=Util::getFormError();?></p>
+    </form>
+</main>
+<footer>
+    <?php include "footer.phtml"; ?>
+</footer>
+</body>
+</html>

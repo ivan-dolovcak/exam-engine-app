@@ -12,4 +12,8 @@ const LANG = [
     "usernameTakenError" => "Korisničko ime je zauzeto.",
     "emailTakenError" => "E-mail je zauzet.",
     "dbError" => "Greška baze podataka.",
+    "logIn" => "Prijava",
+    "usernameOrEmail" => "Korisničko ime / e-mail",
+    "invalidLogin" => "Pogrešni podaci za prijavu.",
+    "logOut" => "Odjava",
 ];

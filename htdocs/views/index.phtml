@@ -14,6 +14,8 @@ session_start();
 </header>
 <main>
     <p><?=LANG["welcome"]?></p>
+
+    <p><?=$_SESSION["userID"] ?? "logged out"?></p>
 </main>
 <footer>
     <?php include "footer.phtml"; ?>
