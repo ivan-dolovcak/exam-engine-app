@@ -2,7 +2,7 @@
 const LANG = [
     "homepage" => "Početna",
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",
-    "signup" => "Registracija",
+    "signUp" => "Registracija",
     "username" => "Korisničko ime",
     "email" => "E-mail",
     "password" => "Lozinka",

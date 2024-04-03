@@ -3,7 +3,7 @@ require_once "config.php";
 session_start();
 
 $successPage = "/views/index.phtml";
-$failurePage = "/views/signup.phtml";
+$failurePage = "/views/sign_up.phtml";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || ! isset($_POST["username"], $_POST["email"], $_POST["password"],

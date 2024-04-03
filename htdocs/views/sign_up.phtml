@@ -6,16 +6,16 @@ session_start();
 <html>
 <head>
     <?php include "head.phtml"; ?>
-    <title><?=LANG["signup"]?> &bull; Exam Engine</title>
+    <title><?=LANG["signUp"]?> &bull; Exam Engine</title>
 </head>
 <body>
 <header>
     <?php include "header.phtml"; ?>
 </header>
 <main>
-    <h2><?=LANG["signup"]?></h2>
+    <h2><?=LANG["signUp"]?></h2>
 
-    <form action="/app/forms/signup.php" method="post">
+    <form action="/app/forms/sign_up.php" method="post">
         <label for="username"><?=LANG["username"]?></label>
         <input autofocus required type="text" name="username" id="username">
         <br>
@@ -31,7 +31,7 @@ session_start();
         <label for="last-name"><?=LANG["lastName"]?></label>
         <input required type="text" name="lastName" id="last-name">
         <br>
-        <button><?=LANG["signup"]?></button>
+        <button><?=LANG["signUp"]?></button>
 
         <p><?=Util::getFormError();?></p>
     </form>

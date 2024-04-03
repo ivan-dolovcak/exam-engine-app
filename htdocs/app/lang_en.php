@@ -2,7 +2,7 @@
 const LANG = [
     "homepage" => "Home",
     "welcome" => "Welcome to the Exam Engine web application home page!",
-    "signup" => "Sign up",
+    "signUp" => "Sign up",
     "username" => "Username",
     "email" => "Email",
     "password" => "Password",
