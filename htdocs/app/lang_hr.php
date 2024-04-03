@@ -1,6 +1,6 @@
 <?php
 const LANG = [
-    "homepage" => "Početna",
+    "homePage" => "Početna",
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",
     "signUp" => "Registracija",
     "username" => "Korisničko ime",

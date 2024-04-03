@@ -4,12 +4,12 @@ require "sql_auth.php";
 class DB
 {
     private static self $obj;
-    public Mysqli $conn;
+    public MySQLi $conn;
 
 
     private function __construct()
     {
-        $this->conn = new Mysqli(
+        $this->conn = new MySQLi(
             SQL_HOSTNAME, SQL_USERNAME, SQL_PASSWORD, SQL_DATABASE);
     }
 
@@ -22,7 +22,7 @@ class DB
     }
 
     function execStmt(
-        string $query, string $types, mixed ...$queryArgs): Mysqli_result|false
+        string $query, string $types, mixed ...$queryArgs): MySQLi_result|false
     {
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param($types, ...$queryArgs);

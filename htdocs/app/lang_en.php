@@ -1,6 +1,6 @@
 <?php
 const LANG = [
-    "homepage" => "Home",
+    "homePage" => "Home",
     "welcome" => "Welcome to the Exam Engine web application home page!",
     "signUp" => "Sign up",
     "username" => "Username",

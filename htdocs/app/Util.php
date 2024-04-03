@@ -5,8 +5,8 @@ class Util
 {
     public static function getFormError(): ?string
     {
-        $errMsg = $_SESSION["formErrMsg"] ?? null;
-        unset($_SESSION["formErrMsg"]);
+        $errMsg = $_SESSION["formErrorMsg"] ?? null;
+        unset($_SESSION["formErrorMsg"]);
         return $errMsg;
     }
     public static function sanitizeFormData(string $data): string

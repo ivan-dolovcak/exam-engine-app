@@ -45,18 +45,18 @@ class UserModel
         $query = "insert into `User`(`username`, `email`, `passwordHash`,
             `firstName`, `lastName`) values (?, ?, ?, ?, ?)";
 
-        $db = DB::getInstance();
+        $DB = DB::getInstance();
 
         try {
-            $db->execStmt($query, "sssss", $this->username, $this->email,
+            $DB->execStmt($query, "sssss", $this->username, $this->email,
                 $this->passwordHash, $this->firstName, $this->lastName);
         }
-        catch (Mysqli_sql_exception $e) {
+        catch (MySQLi_SQL_exception $e) {
             return $e->getMessage();
         }
 
-        $this->ID = $db->conn->insert_id;
-        $_SESSION["userID"] = $db->conn->insert_id;
+        $this->ID = $DB->conn->insert_id;
+        $_SESSION["userID"] = $DB->conn->insert_id;
         $this->creationDate = date("Y.m.d");
         $this->lastLoginTime = null;
 
@@ -68,13 +68,13 @@ class UserModel
         $query = "select `ID`, `passwordHash` from `User`
             where `username` = ? or `email` = ?";
 
-        $db = DB::getInstance();
+        $DB = DB::getInstance();
 
         try {
-            $result = $db->execStmt(
+            $result = $DB->execStmt(
                 $query, "ss", $this->username, $this->username);
         }
-        catch (Mysqli_sql_exception $e) {
+        catch (MySQLi_SQL_exception $e) {
             return $e->getMessage();
         }
 

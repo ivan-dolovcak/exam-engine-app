@@ -8,7 +8,7 @@ $failurePage = "/views/log_in.phtml";
 if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || ! isset($_POST["usernameOrEmail"], $_POST["password"]))
 {
-    $_SESSION["formErrMsg"] = LANG["invalidPost"];
+    $_SESSION["formErrorMsg"] = LANG["invalidPost"];
     header("Location: $failurePage");
     die;
 }
@@ -21,9 +21,9 @@ $user = UserModel::ctorLogIn($usernameOrEmail, $password);
 $errorMsg = $user->logIn();
 if (isset($errorMsg)) {
     if ($errorMsg === false)
-        $_SESSION["formErrMsg"] = LANG["invalidLogin"];
+        $_SESSION["formErrorMsg"] = LANG["invalidLogin"];
     else
-        $_SESSION["formErrMsg"] = LANG["dbError"];
+        $_SESSION["formErrorMsg"] = LANG["dbError"];
 
     header("Location: $failurePage");
 }

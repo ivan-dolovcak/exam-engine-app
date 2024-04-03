@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || ! isset($_POST["username"], $_POST["email"], $_POST["password"],
         $_POST["firstName"],$_POST["lastName"]))
 {
-    $_SESSION["formErrMsg"] = LANG["invalidPost"];
+    $_SESSION["formErrorMsg"] = LANG["invalidPost"];
     header("Location: $failurePage");
     die;
 }
@@ -26,11 +26,11 @@ $user = UserModel::ctorSignUp(
 $errorMsg = $user->signUp();
 if (isset($errorMsg)) {
     if (str_contains($errorMsg, "UK_username"))
-        $_SESSION["formErrMsg"] = LANG["usernameTakenError"];
+        $_SESSION["formErrorMsg"] = LANG["usernameTakenError"];
     elseif (str_contains($errorMsg, "UK_email"))
-        $_SESSION["formErrMsg"] = LANG["emailTakenError"];
+        $_SESSION["formErrorMsg"] = LANG["emailTakenError"];
     else
-        $_SESSION["formErrMsg"] = LANG["dbError"];
+        $_SESSION["formErrorMsg"] = LANG["dbError"];
 
     header("Location: $failurePage");
 }
