@@ -21,6 +21,10 @@ const LANG = [
     "lastName" => "Prezime",
     "usernameTakenError" => "Korisničko ime je zauzeto.",
     "emailTakenError" => "E-mail je zauzet.",
+    "invalidEmail" => "Nevažeći e-mail.",
+    "invalidUsername" => "Nevažeće korisničko ime.",
+    "invalidName" => "Ime i/ili prezime je/su nevažeći.",
+    "invalidPassword" => "Lozinka je preslaba.",
 
     # log_in.phtml
     "usernameOrEmail" => "Korisničko ime / e-mail",

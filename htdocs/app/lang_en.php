@@ -21,6 +21,10 @@ const LANG = [
     "lastName" => "Last name",
     "usernameTakenError" => "Username is taken.",
     "emailTakenError" => "Email is taken.",
+    "invalidEmail" => "Email is invalid.",
+    "invalidUsername" => "Username is invalid.",
+    "invalidName" => "First and/or last name is/are invalid.",
+    "invalidPassword" => "Password too weak.",
 
     # log_in.phtml
     "usernameOrEmail" => "Username / email",
