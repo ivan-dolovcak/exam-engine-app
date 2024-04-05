@@ -12,10 +12,9 @@ class UserModel
     public ?string $lastLoginTime;
 
 
+    # Overloaded ctors:
     private function __construct() {}
 
-
-    # Used when creating a new user (signing up).
     static function ctorSignUp(string $username, string $email,
         string $password, string $firstName, string $lastName): self
     {

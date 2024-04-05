@@ -9,6 +9,7 @@ class Util
         unset($_SESSION["formErrorMsg"]);
         return $errMsg;
     }
+
     public static function sanitizeFormData(string $data): string
     {
         return htmlspecialchars(stripslashes(trim($data)));

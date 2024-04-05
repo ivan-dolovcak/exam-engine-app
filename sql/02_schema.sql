@@ -10,6 +10,6 @@ create table `User` (
     `creationDate`         date not null default utc_date(),
     `lastLoginTime`        datetime,
     primary key (`ID`),
-    constraint `UK_username` unique key (`username`),
-    constraint `UK_email` unique key (`email`)
+    constraint `UK_username`    unique key (`username`),
+    constraint `UK_email`       unique key (`email`)
 );

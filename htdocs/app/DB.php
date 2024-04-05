@@ -1,6 +1,7 @@
 <?php
 require "sql_auth.php";
 
+# Singleton DB controller.
 class DB
 {
     private static self $obj;
