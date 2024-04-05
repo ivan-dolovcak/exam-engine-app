@@ -42,7 +42,8 @@ class UserModel
     function signUp(): ?string
     {
         $query = "insert into `User`(`username`, `email`, `passwordHash`,
-            `firstName`, `lastName`) values (?, ?, ?, ?, ?)";
+            `firstName`, `lastName`, `lastLoginTime`)
+            values(?, ?, ?, ?, ?, default)";
 
         $DB = DB::getInstance();
 
@@ -54,10 +55,7 @@ class UserModel
             return $e->getMessage();
         }
 
-        $this->ID = $DB->conn->insert_id;
-        $_SESSION["userID"] = $DB->conn->insert_id;
-        $this->creationDate = date("Y.m.d");
-        $this->lastLoginTime = null;
+        $_SESSION["userID"] = $DB->conn->insert_id; # Logged in
 
         return null;
     }
@@ -84,7 +82,19 @@ class UserModel
         if (! $ID || ! password_verify($this->password, $passwordHash))
             return false;
 
-        $_SESSION["userID"] = $ID;
+        $_SESSION["userID"] = $ID; # Logged in
+
+        # Touch last login timestamp.
+        $query = "update `User` set `lastLoginTime` = utc_timestamp()
+            where ID = ?";
+
+        try {
+            $result = $DB->execStmt(
+                $query, "i", $_SESSION["userID"]);
+        }
+        catch (MySQLi_SQL_exception $e) {
+            return $e->getMessage();
+        }
 
         return null;
     }
