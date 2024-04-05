@@ -9,6 +9,7 @@ const LANG = [
     "signUp" => "Registracija",
     "logIn" => "Prijava",
     "logOut" => "Odjava",
+    "profile" => "Profil",
 
     # index.phtml
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",

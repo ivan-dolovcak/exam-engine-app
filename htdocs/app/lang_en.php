@@ -9,6 +9,7 @@ const LANG = [
     "signUp" => "Sign up",
     "logIn" => "Log in",
     "logOut" => "Log out",
+    "profile" => "Profile",
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",
