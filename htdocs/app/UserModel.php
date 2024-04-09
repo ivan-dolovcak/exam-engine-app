@@ -5,15 +5,39 @@ class UserModel
     public string $username;
     public string $email;
     public ?string $password;
-    public string $passwordHash;
+    public ?string $passwordHash;
     public string $firstName;
     public string $lastName;
     public readonly string $creationDate;
-    public ?string $lastLoginTime;
+    public string $lastLoginTime;
 
 
     # Overloaded ctors:
     private function __construct() {}
+
+    static function ctorLoad(int $ID): self|false
+    {
+        $columns = ["username", "email", "passwordHash", "firstName",
+            "lastName", "creationDate", "lastLoginTime", ];
+        $query = "select " . implode(", ", $columns) .  " from `User`
+            where ID = ?";
+
+        $DB = DB::getInstance();
+        $result = $DB->execStmt($query, "i", $ID);
+
+        if ($result->num_rows === 0)
+            return false;
+
+        $resultRow = $result->fetch_assoc();
+
+        $instance = new self;
+        $instance->ID = $ID;
+        foreach ($columns as $column) {
+            $instance->$column = $resultRow[$column];
+        }
+
+        return $instance;
+    }
 
     static function ctorSignUp(string $username, string $email,
         string $password, string $firstName, string $lastName): self
@@ -43,7 +67,7 @@ class UserModel
     {
         $query = "insert into `User`(`username`, `email`, `passwordHash`,
             `firstName`, `lastName`, `lastLoginTime`)
-            values(?, ?, ?, ?, ?, default)";
+            values(?, ?, ?, ?, ?, utc_timestamp())";
 
         $DB = DB::getInstance();
 

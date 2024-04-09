@@ -13,9 +13,15 @@ session_start();
     <?php include "header.phtml"; ?>
 </header>
 <main>
-    <h2><?=LANG["profile"]?></h2>
+    <?php
+        $user = UserModel::ctorLoad($_SESSION["userID"]);
+        $fullName = $user->firstName . " " . $user->lastName;
+    ?>
 
-    <p><?=$_SESSION["userID"] ?? "logged out"?></p>
+    <h2><?=$fullName?> (@<?=$user->username?>)</h2>
+    <h4><?=LANG["lastLogin"]?> <?=$user->lastLoginTime?>.</h4>
+    <h4><?=LANG["joined"]?> <?=$user->creationDate?>.</h4>
+
     <a href="/app/forms/log_out.php"><?=LANG["logOut"]?></a>
 </main>
 <footer>

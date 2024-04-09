@@ -11,6 +11,10 @@ const LANG = [
     "logOut" => "Log out",
     "profile" => "Profile",
 
+    # profile.phtml
+    "joined" => "Joined on",
+    "lastLogin" => "Last log in on",
+
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",
 
