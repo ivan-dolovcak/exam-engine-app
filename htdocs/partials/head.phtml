@@ -10,21 +10,25 @@
         const themeClassName = "<?=$preferences["theme"]?>-theme";
         document.documentElement.classList.add(themeClassName);
 
+        // Set root element lang attribute:
+        const lang = "<?=$preferences["lang"]?>";
+        document.documentElement.lang = lang;
+
         // Localize & timezone-adjust all timestamps:
-        const timestampFormatLang = "<?=$preferences["lang"]?>";
         const timestampFormatOptions = {
             year: "numeric",
             month: "long",
             day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
         };
 
         for (const timestampEl of document.getElementsByClassName("timestamp")) {
             // When passing an UTC timestamp to the Date ctor, it adjusts it to
             // the local timezone.
             const adjustedTimestamp = new Date(timestampEl.innerText + " UTC");
-            timestampEl.innerText = adjustedTimestamp.toLocaleString(
-                timestampFormatLang, timestampFormatOptions
-            );
+            timestampEl.innerText
+                = adjustedTimestamp.toLocaleString(lang, timestampFormatOptions);
         }
     });
 </script>
