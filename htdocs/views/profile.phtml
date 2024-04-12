@@ -19,8 +19,10 @@ session_start();
     ?>
 
     <h2><?=$fullName?> (@<?=$user->username?>)</h2>
-    <h4><?=LANG["lastLogin"]?> <?=$user->lastLoginTime?>.</h4>
-    <h4><?=LANG["joined"]?> <?=$user->creationDate?>.</h4>
+    <h4><?=LANG["lastLogin"]?> <span class="timestamp">
+        <?=$user->lastLoginTime?></span>.</h4>
+    <h4><?=LANG["joined"]?> <span class="timestamp">
+        <?=$user->creationDate?></span>.</h4>
 
     <a href="/app/forms/log_out.php"><?=LANG["logOut"]?></a>
 </main>

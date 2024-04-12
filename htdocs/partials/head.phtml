@@ -5,9 +5,26 @@
 <link rel="stylesheet" href="/static/master.css">
 
 <script>
-    // Set theme:
     window.addEventListener("load", () => {
+        // Set theme:
         const themeClassName = "<?=$preferences["theme"]?>-theme";
         document.documentElement.classList.add(themeClassName);
+
+        // Localize & timezone-adjust all timestamps:
+        const timestampFormatLang = "<?=$preferences["lang"]?>";
+        const timestampFormatOptions = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
+
+        for (const timestampEl of document.getElementsByClassName("timestamp")) {
+            // When passing an UTC timestamp to the Date ctor, it adjusts it to
+            // the local timezone.
+            const adjustedTimestamp = new Date(timestampEl.innerText + " UTC");
+            timestampEl.innerText = adjustedTimestamp.toLocaleString(
+                timestampFormatLang, timestampFormatOptions
+            );
+        }
     });
 </script>
