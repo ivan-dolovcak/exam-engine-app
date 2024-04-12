@@ -66,8 +66,8 @@ class UserModel
     function signUp(): ?string
     {
         $query = "insert into `User`(`username`, `email`, `passwordHash`,
-            `firstName`, `lastName`, `lastLoginTime`)
-            values(?, ?, ?, ?, ?, utc_timestamp())";
+            `firstName`, `lastName`)
+            values(?, ?, ?, ?, ?)";
 
         $DB = DB::getInstance();
 
