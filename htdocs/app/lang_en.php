@@ -10,6 +10,8 @@ const LANG = [
     "logIn" => "Log in",
     "logOut" => "Log out",
     "profile" => "Profile",
+    "theme" => "Theme",
+    "lang" => "Language",
 
     # profile.phtml
     "joined" => "Joined on",

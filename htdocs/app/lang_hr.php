@@ -10,6 +10,12 @@ const LANG = [
     "logIn" => "Prijava",
     "logOut" => "Odjava",
     "profile" => "Profil",
+    "theme" => "Tema",
+    "lang" => "Jezik",
+
+    # profile.phtml
+    "joined" => "Pridružio/la se",
+    "lastLogin" => "Zadnje prijavljen/a",
 
     # index.phtml
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",

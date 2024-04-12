@@ -1,6 +1,4 @@
 <?php
-require_once "config.php";
-
 class Util
 {
     public static function getFormError(): ?string

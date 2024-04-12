@@ -3,3 +3,12 @@
     color: #EEE;
     font-family: sans-serif;
 }
+
+.light-theme {
+    background: #EEE;
+    color: #000;
+}
+
+a {
+    color: royalblue;
+}
