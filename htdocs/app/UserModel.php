@@ -10,6 +10,12 @@ class UserModel
     public string $lastName;
     public readonly string $creationDate;
     public string $lastLoginTime;
+    # Only ASCII alphanumeric and _, at least 4 chars long:
+    const REGEX_VALID_USERNAME = "/^\w{4,30}$/";
+    # No digits:
+    const REGEX_VALID_NAME = "/^\D{3,40}$/";
+    # At least 8 chars long, at least 1 uppercase letter, at least 1 number:
+    const REGEX_VALID_PASSWORD = "/^(?=.*\d)(?=.*[A-Z]).{8,50}$/";
 
 
     # Overloaded ctors:

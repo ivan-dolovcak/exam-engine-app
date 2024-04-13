@@ -17,19 +17,27 @@ session_start();
 
     <form action="/app/forms/sign_up.php" method="post">
         <label for="username"><?=LANG["username"]?></label>
-        <input autofocus required type="text" name="username" id="username">
+        <input autofocus required type="text" name="username" id="username"
+            pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
+            title="<?=LANG["invalidUsername"]?>">
         <br>
         <label for="email"><?=LANG["email"]?></label>
         <input required type="email" name="email" id="email">
         <br>
         <label for="password"><?=LANG["password"]?></label>
-        <input required type="password" name="password" id="password">
+        <input required type="password" name="password" id="password"
+            pattern="<?=trim(UserModel::REGEX_VALID_PASSWORD, "/")?>"
+            title="<?=LANG["invalidPassword"]?>">
         <br>
         <label for="first-name"><?=LANG["firstName"]?></label>
-        <input required type="text" name="firstName" id="first-name">
+        <input required type="text" name="firstName" id="first-name"
+            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
+            title="<?=LANG["invalidName"]?>">
         <br>
         <label for="last-name"><?=LANG["lastName"]?></label>
-        <input required type="text" name="lastName" id="last-name">
+        <input required type="text" name="lastName" id="last-name"
+            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
+            title="<?=LANG["invalidName"]?>">
         <br>
         <button><?=LANG["signUp"]?></button>
 
