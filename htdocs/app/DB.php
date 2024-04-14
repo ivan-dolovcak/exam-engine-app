@@ -36,6 +36,23 @@ class DB
         }
     }
 
+    function isTaken(string $table, string $column, string $value) : bool|string
+    {
+        $query = "SELECT `$column`
+            FROM `$table`
+            WHERE `$column` = ?";
+
+        $DB = self::getInstance();
+        $result = $DB->execStmt($query, "s", $value);
+
+        if (gettype($result) === "string")
+            return $result;
+        elseif ($result->num_rows > 1)
+            return true;
+        else
+            return false;
+    }
+
     function __destruct() {
         $this->conn->close();
     }

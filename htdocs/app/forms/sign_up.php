@@ -35,14 +35,15 @@ elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)
     $_SESSION["formErrorMsg"] = LANG["invalidEmail"];
 }
 else {
-    $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
-        $lastName);
-    if (isset($errorMsg)) {
-        if (str_contains($errorMsg, "UK_username"))
-            $_SESSION["formErrorMsg"] = LANG["usernameTakenError"];
-        elseif (str_contains($errorMsg, "UK_email"))
-            $_SESSION["formErrorMsg"] = LANG["emailTakenError"];
-        else
+    $DB = DB::getInstance();
+    if ($DB->isTaken("User", "username", $username))
+        $_SESSION["formErrorMsg"] = LANG["usernameTakenError"];
+    elseif ($DB->isTaken("User", "email", $email))
+        $_SESSION["formErrorMsg"] = LANG["emailTakenError"];
+    else {
+        $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
+            $lastName);
+        if (isset($errorMsg))
             $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
     }
 }
