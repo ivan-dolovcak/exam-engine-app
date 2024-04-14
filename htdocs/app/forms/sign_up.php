@@ -37,10 +37,8 @@ elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)
     $_SESSION["formErrorMsg"] = LANG["invalidEmail"];
 }
 else {
-    $user = UserModel::ctorSignUp(
-        $username, $email, $password, $firstName, $lastName);
-
-    $errorMsg = $user->signUp();
+    $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
+        $lastName);
     if (isset($errorMsg)) {
         if (str_contains($errorMsg, "UK_username"))
             $_SESSION["formErrorMsg"] = LANG["usernameTakenError"];

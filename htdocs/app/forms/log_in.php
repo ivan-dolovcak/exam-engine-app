@@ -16,9 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
 $usernameOrEmail   = Util::sanitizeFormData($_POST["usernameOrEmail"]);
 $password          = Util::sanitizeFormData($_POST["password"]);
 
-$user = UserModel::ctorLogIn($usernameOrEmail, $password);
+$errorMsg = UserModel::logIn($usernameOrEmail, $password);
 
-$errorMsg = $user->logIn();
 if (isset($errorMsg)) {
     if ($errorMsg === false)
         $_SESSION["formErrorMsg"] = LANG["invalidLogin"];

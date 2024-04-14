@@ -2,9 +2,8 @@
 class UserModel
 {
     public readonly int $ID;
-    public string $username;
+    public readonly string $username;
     public string $email;
-    public ?string $password;
     public ?string $passwordHash;
     public string $firstName;
     public string $lastName;
@@ -45,31 +44,8 @@ class UserModel
         return $instance;
     }
 
-    static function ctorSignUp(string $username, string $email,
-        string $password, string $firstName, string $lastName): self
-    {
-        $instance = new self;
-
-        $instance->username = $username;
-        $instance->email = $email;
-        $instance->firstName = $firstName;
-        $instance->lastName = $lastName;
-        $instance->passwordHash = password_hash($password, PASSWORD_BCRYPT);
-
-        return $instance;
-    }
-
-    static function ctorLogIn(string $usernameOrEmail, string $password)
-    {
-        $instance = new self;
-
-        $instance->username = $usernameOrEmail;
-        $instance->password = $password;
-
-        return $instance;
-    }
-
-    function signUp(): ?string
+    static function signUp(string $username, string $email, string $password,
+        string $firstName, string $lastName): ?string
     {
         $query = "insert into `User`(`username`, `email`, `passwordHash`,
             `firstName`, `lastName`)
@@ -78,8 +54,10 @@ class UserModel
         $DB = DB::getInstance();
 
         try {
-            $DB->execStmt($query, "sssss", $this->username, $this->email,
-                $this->passwordHash, $this->firstName, $this->lastName);
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+            $DB->execStmt($query, "sssss", $username, $email, $passwordHash,
+                $firstName, $lastName);
         }
         catch (MySQLi_SQL_exception $e) {
             return $e->getMessage();
@@ -90,7 +68,8 @@ class UserModel
         return null;
     }
 
-    function logIn(): string|false|null
+    static function logIn(string $usernameOrEmail, string $password)
+        : string|false|null
     {
         $query = "select `ID`, `passwordHash` from `User`
             where `username` = ? or `email` = ?";
@@ -98,8 +77,8 @@ class UserModel
         $DB = DB::getInstance();
 
         try {
-            $result = $DB->execStmt(
-                $query, "ss", $this->username, $this->username);
+            $result = $DB->execStmt($query, "ss", $usernameOrEmail,
+                $usernameOrEmail);
         }
         catch (MySQLi_SQL_exception $e) {
             return $e->getMessage();
@@ -109,7 +88,7 @@ class UserModel
         $ID = $resultRow["ID"];
         $passwordHash = $resultRow["passwordHash"];
 
-        if (! $ID || ! password_verify($this->password, $passwordHash))
+        if (! $ID || ! password_verify($password, $passwordHash))
             return false;
 
         $_SESSION["userID"] = $ID; # Logged in
