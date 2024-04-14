@@ -4,7 +4,7 @@ class UserModel
     public readonly int $ID;
     public readonly string $username;
     public string $email;
-    public ?string $passwordHash;
+    public string $passwordHash;
     public string $firstName;
     public string $lastName;
     public readonly string $creationDate;

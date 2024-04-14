@@ -5,20 +5,18 @@ session_start();
 $successPage = "/views/index.phtml";
 $failurePage = "/views/sign_up.phtml";
 
+$requiredPostVars = ["username", "email", "password", "firstName", "lastName", ];
+
 if ($_SERVER["REQUEST_METHOD"] !== "POST"
-    || ! isset($_POST["username"], $_POST["email"], $_POST["password"],
-        $_POST["firstName"],$_POST["lastName"]))
+    || array_diff($requiredPostVars, array_keys($_POST)))
 {
     $_SESSION["formErrorMsg"] = LANG["invalidPost"];
     header("Location: $failurePage");
     die;
 }
 
-$username   = Util::sanitizeFormData($_POST["username"]);
-$email      = Util::sanitizeFormData($_POST["email"]);
-$password   = Util::sanitizeFormData($_POST["password"]);
-$firstName  = Util::sanitizeFormData($_POST["firstName"]);
-$lastName   = Util::sanitizeFormData($_POST["lastName"]);
+foreach ($requiredPostVars as $postVar)
+    $$postVar = Util::sanitizeFormData($_POST[$postVar]);
 
 if (! preg_match(UserModel::REGEX_VALID_USERNAME, $username)) {
     $_SESSION["formErrorMsg"] = LANG["invalidUsername"];
