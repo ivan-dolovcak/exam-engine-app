@@ -15,18 +15,29 @@
         document.documentElement.lang = lang;
 
         // Localize & timezone-adjust all timestamps:
-        const timestampFormatOptions = {
+        const dateFormatOptions = {
             year: "numeric",
             month: "long",
             day: "numeric",
+        };
+        const timeFormatOptions = {
             hour: "numeric",
             minute: "numeric",
         };
+        const dateTimeFormatOptions
+            = {...dateFormatOptions, ...timeFormatOptions};
 
         for (const timestampEl of document.getElementsByClassName("timestamp")) {
             // When passing an UTC timestamp to the Date ctor, it adjusts it to
             // the local timezone.
             const adjustedTimestamp = new Date(timestampEl.innerText + " UTC");
+            let timestampFormatOptions;
+            switch(timestampEl.dataset.format) {
+                case "date": timestampFormatOptions = dateFormatOptions; break;
+                case "time": timestampFormatOptions = timeFormatOptions; break;
+                case "datetime":
+                default: timestampFormatOptions = dateTimeFormatOptions;
+            }
             timestampEl.innerText
                 = adjustedTimestamp.toLocaleString(lang, timestampFormatOptions);
         }
