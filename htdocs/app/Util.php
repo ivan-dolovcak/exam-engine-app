@@ -8,6 +8,7 @@ class Util
         return $errMsg;
     }
 
+    # For preventing XSS-attacks.
     public static function sanitizeFormData(string $data): string
     {
         return htmlspecialchars(stripslashes(trim($data)));

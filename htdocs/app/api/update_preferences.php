@@ -1,7 +1,7 @@
 <?php
 require_once "config.php";
 
-if ($_SERVER["REQUEST_METHOD"] !== "GET")
+if ($_SERVER["REQUEST_METHOD"] !== "GET" || ! isset($_GET["name"]))
     die;
 
 if ($_GET["name"] === "theme")
@@ -12,4 +12,5 @@ elseif ($_GET["name"] === "lang")
 setcookie(PREFERENCES_COOKIE_NAME, json_encode($preferences),
     strtotime("+1 year"), "/");
 
-header("Location: " . $_SERVER["HTTP_REFERER"]); # Refresh
+# Return to view (previous page):
+header("Location: " . $_SERVER["HTTP_REFERER"]);

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+# Display errors only on local development server:
 if (isset($_SERVER["DEVELOPMENT"])) {
     error_reporting(E_ALL);
     ini_set("display_errors", true);

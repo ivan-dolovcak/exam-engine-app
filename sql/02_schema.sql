@@ -8,7 +8,7 @@ create table `User` (
     `firstName`            varchar(40) not null,
     `lastName`             varchar(40) not null,
     `creationDate`         date not null default utc_date(),
-    `lastLoginTime`        datetime,
+    `lastLoginTime`        datetime not null default utc_timestamp(),
     primary key (`ID`),
     constraint `UK_username`    unique key (`username`),
     constraint `UK_email`       unique key (`email`)

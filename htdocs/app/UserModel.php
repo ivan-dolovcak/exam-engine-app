@@ -9,15 +9,14 @@ class UserModel
     public string $lastName;
     public readonly string $creationDate;
     public string $lastLoginTime;
-    # Only ASCII alphanumeric and _, at least 4 chars long:
+    # Only ASCII alphanumeric and _, between 4 and 30 chars:
     const REGEX_VALID_USERNAME = "/^\w{4,30}$/";
-    # No digits:
+    # No digits, between 3 and 40 chars:
     const REGEX_VALID_NAME = "/^\D{3,40}$/";
-    # At least 8 chars long, at least 1 uppercase letter, at least 1 number:
+    # Between 8 and 50 chars, at least 1 uppercase letter, at least 1 number:
     const REGEX_VALID_PASSWORD = "/^(?=.*\d)(?=.*[A-Z]).{8,50}$/";
 
 
-    # Overloaded ctors:
     private function __construct() {}
 
     static function ctorLoad(int $ID): self|false
@@ -63,7 +62,7 @@ class UserModel
         if (gettype($errorMsg) === "string")
             return $errorMsg;
 
-        $_SESSION["userID"] = $DB->conn->insert_id; # Logged in
+        $_SESSION["userID"] = $DB->conn->insert_id; # Logged in.
 
         return null;
     }
@@ -88,14 +87,14 @@ class UserModel
         if (! $ID || ! password_verify($password, $passwordHash))
             return false;
 
-        $_SESSION["userID"] = $ID; # Logged in
+        $_SESSION["userID"] = $ID; # Logged in.
 
         # Touch last login timestamp.
         $query = "UPDATE `User`
             SET `lastLoginTime` = utc_timestamp()
             WHERE ID = ?";
 
-        $result = $DB->execStmt($query, "i", $_SESSION["userID"]);
+        $DB->execStmt($query, "i", $_SESSION["userID"]);
 
         return null;
     }

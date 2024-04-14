@@ -7,6 +7,7 @@ $failurePage = "/views/sign_up.phtml";
 
 $requiredPostVars = ["username", "email", "password", "firstName", "lastName", ];
 
+# Test if all required POST vars are present:
 if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || array_diff($requiredPostVars, array_keys($_POST)))
 {
@@ -15,9 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
     die;
 }
 
+# Create sanitized vars from POST:
 foreach ($requiredPostVars as $postVar)
     $$postVar = Util::sanitizeFormData($_POST[$postVar]);
 
+# Validation
 if (! preg_match(UserModel::REGEX_VALID_USERNAME, $username)) {
     $_SESSION["formErrorMsg"] = LANG["invalidUsername"];
 }

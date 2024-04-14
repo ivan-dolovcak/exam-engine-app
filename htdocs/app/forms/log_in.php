@@ -13,8 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
     die;
 }
 
-$usernameOrEmail   = Util::sanitizeFormData($_POST["usernameOrEmail"]);
-$password          = Util::sanitizeFormData($_POST["password"]);
+$usernameOrEmail = Util::sanitizeFormData($_POST["usernameOrEmail"]);
+$password        = Util::sanitizeFormData($_POST["password"]);
 
 $errorMsg = UserModel::logIn($usernameOrEmail, $password);
 
