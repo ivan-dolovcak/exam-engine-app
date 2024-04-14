@@ -24,8 +24,10 @@ class UserModel
     {
         $columns = ["username", "email", "passwordHash", "firstName",
             "lastName", "creationDate", "lastLoginTime", ];
-        $query = "select " . implode(", ", $columns) .  " from `User`
-            where ID = ?";
+
+        $query = sprintf("SELECT %s
+            FROM `User`
+            WHERE ID = ?", implode(", ", $columns));
 
         $DB = DB::getInstance();
         $result = $DB->execStmt($query, "i", $ID);
@@ -47,9 +49,9 @@ class UserModel
     static function signUp(string $username, string $email, string $password,
         string $firstName, string $lastName): ?string
     {
-        $query = "insert into `User`(`username`, `email`, `passwordHash`,
-            `firstName`, `lastName`)
-            values(?, ?, ?, ?, ?)";
+        $query = "INSERT INTO `User`(`username`, `email`, `passwordHash`,
+                `firstName`, `lastName`)
+            VALUES(?, ?, ?, ?, ?)";
 
         $DB = DB::getInstance();
 
@@ -71,8 +73,9 @@ class UserModel
     static function logIn(string $usernameOrEmail, string $password)
         : string|false|null
     {
-        $query = "select `ID`, `passwordHash` from `User`
-            where `username` = ? or `email` = ?";
+        $query = "SELECT `ID`, `passwordHash`
+            FROM `User`
+            WHERE `username` = ? OR `email` = ?";
 
         $DB = DB::getInstance();
 
@@ -94,8 +97,9 @@ class UserModel
         $_SESSION["userID"] = $ID; # Logged in
 
         # Touch last login timestamp.
-        $query = "update `User` set `lastLoginTime` = utc_timestamp()
-            where ID = ?";
+        $query = "UPDATE `User`
+            SET `lastLoginTime` = utc_timestamp()
+            WHERE ID = ?";
 
         try {
             $result = $DB->execStmt(
