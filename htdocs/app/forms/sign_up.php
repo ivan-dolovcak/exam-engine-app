@@ -43,7 +43,7 @@ else {
         elseif (str_contains($errorMsg, "UK_email"))
             $_SESSION["formErrorMsg"] = LANG["emailTakenError"];
         else
-            $_SESSION["formErrorMsg"] = LANG["dbError"];
+            $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
     }
 }
 

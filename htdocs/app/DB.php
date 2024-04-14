@@ -22,13 +22,18 @@ class DB
         return self::$obj;
     }
 
-    function execStmt(
-        string $query, string $types, mixed ...$queryArgs): MySQLi_result|false
+    function execStmt(string $query, string $types, mixed ...$queryArgs)
+        : MySQLi_result|false|string
     {
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param($types, ...$queryArgs);
-        $stmt->execute();
-        return $stmt->get_result();
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param($types, ...$queryArgs);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+        catch (MySQLi_SQL_exception $e) {
+            return $e->getMessage();
+        }
     }
 
     function __destruct() {

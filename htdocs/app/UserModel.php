@@ -55,15 +55,13 @@ class UserModel
 
         $DB = DB::getInstance();
 
-        try {
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-            $DB->execStmt($query, "sssss", $username, $email, $passwordHash,
-                $firstName, $lastName);
-        }
-        catch (MySQLi_SQL_exception $e) {
-            return $e->getMessage();
-        }
+        $errorMsg = $DB->execStmt($query, "sssss", $username, $email,
+            $passwordHash, $firstName, $lastName);
+
+        if (gettype($errorMsg) === "string")
+            return $errorMsg;
 
         $_SESSION["userID"] = $DB->conn->insert_id; # Logged in
 
@@ -79,13 +77,9 @@ class UserModel
 
         $DB = DB::getInstance();
 
-        try {
-            $result = $DB->execStmt($query, "ss", $usernameOrEmail,
-                $usernameOrEmail);
-        }
-        catch (MySQLi_SQL_exception $e) {
-            return $e->getMessage();
-        }
+        $result = $DB->execStmt($query, "ss", $usernameOrEmail, $usernameOrEmail);
+        if (gettype($result) === "string")
+            return $result; # Error message.
 
         $resultRow = $result->fetch_assoc();
         $ID = $resultRow["ID"];
@@ -101,13 +95,7 @@ class UserModel
             SET `lastLoginTime` = utc_timestamp()
             WHERE ID = ?";
 
-        try {
-            $result = $DB->execStmt(
-                $query, "i", $_SESSION["userID"]);
-        }
-        catch (MySQLi_SQL_exception $e) {
-            return $e->getMessage();
-        }
+        $result = $DB->execStmt($query, "i", $_SESSION["userID"]);
 
         return null;
     }

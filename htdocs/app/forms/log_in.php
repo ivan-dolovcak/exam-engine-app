@@ -22,7 +22,7 @@ if (isset($errorMsg)) {
     if ($errorMsg === false)
         $_SESSION["formErrorMsg"] = LANG["invalidLogin"];
     else
-        $_SESSION["formErrorMsg"] = LANG["dbError"];
+        $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
 
     header("Location: $failurePage");
 }
