@@ -12,4 +12,4 @@ elseif ($_GET["name"] === "lang")
 setcookie(PREFERENCES_COOKIE_NAME, json_encode($preferences),
     strtotime("+1 year"), "/");
 
-header("Location: " . $_SERVER["HTTP_REFERER"]);
+header("Location: " . $_SERVER["HTTP_REFERER"]); # Refresh
