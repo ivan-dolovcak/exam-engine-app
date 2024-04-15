@@ -24,6 +24,7 @@ const LANG = [
     "logInCTA1" => "Molimo Vas prijavite se",
     "logInCTA2" => "da biste koristili sve mogućnosti aplikacije.",
     "resetPreferences" => "Resetiraj postavke",
+    "invalidPreferences" => "Nevažeće postavke.",
 
     # index.phtml
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",

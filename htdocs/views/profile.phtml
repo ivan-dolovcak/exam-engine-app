@@ -77,6 +77,7 @@ session_start();
     <a class="btn" href="/app/api/update_preferences.php?name=reset">
         <i class="bi bi-x-circle"></i> <?=LANG["resetPreferences"]?></a>
 </section>
+<?=Util::getFormError();?>
 </main>
 <footer>
     <?php include "footer.phtml"; ?>
