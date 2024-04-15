@@ -7,6 +7,22 @@ session_start();
 <head>
     <?php include "head.phtml"; ?>
     <title><?=LANG["profile"]?> &bull; Exam Engine</title>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", () => {
+        function updatePreferences(name, value)
+        {
+            location.href
+                = `/app/api/update_preferences.php?name=${name}&value=${value}`;
+        }
+
+        for (const configDropdown of document.getElementsByClassName("config-dropdown")) {
+            configDropdown.value = preferences[configDropdown.id];
+            configDropdown.addEventListener("change",
+                () => updatePreferences(configDropdown.id, configDropdown.value));
+            }
+        });
+        </script>
 </head>
 <body>
 <header>
@@ -43,16 +59,18 @@ session_start();
     <h1><?=LANG["preferences"]?></h1>
     <ul>
         <li>
-            <?=LANG["theme"]?>: <?=LANG[$preferences["theme"]]?>
-
-            <a class="btn" href="/app/api/update_preferences.php?name=theme">
-                <i class="bi bi-arrow-clockwise"></i></a>
+            <?=LANG["theme"]?>:
+            <select id="theme" class="input config-dropdown">
+                <option value="dark"><?=LANG["dark"]?></option>
+                <option value="light"><?=LANG["light"]?></option>
+            </select>
         </li>
         <li>
-            <?=LANG["lang"]?>: <?=LANG[$preferences["lang"]]?>
-
-            <a class="btn" href="/app/api/update_preferences.php?name=lang">
-                <i class="bi bi-arrow-clockwise"></i></a>
+            <?=LANG["lang"]?>:
+            <select id="lang" class="input config-dropdown">
+                <option value="hr"><?=LANG["hr"]?></option>
+                <option value="en"><?=LANG["en"]?></option>
+            </select>
         </li>
     </ul>
 
