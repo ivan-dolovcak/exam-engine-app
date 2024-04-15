@@ -151,15 +151,18 @@ a {
 .input-group {
     display: flex;
 }
-
+.input-group > * {
+    border-radius: 0;
+}
+.input-group .btn {
+    outline: 1px solid rgb(var(--color-mid));
+}
 .input-group > :first-child {
     flex: 1;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 .input-group > :last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 footer {
