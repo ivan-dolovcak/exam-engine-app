@@ -109,7 +109,6 @@ a {
     border: 1px solid rgb(var(--color-accent));
     color: rgb(var(--color-accent));
     font-weight: normal;
-
 }
 .btn:hover {
     transition: .2s;
@@ -122,16 +121,17 @@ a {
 }
 .form {
     display: grid;
+    width: 35ch;
     gap: 1rem;
     padding: 1.5rem;
     border-radius: var(--border-radius);
     background: rgb(var(--color-bg));
 }
-.form .input {
-    width: 35ch;
-}
 .form label {
     margin-bottom: -.6rem;
+}
+.form > button:last-of-type {
+    margin: 2rem 0;
 }
 
 .input {
@@ -146,6 +146,20 @@ a {
 .input:focus {
     transition: .2s;
     outline-color: rgb(var(--color-accent));
+}
+
+.input-group {
+    display: flex;
+}
+
+.input-group > :first-child {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-group > :last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 footer {

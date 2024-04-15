@@ -7,6 +7,8 @@ session_start();
 <head>
     <?php include "head.phtml"; ?>
     <title><?=LANG["signUp"]?> &bull; Exam Engine</title>
+
+    <script defer src="/static/password_peak_btn.js"></script>
 </head>
 <body>
 <header>
@@ -25,9 +27,14 @@ session_start();
         <input required type="email" name="email" id="email" class="input">
 
         <label for="password"><?=LANG["password"]?></label>
-        <input required type="password" name="password" id="password"
-            pattern="<?=trim(UserModel::REGEX_VALID_PASSWORD, "/")?>"
-            title="<?=LANG["invalidPassword"]?>" class="input">
+        <div class="input-group">
+            <input required type="password" name="password" id="password"
+                pattern="<?=trim(UserModel::REGEX_VALID_PASSWORD, "/")?>"
+                title="<?=LANG["invalidPassword"]?>" class="input">
+            <button type="button" id="btn-password-peak" class="btn">
+                <i class="bi bi-eye-fill"></i>
+            </button>
+        </div>
 
         <label for="first-name"><?=LANG["firstName"]?></label>
         <input required type="text" name="firstName" id="first-name"
