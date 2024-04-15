@@ -2,7 +2,7 @@ function getCookie(cookieName)
 {
     const cookies = document.cookie.split(";");
     for (const cookie of cookies)
-        if (cookie.split("=")[0] === cookieName)
+        if (cookie.split("=")[0].trim() === cookieName)
             return decodeURIComponent(cookie.split("=")[1]);
 
     return null;
