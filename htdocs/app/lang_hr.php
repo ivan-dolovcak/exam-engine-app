@@ -16,6 +16,11 @@ const LANG = [
     # profile.phtml
     "joined" => "Pridružio/la se",
     "lastLogin" => "Zadnje prijavljen/a",
+    "preferences" => "Postavke",
+    "dark" => "tamna",
+    "light" => "svijetla",
+    "en" => "engleski",
+    "hr" => "hrvatski",
 
     # index.phtml
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",

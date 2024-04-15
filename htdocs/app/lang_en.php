@@ -16,6 +16,11 @@ const LANG = [
     # profile.phtml
     "joined" => "Joined on",
     "lastLogin" => "Last log in on",
+    "preferences" => "Preferences",
+    "dark" => "dark",
+    "light" => "light",
+    "en" => "English",
+    "hr" => "Croatian",
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",

@@ -1,30 +1,52 @@
 <?php
 require_once "config.php";
 session_start();
+
+$user = UserModel::ctorLoad($_SESSION["userID"]);
+$fullName = $user->firstName . " " . $user->lastName;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <?php include "head.phtml"; ?>
-    <title><?=LANG["homePage"]?> &bull; Exam Engine</title>
+    <title><?=LANG["profile"]?> &bull; Exam Engine</title>
 </head>
 <body>
 <header>
     <?php include "header.phtml"; ?>
 </header>
 <main>
-    <?php
-        $user = UserModel::ctorLoad($_SESSION["userID"]);
-        $fullName = $user->firstName . " " . $user->lastName;
-    ?>
+<section>
+    <h1><?=LANG["profile"]?></h1>
 
-    <h2><?=$fullName?> (@<?=$user->username?>)</h2>
-    <h4><?=LANG["lastLogin"]?> <span class="timestamp" data-format="datetime">
-        <?=$user->lastLoginTime?></span>.</h4>
-    <h4><?=LANG["joined"]?> <span class="timestamp" data-format="date">
-        <?=$user->creationDate?></span>.</h4>
+    <h3><?=$user->firstName?> <?=$user->lastName?> (@<?=$user->username?>)</h3>
+    <ul>
+        <li><?=LANG["lastLogin"]?> <span class="timestamp" data-format="datetime">
+            <?=$user->lastLoginTime?></span></li>
+        <li><?=LANG["joined"]?> <span class="timestamp" data-format="date">
+            <?=$user->creationDate?></span></li>
+    </ul>
 
-    <a href="/app/forms/log_out.php"><?=LANG["logOut"]?></a>
+    <a class="btn" href="/app/forms/log_out.php">
+        <i class="bi bi-escape"></i> <?=LANG["logOut"]?></a>
+</section>
+<section>
+    <h1><?=LANG["preferences"]?></h1>
+    <ul>
+        <li>
+            <?=LANG["theme"]?>: <?=LANG[$preferences["theme"]]?>
+
+            <a class="btn" href="/app/api/update_preferences.php?name=theme">
+                <i class="bi bi-arrow-clockwise"></i></a>
+        </li>
+        <li>
+            <?=LANG["lang"]?>: <?=LANG[$preferences["lang"]]?>
+
+            <a class="btn" href="/app/api/update_preferences.php?name=lang">
+                <i class="bi bi-arrow-clockwise"></i></a>
+        </li>
+    </ul>
+</section>
 </main>
 <footer>
     <?php include "footer.phtml"; ?>

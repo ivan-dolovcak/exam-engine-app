@@ -12,36 +12,36 @@ session_start();
 <header>
     <?php include "header.phtml"; ?>
 </header>
-<main>
-    <h2><?=LANG["signUp"]?></h2>
+<main class="form-focus-wrapper">
+    <form action="/app/forms/sign_up.php" method="post" class="form">
+        <h1><?=LANG["signUp"]?></h1>
 
-    <form action="/app/forms/sign_up.php" method="post">
         <label for="username"><?=LANG["username"]?></label>
         <input autofocus required type="text" name="username" id="username"
             pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
-            title="<?=LANG["invalidUsername"]?>">
-        <br>
+            title="<?=LANG["invalidUsername"]?>" class="input">
+
         <label for="email"><?=LANG["email"]?></label>
-        <input required type="email" name="email" id="email">
-        <br>
+        <input required type="email" name="email" id="email" class="input">
+
         <label for="password"><?=LANG["password"]?></label>
         <input required type="password" name="password" id="password"
             pattern="<?=trim(UserModel::REGEX_VALID_PASSWORD, "/")?>"
-            title="<?=LANG["invalidPassword"]?>">
-        <br>
+            title="<?=LANG["invalidPassword"]?>" class="input">
+
         <label for="first-name"><?=LANG["firstName"]?></label>
         <input required type="text" name="firstName" id="first-name"
             pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
-            title="<?=LANG["invalidName"]?>">
-        <br>
+            title="<?=LANG["invalidName"]?>" class="input">
+
         <label for="last-name"><?=LANG["lastName"]?></label>
         <input required type="text" name="lastName" id="last-name"
             pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
-            title="<?=LANG["invalidName"]?>">
-        <br>
-        <button><?=LANG["signUp"]?></button>
+            title="<?=LANG["invalidName"]?>" class="input">
 
-        <p><?=Util::getFormError();?></p>
+        <button class="btn"><?=LANG["signUp"]?></button>
+
+        <?=Util::getFormError();?>
     </form>
 </main>
 <footer>

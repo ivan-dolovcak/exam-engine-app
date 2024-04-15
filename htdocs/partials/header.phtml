@@ -1,15 +1,17 @@
-<h1>Exam Engine</h1>
+<a id="title-wrapper" href="/views/index.phtml">
+    <img src="/static/favicons/favicon.ico" alt="Exam Engine favicon" style="display: inline-block;">
+    <h1 id="title">Exam Engine</h1>
+</a>
 
 <nav>
-    <a href="/views/index.phtml"><?=LANG["homePage"]?></a>
-    <?php if (isset($_SESSION["userID"])): ?>
-        <a href="/views/profile.phtml"><?=LANG["profile"]?></a>
-    <?php else: ?>
-        <a href="/views/sign_up.phtml"><?=LANG["signUp"]?></a>
-        <a href="/views/log_in.phtml"><?=LANG["logIn"]?></a>
+    <a class="btn nav-item" href="/views/index.phtml">
+        <i class="bi bi-house"></i> <?=LANG["homePage"]?></a>
+    <?php if (! isset($_SESSION["userID"])): ?>
+        <a class="btn nav-item" href="/views/sign_up.phtml">
+            <i class="bi bi-person-add"></i> <?=LANG["signUp"]?></a>
+        <a class="btn nav-item" href="/views/log_in.phtml">
+            <i class="bi bi-box-arrow-right"></i> <?=LANG["logIn"]?></a>
     <?php endif; ?>
-        <a href="/app/api/update_preferences.php?name=theme">
-            <?=LANG["theme"]?></a>
-        <a href="/app/api/update_preferences.php?name=lang">
-            <?=LANG["lang"]?></a>
+    <a class="btn nav-item" href="/views/profile.phtml">
+        <i class="bi bi-person-circle"></i> <?=LANG["profile"]?></a>
 </nav>

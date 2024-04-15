@@ -13,8 +13,11 @@ const preferences = JSON.parse(getCookie("examEnginePreferences"));
 const themeClassName = `${preferences.theme}-theme`;
 document.documentElement.classList.add(themeClassName);
 
-// Set root element lang attribute:
 document.documentElement.lang = preferences.lang;
+
+// Highlight current page anchor in nav:
+const currentPage = location.pathname;
+document.querySelector(`nav a[href="${currentPage}"]`).classList.add("active");
 
 // Localize & timezone-adjust all timestamps:
 const dateFormatOptions = {
@@ -26,8 +29,7 @@ const timeFormatOptions = {
     hour: "numeric",
     minute: "numeric",
 };
-const dateTimeFormatOptions
-    = {...dateFormatOptions, ...timeFormatOptions};
+const dateTimeFormatOptions = {...dateFormatOptions, ...timeFormatOptions};
 
 for (const timestampEl of document.getElementsByClassName("timestamp")) {
     // When passing an UTC timestamp to the Date ctor, it adjusts it to
