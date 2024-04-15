@@ -8,6 +8,8 @@ if ($_GET["name"] === "theme")
     $preferences["theme"] = $preferences["theme"] === "light" ? "dark" : "light";
 elseif ($_GET["name"] === "lang")
     $preferences["lang"] = $preferences["lang"] === "en" ? "hr" : "en";
+elseif ($_GET["name"] === "reset")
+    $preferences = DEFAULT_PREFERENCES;
 
 setcookie(PREFERENCES_COOKIE_NAME, json_encode($preferences),
     strtotime("+1 year"), "/");

@@ -21,6 +21,9 @@ const LANG = [
     "light" => "light",
     "en" => "English",
     "hr" => "Croatian",
+    "logInCTA1" => "Please log in",
+    "logInCTA2" => "to use all the app's features.",
+    "resetPreferences" => "Reset preferences",
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",

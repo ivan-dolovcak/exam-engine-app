@@ -1,9 +1,6 @@
 <?php
 require_once "config.php";
 session_start();
-
-$user = UserModel::ctorLoad($_SESSION["userID"]);
-$fullName = $user->firstName . " " . $user->lastName;
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +16,12 @@ $fullName = $user->firstName . " " . $user->lastName;
 <section>
     <h1><?=LANG["profile"]?></h1>
 
+<?php if (isset($_SESSION["userID"])): ?>
+    <?php
+        $user = UserModel::ctorLoad($_SESSION["userID"]);
+        $fullName = $user->firstName . " " . $user->lastName;
+    ?>
+
     <h3><?=$user->firstName?> <?=$user->lastName?> (@<?=$user->username?>)</h3>
     <ul>
         <li><?=LANG["lastLogin"]?> <span class="timestamp" data-format="datetime">
@@ -29,6 +32,12 @@ $fullName = $user->firstName . " " . $user->lastName;
 
     <a class="btn" href="/app/forms/log_out.php">
         <i class="bi bi-escape"></i> <?=LANG["logOut"]?></a>
+<?php else: ?>
+    <p>
+        <a href="http://localhost/views/log_in.phtml"><?=LANG["logInCTA1"]?></a>
+        <?=LANG["logInCTA2"]?>
+    </p>
+<?php endif; ?>
 </section>
 <section>
     <h1><?=LANG["preferences"]?></h1>
@@ -46,6 +55,9 @@ $fullName = $user->firstName . " " . $user->lastName;
                 <i class="bi bi-arrow-clockwise"></i></a>
         </li>
     </ul>
+
+    <a class="btn" href="/app/api/update_preferences.php?name=reset">
+        <i class="bi bi-x-circle"></i> <?=LANG["resetPreferences"]?></a>
 </section>
 </main>
 <footer>
