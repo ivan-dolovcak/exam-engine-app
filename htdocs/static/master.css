@@ -16,6 +16,12 @@
     --color-bg-alt: 242, 242, 242;
 }
 
+#header-logo {
+    display: inline-block;
+    width: 48px;
+    background: rgb(var(--color-accent));
+}
+
 #title {
     font-size: 1.9rem;
 }
