@@ -14,14 +14,9 @@ date_default_timezone_set("UTC");
 # Auto-require classes:
 spl_autoload_register(fn($className) => require "$className.php");
 
-const PREFERENCES_COOKIE_NAME = "examEnginePreferences";
-const DEFAULT_PREFERENCES = ["theme" => "light", "lang" => "en"];
+
 # Load/set default user preferences:
-if (! isset($_COOKIE[PREFERENCES_COOKIE_NAME]))
-    $preferences = DEFAULT_PREFERENCES;
-else
-    $preferences = json_decode($_COOKIE[PREFERENCES_COOKIE_NAME],
-        associative:true);
+$preferences = Preferences::loadPreferences();
 
 # Multi-language support:
 require_once "lang_{$preferences["lang"]}.php";
