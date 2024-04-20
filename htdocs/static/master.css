@@ -117,15 +117,11 @@ a {
     color: var(--color-accent);
     font-weight: normal;
 }
-.btn:hover {
+.btn:hover, .btn:focus {
     transition: .2s;
     filter: brightness(.85);
 }
 
-.form-focus-wrapper {
-    align-items: center;
-    justify-content: center;
-}
 .form {
     display: grid;
     width: 35ch;
@@ -157,6 +153,10 @@ input[type="color"] {
     transition: .2s;
     outline-color: var(--color-accent);
 }
+.form-validate .input:valid {
+    background-color: var(--color-accent);
+    color: rgb(var(--color-fg));
+}
 
 .input-group {
     display: flex;
@@ -173,6 +173,14 @@ input[type="color"] {
 }
 .input-group > :last-child {
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.form-error-msg {
+    text-align: center;
+    font-size: small;
+}
+.form-error-msg:empty {
+    display: none;
 }
 
 footer {

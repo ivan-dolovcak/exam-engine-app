@@ -47,7 +47,7 @@ class DB
 
         if (gettype($result) === "string")
             return $result;
-        elseif ($result->num_rows > 1)
+        elseif ($result->num_rows > 0)
             return true;
         else
             return false;
