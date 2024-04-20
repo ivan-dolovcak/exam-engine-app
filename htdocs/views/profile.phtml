@@ -58,6 +58,10 @@ session_start();
                 <option value="en"><?=LANG["en"]?></option>
             </select>
         </li>
+        <li>
+            <?=LANG["accentColor"]?>:
+            <input type="color" id="accentColor" class="input config-dropdown" value="#FF0000">
+        </li>
     </ul>
 
     <a class="btn" href="/app/api/update_preferences.php?name=reset">

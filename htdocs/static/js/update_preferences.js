@@ -1,5 +1,6 @@
 function updatePreferences(name, value)
 {
+    value = encodeURIComponent(value);
     location.href
         = `/app/api/update_preferences.php?name=${name}&value=${value}`;
 }

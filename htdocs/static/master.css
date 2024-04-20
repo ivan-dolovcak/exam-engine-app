@@ -2,7 +2,6 @@
     --color-fg: 238, 238, 238;
     --color-bg: 10, 10, 10;
     --color-bg-alt: 15, 15, 15;
-    --color-accent: 0, 170, 0;
     --color-mid: 100, 100, 100;
     --border-radius: 5px;
 
@@ -19,7 +18,7 @@
 #header-logo {
     display: inline-block;
     width: 48px;
-    background: rgb(var(--color-accent));
+    background: var(--color-accent);
 }
 
 #title {
@@ -42,7 +41,7 @@ header {
     display: flex;
     align-items: center;
     padding: .8rem 1rem;
-    border-top: 3px solid rgb(var(--color-accent));
+    border-top: 3px solid var(--color-accent);
 }
 
 nav {
@@ -76,20 +75,22 @@ section {
 }
 
 h1, h2, h3 {
-    color: rgb(var(--color-accent));
+    color: var(--color-accent);
     font-family: "Chakra Petch", sans-serif;
 }
 
 ul, ol {
-    line-height: 1.5;
     list-style: square;
 }
+li {
+    margin: 5px 0;
+}
 li::marker {
-    color: rgb(var(--color-accent));
+    color: var(--color-accent);
 }
 
 a {
-    color: rgb(var(--color-accent));
+    color: var(--color-accent);
 }
 
 .btn {
@@ -102,7 +103,7 @@ a {
     text-decoration: none;
     cursor: pointer;
     font-family: "Chakra Petch", sans-serif;
-    background: rgb(var(--color-accent));
+    background: var(--color-accent);
     color: #FFF;
     font-weight: bold;
     margin: 1px;
@@ -112,8 +113,8 @@ a {
 }
 .btn.nav-item:not(.active) {
     background: transparent;
-    border: 1px solid rgb(var(--color-accent));
-    color: rgb(var(--color-accent));
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
     font-weight: normal;
 }
 .btn:hover {
@@ -140,6 +141,9 @@ a {
     margin: 2rem 0;
 }
 
+input[type="color"] {
+    vertical-align: middle;
+}
 .input {
     margin: 1px;
     padding: 4px;
@@ -151,7 +155,7 @@ a {
 }
 .input:focus {
     transition: .2s;
-    outline-color: rgb(var(--color-accent));
+    outline-color: var(--color-accent);
 }
 
 .input-group {

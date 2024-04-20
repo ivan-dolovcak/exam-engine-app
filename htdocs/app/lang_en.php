@@ -25,6 +25,7 @@ const LANG = [
     "logInCTA2" => "to use all the app's features.",
     "resetPreferences" => "Reset preferences",
     "invalidPreferences" => "Invalid preferences set.",
+    "accentColor" => "Accent color",
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",

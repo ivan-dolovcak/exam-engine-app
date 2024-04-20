@@ -2,11 +2,16 @@
 class Preferences
 {
     const COOKIE_NAME = "examEnginePreferences";
-    const DEFAULT_PREFERENCES = ["theme" => "light", "lang" => "en"];
+    const DEFAULT_PREFERENCES = [
+        "theme" => "light",
+        "lang" => "en",
+        "accentColor" => "#00AA00",
+    ];
     const VALID_PREFERENCES = [
         "theme" => ["dark", "light", ],
         "lang" => ["en", "hr", ],
         "reset" => null,
+        "accentColor" => null,
     ];
 
 

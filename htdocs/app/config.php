@@ -14,7 +14,6 @@ date_default_timezone_set("UTC");
 # Auto-require classes:
 spl_autoload_register(fn($className) => require "$className.php");
 
-
 # Load/set default user preferences:
 $preferences = Preferences::loadPreferences();
 
