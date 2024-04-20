@@ -38,11 +38,10 @@ const LANG = [
     "lastName" => "Prezime",
     "usernameTakenError" => "Korisničko ime je zauzeto.",
     "emailTakenError" => "E-mail je zauzet.",
-    "invalidEmail" => "Nevažeći e-mail.",
-    "invalidUsername" => "Koristite velika i mala slova bez dijakritičkih znakova,
-        brojeve i donje crte, duljine najmanje 8 znakova",
+    "invalidEmail" => "Unesite važeću e-mail adresu.",
+    "invalidUsername" => "Koristite velika i mala slova bez dijakritičkih znakova, brojeve i donje crte, duljine najmanje 4 znakova.",
     "invalidName" => "Duljine najmanje 3 znakova, bez brojeva.",
-    "invalidPassword" => "Duljine barem 8 znakova, barem 1 veliko slovo i 1 broj",
+    "invalidPassword" => "Duljine barem 8 znakova, barem 1 veliko slovo i 1 broj.",
 
     # log_in.phtml
     "usernameOrEmail" => "Korisničko ime / e-mail",

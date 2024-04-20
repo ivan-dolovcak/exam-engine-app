@@ -38,11 +38,10 @@ const LANG = [
     "lastName" => "Last name",
     "usernameTakenError" => "Username is taken.",
     "emailTakenError" => "Email is taken.",
-    "invalidEmail" => "Email is invalid.",
-    "invalidUsername" => "Use uppercase and lowercase letters A-Z, numbers and
-        underscores; at least 4 characters long",
+    "invalidEmail" => "Enter a valid email address.",
+    "invalidUsername" => "Use uppercase and lowercase letters A-Z, numbers and underscores; at least 4 characters long.",
     "invalidName" => "At least 3 characters long, no numbers.",
-    "invalidPassword" => "At least 8 characters, 1 uppercase letter and 1 number",
+    "invalidPassword" => "At least 8 characters, 1 uppercase letter and 1 number.",
 
     # log_in.phtml
     "usernameOrEmail" => "Username / email",
