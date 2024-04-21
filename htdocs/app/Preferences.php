@@ -25,12 +25,6 @@ class Preferences
 
     static function loadPreferences(): array
     {
-        if (! isset($_COOKIE[self::COOKIE_NAME]))
-            $preferences = self::DEFAULT_PREFERENCES;
-        else
-            $preferences = json_decode($_COOKIE[self::COOKIE_NAME],
-                associative:true);
-
-        return $preferences;
+        return json_decode($_COOKIE[self::COOKIE_NAME], associative:true);
     }
 }

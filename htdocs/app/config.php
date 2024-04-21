@@ -15,6 +15,9 @@ date_default_timezone_set("UTC");
 spl_autoload_register(fn($className) => require "$className.php");
 
 # Load/set default user preferences:
+if (! isset($_COOKIE[Preferences::COOKIE_NAME]))
+    Preferences::savePreferences(Preferences::DEFAULT_PREFERENCES);
+
 $preferences = Preferences::loadPreferences();
 
 # Multi-language support:
