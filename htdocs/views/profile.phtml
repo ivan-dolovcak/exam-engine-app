@@ -9,9 +9,6 @@ session_start();
     <title><?=LANG["profile"]?> &bull; Exam Engine</title>
 
     <script defer src="/static/js/update_preferences.js"></script>
-    <!-- <script defer src="/static/js/password_peak_btn.js"></script> -->
-    <script defer src="/static/js/form_validation.js"></script>
-    <script defer src="/static/js/overlay.js"></script>
 </head>
 <body>
 <header>
@@ -78,6 +75,12 @@ session_start();
 </section>
 <?=Util::getFormError();?>
 </main>
+
+<?php if (isset($_SESSION["userID"])): ?>
+
+<script defer src="/static/js/form_validation.js"></script>
+<script defer src="/static/js/overlay.js"></script>
+
 <div id="overlay-edit-profile" class="overlay">
     <form action="/app/forms/sign_up.php?update" method="post" class="form form-validate">
         <button type="button" data-overlay="edit-profile" class="btn btn-close-overlay"
@@ -114,6 +117,7 @@ session_start();
         <div class="form-error-msg"></div>
     </form>
 </div>
+<?php endif; ?>
 <footer>
     <?php include "footer.phtml"; ?>
 </footer>
