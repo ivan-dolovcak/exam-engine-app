@@ -18,7 +18,7 @@
 #header-logo {
     display: inline-block;
     width: 48px;
-    background: var(--color-accent);
+    background: rgb(var(--color-accent));
 }
 
 #title {
@@ -41,7 +41,7 @@ header {
     display: flex;
     align-items: center;
     padding: .8rem 1rem;
-    border-top: 3px solid var(--color-accent);
+    border-top: 3px solid rgb(var(--color-accent));
 }
 
 nav {
@@ -75,7 +75,7 @@ section {
 }
 
 h1, h2, h3 {
-    color: var(--color-accent);
+    color: rgb(var(--color-accent));
     font-family: "Chakra Petch", sans-serif;
 }
 
@@ -86,11 +86,11 @@ li {
     margin: 5px 0;
 }
 li::marker {
-    color: var(--color-accent);
+    color: rgb(var(--color-accent));
 }
 
 a {
-    color: var(--color-accent);
+    color: rgb(var(--color-accent));
 }
 
 .btn {
@@ -103,7 +103,7 @@ a {
     text-decoration: none;
     cursor: pointer;
     font-family: "Chakra Petch", sans-serif;
-    background: var(--color-accent);
+    background: rgb(var(--color-accent));
     color: #FFF;
     font-weight: bold;
     margin: 1px;
@@ -114,8 +114,8 @@ a {
 }
 .btn.nav-item:not(.active) {
     background: transparent;
-    border: 1px solid var(--color-accent);
-    color: var(--color-accent);
+    border: 1px solid rgb(var(--color-accent));
+    color: rgb(var(--color-accent));
     font-weight: normal;
 }
 .btn:hover {
@@ -151,13 +151,13 @@ input[type="color"] {
     outline: 1px solid rgb(var(--color-mid));
     background: rgb(var(--color-bg-alt));
     color: rgb(var(--color-mid));
-    transition: outline-color .2s;
+    transition: outline-color .2s, background .5s ease-out, color .5s ease-out;
 }
 .input:focus {
-    outline-color: var(--color-accent);
+    outline-color: rgb(var(--color-accent));
 }
 .form-validate .input:valid {
-    background-color: var(--color-accent);
+    background: rgba(var(--color-accent), .5);
     color: rgb(var(--color-fg));
 }
 
@@ -202,7 +202,7 @@ input[type="color"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid var(--color-accent);
+    border: 1px solid rgb(var(--color-accent));
 }
 .btn-close-overlay {
     position: absolute;

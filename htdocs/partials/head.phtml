@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/static/master.css">
 <style>
     :root {
-        --color-accent: <?=$preferences["accentColor"]?>;
+        --color-accent: <?=Util::colorHex2RGB($preferences["accentColor"])?>;
         color-scheme: only <?=$preferences["theme"]?>;
     }
 </style>
