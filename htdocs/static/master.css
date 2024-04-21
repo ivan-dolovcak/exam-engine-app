@@ -107,6 +107,7 @@ a {
     color: #FFF;
     font-weight: bold;
     margin: 1px;
+    transition: filter .2s ease-in-out;
 }
 .btn.nav-item {
     padding: 7px 10px;
@@ -117,9 +118,11 @@ a {
     color: var(--color-accent);
     font-weight: normal;
 }
-.btn:hover, .btn:focus {
-    transition: .2s;
+.btn:hover {
     filter: brightness(.85);
+}
+.btn:focus {
+    outline: 1px solid rgb(var(--color-fg)) !important;
 }
 
 .form {
@@ -148,9 +151,9 @@ input[type="color"] {
     outline: 1px solid rgb(var(--color-mid));
     background: rgb(var(--color-bg-alt));
     color: rgb(var(--color-mid));
+    transition: outline-color .2s;
 }
 .input:focus {
-    transition: .2s;
     outline-color: var(--color-accent);
 }
 .form-validate .input:valid {
@@ -167,8 +170,10 @@ input[type="color"] {
 .input-group .btn {
     outline: 1px solid rgb(var(--color-mid));
 }
-.input-group > :first-child {
+.form .input-group > :first-child {
     flex: 1;
+}
+.input-group > :first-child {
     border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 .input-group > :last-child {

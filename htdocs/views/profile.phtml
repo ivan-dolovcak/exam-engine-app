@@ -20,10 +20,12 @@ session_start();
 
 <?php if (isset($_SESSION["userID"])): ?>
     <?php
+        // Load current user if logged in
         $user = UserModel::ctorLoad($_SESSION["userID"]);
         $fullName = $user->firstName . " " . $user->lastName;
     ?>
 
+    <!-- User profile details  -->
     <h3><?=$user->firstName?> <?=$user->lastName?> (@<?=$user->username?>)</h3>
     <ul>
         <li><?=LANG["lastLogin"]?> <span class="timestamp" data-format="datetime">
@@ -32,8 +34,12 @@ session_start();
             <?=$user->creationDate?></span></li>
     </ul>
 
-    <a class="btn" href="/app/forms/log_out.php">
-        <i class="bi bi-escape"></i> <?=LANG["logOut"]?></a>
+    <div class="input-group">
+        <button class="btn">
+            <i class="bi bi-pencil"></i> Edit profile</button>
+        <a class="btn" href="/app/forms/log_out.php">
+            <i class="bi bi-escape"></i> <?=LANG["logOut"]?></a>
+    </div>
 <?php else: ?>
     <p>
         <a href="http://localhost/views/log_in.phtml"><?=LANG["logInCTA1"]?></a>
