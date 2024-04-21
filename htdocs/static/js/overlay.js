@@ -1,13 +1,13 @@
 function openOverlay(overlayID)
 {
     const overlay = document.getElementById(overlayID);
-    overlay.style.display = "block";
+    overlay.classList.add("fade");
     document.querySelector(`#${overlayID} > form > label`).focus();
 }
 
 function closeOverlay(overlayID)
 {
-    document.getElementById(overlayID).style.display = "none";
+    document.getElementById(overlayID).classList.remove("fade");
 }
 
 for (const btnCloseOverlay of document.getElementsByClassName("btn-close-overlay")) {

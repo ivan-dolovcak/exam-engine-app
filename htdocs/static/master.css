@@ -191,11 +191,17 @@ input[type="color"] {
 .overlay {
     position: absolute;
     width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    overflow: visible;
-    display: none;
+    height: 0;
+    overflow: hidden;
+    z-index: -1;
     backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: .4s ease-out;
+}
+.overlay.fade {
+    height: 100vh;
+    opacity: 1;
+    z-index: 10;
 }
 .overlay .form {
     position: relative;
