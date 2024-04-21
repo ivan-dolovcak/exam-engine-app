@@ -26,6 +26,8 @@ const LANG = [
     "resetPreferences" => "Reset preferences",
     "invalidPreferences" => "Invalid preferences set.",
     "accentColor" => "Accent color",
+    "editProfile" => "Edit profile",
+    "save" => "Save",
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",

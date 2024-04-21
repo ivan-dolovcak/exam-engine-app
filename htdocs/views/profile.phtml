@@ -9,6 +9,9 @@ session_start();
     <title><?=LANG["profile"]?> &bull; Exam Engine</title>
 
     <script defer src="/static/js/update_preferences.js"></script>
+    <!-- <script defer src="/static/js/password_peak_btn.js"></script> -->
+    <script defer src="/static/js/form_validation.js"></script>
+    <script defer src="/static/js/overlay.js"></script>
 </head>
 <body>
 <header>
@@ -35,8 +38,8 @@ session_start();
     </ul>
 
     <div class="input-group">
-        <button class="btn">
-            <i class="bi bi-pencil"></i> Edit profile</button>
+        <button class="btn btn-open-overlay" data-overlay="edit-profile">
+            <i class="bi bi-pencil"></i> <?=LANG["editProfile"]?></button>
         <a class="btn" href="/app/forms/log_out.php">
             <i class="bi bi-escape"></i> <?=LANG["logOut"]?></a>
     </div>
@@ -75,6 +78,42 @@ session_start();
 </section>
 <?=Util::getFormError();?>
 </main>
+<div id="overlay-edit-profile" class="overlay">
+    <form action="/app/forms/sign_up.php?update" method="post" class="form form-validate">
+        <button type="button" data-overlay="edit-profile" class="btn btn-close-overlay"
+            onclick="this.parentElement.reset();">
+            <i class="bi bi-x-lg"></i></button>
+
+        <h1><?=LANG["editProfile"]?></h1>
+
+        <label for="username"><?=LANG["username"]?></label>
+        <input autofocus required type="text" name="username" id="username"
+            pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
+            title="<?=LANG["invalidUsername"]?>" class="input"
+            value="<?=$user->username?>">
+
+        <label for="email"><?=LANG["email"]?></label>
+        <input required type="email" name="email" id="email" class="input"
+            title="<?=LANG["invalidEmail"]?>"
+            value="<?=$user->email?>">
+
+        <label for="first-name"><?=LANG["firstName"]?></label>
+        <input required type="text" name="firstName" id="first-name"
+            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
+            title="<?=LANG["invalidName"]?>" class="input"
+            value="<?=$user->firstName?>">
+
+        <label for="last-name"><?=LANG["lastName"]?></label>
+        <input required type="text" name="lastName" id="last-name"
+            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
+            title="<?=LANG["invalidName"]?>" class="input"
+            value="<?=$user->lastName?>">
+
+        <button class="btn"><?=LANG["save"]?></button>
+
+        <div class="form-error-msg"></div>
+    </form>
+</div>
 <footer>
     <?php include "footer.phtml"; ?>
 </footer>

@@ -188,6 +188,30 @@ input[type="color"] {
     display: none;
 }
 
+.overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    overflow: visible;
+    display: none;
+    backdrop-filter: blur(5px);
+}
+.overlay .form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--color-accent);
+}
+.btn-close-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 var(--border-radius);
+    margin: 0;
+}
+
 footer {
     text-align: center;
 }

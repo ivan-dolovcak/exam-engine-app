@@ -2,7 +2,7 @@
 class UserModel
 {
     public readonly int $ID;
-    public readonly string $username;
+    public string $username;
     public string $email;
     public string $passwordHash;
     public string $firstName;
@@ -92,9 +92,30 @@ class UserModel
         # Touch last login timestamp.
         $query = "UPDATE `User`
             SET `lastLoginTime` = utc_timestamp()
-            WHERE ID = ?";
+            WHERE `ID` = ?";
 
         $DB->execStmt($query, "i", $_SESSION["userID"]);
+
+        return null;
+    }
+
+    function update() : ?string
+    {
+        $DB = DB::getInstance();
+        $updatePairs = ["username", "email", "firstName", "lastName", ];
+        foreach ($updatePairs as &$updateVar)
+            $updateVar .= sprintf(' = "%s"',
+                $DB->conn->real_escape_string($this->$updateVar));
+
+        $query = sprintf("UPDATE `User`
+            SET %s
+            WHERE `ID` = ?", implode(", ", $updatePairs));
+
+        $DB = DB::getInstance();
+
+        $errorMsg = $DB->execStmt($query, "i", $this->ID);
+        if (gettype($errorMsg) === "string")
+            return $errorMsg;
 
         return null;
     }

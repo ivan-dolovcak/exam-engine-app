@@ -2,10 +2,17 @@
 require_once "config.php";
 session_start();
 
-$successPage = "/views/index.phtml";
-$failurePage = "/views/sign_up.phtml";
+if (isset($_GET["update"])) {
+    $successPage = "/views/profile.phtml";
+    $failurePage = "/views/profile.phtml";
+} else {
+    $successPage = "/views/index.phtml";
+    $failurePage = "/views/sign_up.phtml";
+}
 
-$requiredPostVars = ["username", "email", "password", "firstName", "lastName", ];
+$requiredPostVars = ["username", "email", "firstName", "lastName", ];
+if (! isset($_GET["update"]))
+    $requiredPostVars[] = "password";
 
 # Test if all required POST vars are present:
 if ($_SERVER["REQUEST_METHOD"] !== "POST"
@@ -29,7 +36,9 @@ elseif (! preg_match(UserModel::REGEX_VALID_NAME, $firstName)
 {
     $_SESSION["formErrorMsg"] = LANG["invalidName"];
 }
-elseif (! preg_match(UserModel::REGEX_VALID_PASSWORD, $password)) {
+elseif (! isset($_GET["update"])
+    && ! preg_match(UserModel::REGEX_VALID_PASSWORD, $password))
+{
     $_SESSION["formErrorMsg"] = LANG["invalidPassword"];
 }
 elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)
@@ -37,19 +46,37 @@ elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)
 {
     $_SESSION["formErrorMsg"] = LANG["invalidEmail"];
 }
-else {
+else if (! isset($_GET["update"])) {
     $DB = DB::getInstance();
     if ($DB->isTaken("User", "username", $username))
         $_SESSION["formErrorMsg"] = LANG["usernameTakenError"];
     elseif ($DB->isTaken("User", "email", $email))
         $_SESSION["formErrorMsg"] = LANG["emailTakenError"];
-    else {
-        $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
-            $lastName);
-        if (isset($errorMsg))
-            $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
-    }
 }
+
+if (isset($_SESSION["formErrorMsg"])) {
+    header("Location: $failurePage");
+    die;
+}
+
+if (isset($_GET["update"])) {
+    // Updating code here :D
+    $updateVars = ["username", "email", "firstName", "lastName", ];
+    $user = UserModel::ctorLoad($_SESSION["userID"]);
+
+    foreach ($updateVars as $updateVar) {
+        $user->$updateVar = $$updateVar;
+    }
+
+    $errorMsg = $user->update();
+
+} else {
+    $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
+        $lastName);
+}
+
+if (isset($errorMsg))
+    $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
 
 if (isset($_SESSION["formErrorMsg"]))
     header("Location: $failurePage");

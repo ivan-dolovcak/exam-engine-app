@@ -15,11 +15,11 @@ async function validateInput(input)
 {
     const errorMsgElement = mainForm.getElementsByClassName("form-error-msg")[0];
 
-    if (input.name === "email") {
+    if (input.name === "email" && input.value !== input.defaultValue) {
         const validationMessage = await apiGet("isUserEmailTaken", input.value);
         input.setCustomValidity(validationMessage);
     }
-    else if (input.name === "username") {
+    else if (input.name === "username" && input.value !== input.defaultValue) {
         const validationMessage = await apiGet("isUsernameTaken", input.value);
         input.setCustomValidity(validationMessage);
     }

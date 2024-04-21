@@ -26,6 +26,8 @@ const LANG = [
     "resetPreferences" => "Resetiraj postavke",
     "invalidPreferences" => "Nevažeće postavke.",
     "accentColor" => "Istaknuta boja",
+    "editProfile" => "Uredi profil",
+    "save" => "Spremi",
 
     # index.phtml
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",
