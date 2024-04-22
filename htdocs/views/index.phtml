@@ -1,6 +1,11 @@
 <?php
 require_once "config.php";
 session_start();
+
+if (! isset($_SESSION["userID"])) {
+    header("Location: /views/log_in.phtml");
+    die;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,10 +33,46 @@ session_start();
 
     <p><?=LANG["welcome"]?></p>
 
+    <div class="form-error-msg"><?=Util::getFormError();?></div>
+</section>
+<section>
+    <h1><?=LANG["documents"]?></h1>
+
+    <table id="documents-listing">
+    <?php
+
+        $filter = "`authorID` = {$_SESSION["userID"]} ORDER BY `creationDate`";
+
+        $documents = DocumentModel::listDocuments($filter);
+
+        if (count($documents)) {
+            $headers = ["name", "type", "visibility", "deadlineDatetime", ];
+            echo "<tr><th>", implode(
+                "</th><th>", array_map(fn($x) => LANG[$x], $headers)), "</th></tr>";
+        }
+        else {
+            echo "<p>", LANG["youHaveNoDocuments"], "</p>";
+        }
+
+        foreach ($documents as $document) {
+            foreach ($document as $key => &$val)
+                $$key = $val;
+
+            $name = "<a href='/views/document_details.phtml?documentID=$ID'>$name</a>";
+            $type = LANG[$type];
+            $visibility = LANG[$visibility];
+            $deadlineDatetime = "<span class='timestamp'>$deadlineDatetime</span>";
+            // $username = "<a href='/views/user_details.phtml?userID=$authorID'>@$username</a>";
+            // $author = "$firstName $lastName ($username)";
+
+            echo "\n<tr><td>", implode(
+                "</td><td>", [$name, $type, $visibility, $deadlineDatetime]), "</td></tr>";
+        }
+    ?>
+    </table>
+
     <button class="btn btn-open-overlay" data-overlay="create-document">
         <i class="bi bi-plus-circle"></i> <?=LANG["createNewDocument"]?></button>
-
-    <div class="form-error-msg"><?=Util::getFormError();?></div>
 </section>
 </main>
 <footer>
@@ -74,7 +115,7 @@ session_start();
         <input type="datetime-local" name="deadlineDatetime"
             id="deadline-datetime" class="input input-novalidate">
 
-        <input hidden required type="text" name="timezone" id="timezone">
+        <input hidden type="text" name="timezone" id="timezone">
 
         <button class="btn"><?=LANG["createNewDocument"]?></button>
 

@@ -32,6 +32,10 @@ const timeFormatOptions = {
 const dateTimeFormatOptions = {...dateFormatOptions, ...timeFormatOptions};
 
 for (const timestampEl of document.getElementsByClassName("timestamp")) {
+    if (! timestampEl.innerText) {
+        timestampEl.innerText = "N/A";
+        continue;
+    }
     // When passing an UTC timestamp to the Date ctor, it adjusts it to
     // the local timezone.
     const adjustedTimestamp = new Date(timestampEl.innerText + " UTC");

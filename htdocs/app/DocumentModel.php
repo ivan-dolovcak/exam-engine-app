@@ -32,4 +32,22 @@ class DocumentModel
 
         return null;
     }
+
+    public static function listDocuments(?string $filter) : array {
+        $query = "SELECT `Document`.`ID`, `name`, `type`, `visibility`,
+            `numMaxSubmissions`, `authorID`, `firstName`, `lastName`, `username`,
+            `deadlineDatetime`, `Document`.`creationDate`
+            FROM `Document`
+            INNER JOIN `User`
+                ON `User`.`ID` = `authorID`";
+
+        if (isset($filter))
+            $query .= "WHERE " . $filter;
+
+        $DB = DB::getInstance();
+
+        $result = $DB->execStmt($query, null);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

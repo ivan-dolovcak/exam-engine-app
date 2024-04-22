@@ -45,6 +45,9 @@ const LANG = [
     "invalidDocumentName" => "Name must be between 4 and 50 characters long.",
     "invalidNumMaxSubmissions" => "Number of allowed attempts must be between 1 and 100.",
     "defaultDocumentName" => "My document",
+    "author" => "Author",
+    "documents" => "Documents",
+    "youHaveNoDocuments" => "You don't have any created documents.",
 
     # sign_up.phtml
     "username" => "Username",

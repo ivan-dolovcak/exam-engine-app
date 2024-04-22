@@ -24,7 +24,7 @@ foreach (array_keys($_POST) as $postVar)
         $$postVar = null;
 
 # Adjust deadline date and time to UTC.
-if (isset($_POST["deadlineDatetime"])) {
+if (isset($deadlineDatetime)) {
     $deadlineObj = new DateTime($deadlineDatetime, new DateTimeZone($timezone));
     $deadlineObj->setTimezone(new DateTimeZone("UTC"));
     $deadlineDatetime = $deadlineObj->format("Y-m-d H:i:s");

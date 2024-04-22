@@ -22,12 +22,13 @@ class DB
         return self::$obj;
     }
 
-    function execStmt(string $query, string $types, mixed ...$queryArgs)
+    function execStmt(string $query, ?string $types, mixed ...$queryArgs)
         : MySQLi_result|false|string
     {
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param($types, ...$queryArgs);
+            if (isset($types))
+                $stmt->bind_param($types, ...$queryArgs);
             $stmt->execute();
             return $stmt->get_result();
         }
