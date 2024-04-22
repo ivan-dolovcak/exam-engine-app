@@ -65,4 +65,8 @@ const LANG = [
     # log_in.phtml
     "usernameOrEmail" => "Korisničko ime / e-mail",
     "invalidLogin" => "Pogrešni podaci za prijavu.",
+
+    # document_details.phtml
+    "documentDetails" => "Detalji dokumenta",
+    "creationDate" => "Datum izrade",
 ];

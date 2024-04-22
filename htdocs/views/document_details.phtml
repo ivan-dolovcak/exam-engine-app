@@ -1,0 +1,44 @@
+<?php
+require_once "config.php";
+session_start();
+
+$document = DocumentModel::ctorLoad($_GET["documentID"]);
+
+if (! $document)
+    die("nope");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <?php include "head.phtml"; ?>
+    <title><?=LANG["documentDetails"]?>
+        &bull; <?=$document->name?> &bull; Exam Engine</title>
+</head>
+<body>
+<header>
+    <?php include "header.phtml"; ?>
+</header>
+<main>
+<section>
+    <h1><?=LANG["documentDetails"]?>: <em><?=$document->name?></em></h1>
+
+    <ul>
+        <li><?=LANG["type"], ": ",
+            LANG[$document->type]?></li>
+        <li><?=LANG["visibility"], ": ",
+            LANG[$document->visibility]?></li>
+        <li><?=LANG["numMaxSubmissions"], ": ",
+            $document->numMaxSubmissions?></li>
+        <li><?=LANG["deadlineDatetime"]?>:
+            <span class="timestamp"><?=$document->deadlineDatetime?></span></li>
+        <li><?=LANG["creationDate"]?>:
+            <span class="timestamp" data-format="date">
+            <?=$document->creationDate?></span></li>
+    </ul>
+</section>
+</main>
+<footer>
+    <?php include "footer.phtml"; ?>
+</footer>
+</body>
+</html>

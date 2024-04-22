@@ -15,6 +15,32 @@ class DocumentModel
 
     private function __construct() {}
 
+    public static function ctorLoad(int $ID) : self|false
+    {
+        $columns = ["name", "type", "visibility", "numMaxSubmissions",
+            "deadlineDatetime", "authorID", "creationDate", ];
+
+        $query = sprintf("SELECT %s
+            FROM `Document`
+            WHERE ID = ?", implode(", ", $columns));
+
+        $DB = DB::getInstance();
+        $result = $DB->execStmt($query, "i", $ID);
+
+        if ($result->num_rows === 0)
+            return false;
+
+        $resultRow = $result->fetch_assoc();
+
+        $instance = new self;
+        $instance->ID = $ID;
+        foreach ($columns as $column) {
+            $instance->$column = $resultRow[$column];
+        }
+
+        return $instance;
+    }
+
     public static function create(string $name, string $type, string $visibility,
         ?int $numMaxSubmissions, ?string $deadlineDatetime) : ?string
     {

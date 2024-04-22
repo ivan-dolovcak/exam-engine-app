@@ -65,4 +65,8 @@ const LANG = [
     # log_in.phtml
     "usernameOrEmail" => "Username / email",
     "invalidLogin" => "Invalid login.",
+
+    # document_details.phtml
+    "documentDetails" => "Document details",
+    "creationDate" => "Creation date",
 ];

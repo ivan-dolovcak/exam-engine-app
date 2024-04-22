@@ -84,9 +84,12 @@ ul, ol {
     list-style: square;
 }
 li {
-    margin: 5px 0;
+    margin: 6px 0;
+    padding-left: .4rem;
 }
 li::marker {
+    content: "\F10B"; /* squircle */
+    font: bold .7rem "Bootstrap-icons";
     color: rgb(var(--color-accent));
 }
 
@@ -216,6 +219,7 @@ input[type="color"] {
 }
 .btn-close-overlay {
     position: absolute;
+    padding: 8px;
     top: 0;
     right: 0;
     border-radius: 0 0 0 var(--border-radius);

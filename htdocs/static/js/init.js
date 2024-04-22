@@ -17,7 +17,9 @@ document.documentElement.lang = preferences.lang;
 
 // Highlight current page anchor in nav:
 const currentPage = location.pathname;
-document.querySelector(`nav a[href="${currentPage}"]`).classList.add("active");
+const a = document.querySelector(`nav a[href="${currentPage}"]`);
+if (a)
+    a.classList.add("active");
 
 // Localize & timezone-adjust all timestamps:
 const dateFormatOptions = {
