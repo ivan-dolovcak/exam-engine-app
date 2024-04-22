@@ -10,6 +10,13 @@ session_start();
 
     <script defer src="/static/js/form_validation.js"></script>
     <script defer src="/static/js/overlay.js"></script>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("timezone").value
+                = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        })
+    </script>
 </head>
 <body>
 <header>
@@ -66,6 +73,8 @@ session_start();
         <label for="deadline-datetime"><?=LANG["deadlineDatetime"]?></label>
         <input type="datetime-local" name="deadlineDatetime"
             id="deadline-datetime" class="input input-novalidate">
+
+        <input hidden required type="text" name="timezone" id="timezone">
 
         <button class="btn"><?=LANG["createNewDocument"]?></button>
 

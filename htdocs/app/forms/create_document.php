@@ -5,7 +5,7 @@ session_start();
 $successPage = "/views/index.phtml";
 $failurePage = "/views/index.phtml";
 
-$requiredPostVars = ["name", "type", "visibility", ];
+$requiredPostVars = ["name", "type", "visibility", "timezone", ];
 
 # Test if all required POST vars are present:
 if ($_SERVER["REQUEST_METHOD"] !== "POST"
@@ -22,6 +22,13 @@ foreach (array_keys($_POST) as $postVar)
         $$postVar = Util::sanitizeFormData($_POST[$postVar]);
     else
         $$postVar = null;
+
+# Adjust deadline date and time to UTC.
+if (isset($_POST["deadlineDatetime"])) {
+    $deadlineObj = new DateTime($deadlineDatetime, new DateTimeZone($timezone));
+    $deadlineObj->setTimezone(new DateTimeZone("UTC"));
+    $deadlineDatetime = $deadlineObj->format("Y-m-d H:i:s");
+}
 
 if (isset($numMaxSubmissions))
     $numMaxSubmissions = (int) $numMaxSubmissions;
