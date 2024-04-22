@@ -31,6 +31,7 @@
 }
 #title-wrapper img {
     margin-right: 1rem;
+    border-radius: var(--border-radius);
 }
 
 header, section, footer {
@@ -156,7 +157,7 @@ input[type="color"] {
 .input:focus {
     outline-color: rgb(var(--color-accent));
 }
-.form-validate .input:valid {
+.form-validate .input:valid:not(.input-novalidate) {
     background: rgba(var(--color-accent), .5);
     color: rgb(var(--color-fg));
 }

@@ -7,6 +7,9 @@ session_start();
 <head>
     <?php include "head.phtml"; ?>
     <title><?=LANG["homePage"]?> &bull; Exam Engine</title>
+
+    <script defer src="/static/js/form_validation.js"></script>
+    <script defer src="/static/js/overlay.js"></script>
 </head>
 <body>
 <header>
@@ -17,10 +20,57 @@ session_start();
     <h1><?=LANG["homePage"]?></h1>
 
     <p><?=LANG["welcome"]?></p>
+
+    <button class="btn btn-open-overlay" data-overlay="create-document">
+        <i class="bi bi-plus-circle"></i> <?=LANG["createNewDocument"]?></button>
+
+    <div class="form-error-msg"><?=Util::getFormError();?></div>
 </section>
 </main>
 <footer>
     <?php include "footer.phtml"; ?>
 </footer>
+<div id="overlay-create-document" class="overlay">
+    <form action="/app/forms/create_document.php" method="post"
+        class="form form-validate">
+        <button type="button" data-overlay="create-document"
+            class="btn btn-close-overlay" onclick="this.parentElement.reset();">
+            <i class="bi bi-x-lg"></i></button>
+
+        <h1><?=LANG["createNewDocument"]?></h1>
+
+        <label for="name"><?=LANG["name"]?>*</label>
+        <input autofocus required type="text" name="name" id="name"
+            pattern="<?=trim(DocumentModel::REGEX_VALID_NAME, "/")?>"
+            title="<?=LANG["invalidDocumentName"]?>" class="input"
+            value="<?=LANG["defaultDocumentName"]?>">
+
+        <label for="type"><?=LANG["type"]?>*</label>
+        <select name="type" id="type" class="input input-novalidate">
+            <option value="exam"><?=LANG["exam"]?></option>
+            <option value="form"><?=LANG["form"]?></option>
+        </select>
+
+        <label for="visibility"><?=LANG["visibility"]?>*</label>
+        <select name="visibility" id="visibility" class="input input-novalidate">
+            <option value="public"><?=LANG["public"]?></option>
+            <option value="private"><?=LANG["private"]?></option>
+            <option value="unlisted"><?=LANG["unlisted"]?></option>
+        </select>
+
+        <label for="num-max-submissions"><?=LANG["numMaxSubmissions"]?></label>
+        <input type="number" name="numMaxSubmissions"
+            id="num-max-submissions" min="1" max="100"
+            title="<?=LANG["invalidNumMaxSubmissions"]?>" class="input">
+
+        <label for="deadline-datetime"><?=LANG["deadlineDatetime"]?></label>
+        <input type="datetime-local" name="deadlineDatetime"
+            id="deadline-datetime" class="input input-novalidate">
+
+        <button class="btn"><?=LANG["createNewDocument"]?></button>
+
+        <div class="form-error-msg"></div>
+    </form>
+</div>
 </body>
 </html>

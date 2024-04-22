@@ -60,7 +60,6 @@ if (isset($_SESSION["formErrorMsg"])) {
 }
 
 if (isset($_GET["update"])) {
-    // Updating code here :D
     $updateVars = ["username", "email", "firstName", "lastName", ];
     $user = UserModel::ctorLoad($_SESSION["userID"]);
 

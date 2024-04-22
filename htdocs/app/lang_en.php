@@ -31,6 +31,20 @@ const LANG = [
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",
+    "name" => "Name",
+    "exam" => "exam",
+    "form" => "form",
+    "public" => "public",
+    "private" => "private",
+    "type" => "Type",
+    "unlisted" => "unlisted",
+    "visibility" => "Visibility",
+    "numMaxSubmissions" => "Number of allowed attempts",
+    "createNewDocument" => "Create new document",
+    "deadlineDatetime" => "Deadline",
+    "invalidDocumentName" => "Name must be between 4 and 50 characters long.",
+    "invalidNumMaxSubmissions" => "Number of allowed attempts must be between 1 and 100.",
+    "defaultDocumentName" => "My document",
 
     # sign_up.phtml
     "username" => "Username",

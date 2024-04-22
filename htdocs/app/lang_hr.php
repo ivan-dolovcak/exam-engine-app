@@ -31,6 +31,20 @@ const LANG = [
 
     # index.phtml
     "welcome" => "Dobro došli na početnu stranicu web aplikacije Exam Engine!",
+    "name" => "Ime",
+    "exam" => "ispit",
+    "form" => "obrazac",
+    "public" => "javni",
+    "private" => "privatni",
+    "type" => "Tip",
+    "unlisted" => "skriveni",
+    "visibility" => "Vidljivost",
+    "numMaxSubmissions" => "Broj dozvoljenih pokušaja",
+    "createNewDocument" => "Napravi novi dokument",
+    "deadlineDatetime" => "Rok predaje",
+    "invalidDocumentName" => "Ime mora biti duljine između 4 and 50 znakova.",
+    "invalidNumMaxSubmissions" => "Broj dozvoljenih pokušaja mora biti između 1 i 100.",
+    "defaultDocumentName" => "Moj dokument",
 
     # sign_up.phtml
     "username" => "Korisničko ime",
