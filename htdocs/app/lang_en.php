@@ -28,6 +28,8 @@ const LANG = [
     "accentColor" => "Accent color",
     "editProfile" => "Edit profile",
     "save" => "Save",
+    "deleteAccount" => "Delete account",
+    "deleteAccountConfirmation" => "Are you sure you want to delete your account and all of its related data? This action is irreversible!",
 
     # index.phtml
     "welcome" => "Welcome to the Exam Engine web application home page!",

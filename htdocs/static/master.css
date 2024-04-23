@@ -4,6 +4,7 @@
     --color-bg-alt: 15, 15, 15;
     --color-mid: 100, 100, 100;
     --border-radius: 5px;
+    --color-warning: 200, 0, 0;
 
     background: rgb(var(--color-bg-alt));
     color: rgb(var(--color-fg));
@@ -13,6 +14,12 @@
     --color-fg: 10, 10, 10;
     --color-bg: 235, 235, 235;
     --color-bg-alt: 242, 242, 242;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #header-logo {
@@ -113,6 +120,9 @@ a {
     margin: 1px;
     transition: filter .2s ease-in-out;
 }
+.btn.warning {
+    background: rgb(var(--color-warning));
+}
 .btn.nav-item {
     padding: 7px 10px;
 }
@@ -210,14 +220,17 @@ input[type="color"] {
     opacity: 1;
     z-index: 10;
 }
-.overlay .form {
+.overlay > :first-child {
+    max-width: 350px;
     position: relative;
+    padding: .8rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid rgb(var(--color-accent));
+    background: rgb(var(--color-bg));
 }
-.btn-close-overlay {
+.btn-close-overlay:first-child {
     position: absolute;
     padding: 8px;
     top: 0;

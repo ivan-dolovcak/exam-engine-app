@@ -119,4 +119,13 @@ class UserModel
 
         return null;
     }
+
+    function delete() : void
+    {
+        $query = "DELETE from `User`
+            WHERE `ID` = ?";
+
+        $DB = DB::getInstance();
+        $DB->execStmt($query, "s", $this->ID);
+    }
 }

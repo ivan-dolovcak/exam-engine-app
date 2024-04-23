@@ -2,7 +2,9 @@ function openOverlay(overlayID)
 {
     const overlay = document.getElementById(overlayID);
     overlay.classList.add("fade");
-    document.querySelector(`#${overlayID} > form > label`).focus();
+    const firstLabel = document.querySelector(`#${overlayID} > form > label`);
+    if (firstLabel)
+        firstLabel.focus();
 }
 
 function closeOverlay(overlayID)

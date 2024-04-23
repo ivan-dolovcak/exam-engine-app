@@ -9,6 +9,7 @@ session_start();
     <title><?=LANG["profile"]?> &bull; Exam Engine</title>
 
     <script defer src="/static/js/update_preferences.js"></script>
+    <script defer src="/static/js/overlay.js"></script>
 </head>
 <body>
 <header>
@@ -39,6 +40,9 @@ session_start();
             <i class="bi bi-pencil"></i> <?=LANG["editProfile"]?></button>
         <a class="btn" href="/app/forms/log_out.php">
             <i class="bi bi-escape"></i> <?=LANG["logOut"]?></a>
+        <button class="btn warning btn-open-overlay"
+            data-overlay="confirm-delete-profile">
+            <i class="bi bi-trash"></i> <?=LANG["deleteAccount"]?></button>
     </div>
 <?php else: ?>
     <p>
@@ -78,8 +82,23 @@ session_start();
 
 <?php if (isset($_SESSION["userID"])): ?>
 
+<div id="overlay-confirm-delete-profile" class="overlay">
+    <div>
+        <button data-overlay="confirm-delete-profile" class="btn btn-close-overlay">
+            <i class="bi bi-x-lg"></i></button>
+
+        <h1><?=LANG["deleteAccount"]?></h1>
+        <p><?=LANG["deleteAccountConfirmation"]?></p>
+        <div class="input-group flex-center">
+            <a href="/app/forms/delete_user.php" class="btn warning">Yes</a>
+            <button data-overlay="confirm-delete-profile"
+                class="btn btn-close-overlay">
+                No</button>
+        </div>
+    </div>
+</div>
+
 <script defer src="/static/js/form_validation.js"></script>
-<script defer src="/static/js/overlay.js"></script>
 
 <div id="overlay-edit-profile" class="overlay">
     <form action="/app/forms/sign_up.php?update" method="post" class="form form-validate">
