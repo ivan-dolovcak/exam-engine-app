@@ -13,6 +13,7 @@ class DocumentModel
     public readonly string $creationDate;
     const REGEX_VALID_NAME = "/^.{4,50}$/";
 
+
     private function __construct() {}
 
     public static function ctorLoad(int $ID) : self|false
@@ -59,7 +60,8 @@ class DocumentModel
         return null;
     }
 
-    public static function listDocuments(?string $filter) : array {
+    public static function listDocuments(?string $filter) : array
+    {
         $query = "SELECT `Document`.`ID`, `name`, `type`, `visibility`,
             `numMaxSubmissions`, `authorID`, `firstName`, `lastName`, `username`,
             `deadlineDatetime`, `Document`.`creationDate`

@@ -3,8 +3,7 @@ require_once "config.php";
 session_start();
 
 if (! isset($_SESSION["userID"])) {
-    header("Location: /views/log_in.phtml");
-    die;
+    Util::redirect("/views/log_in.phtml");
 }
 ?>
 <!DOCTYPE html>
@@ -63,8 +62,8 @@ if (! isset($_SESSION["userID"])) {
             $type = LANG[$type];
             $visibility = LANG[$visibility];
             $deadlineDatetime = "<span class='timestamp'>$deadlineDatetime</span>";
-            // $username = "<a href='/views/user_details.phtml?userID=$authorID'>@$username</a>";
-            // $author = "$firstName $lastName ($username)";
+            # $username = "<a href='/views/user_details.phtml?userID=$authorID'>@$username</a>";
+            # $author = "$firstName $lastName ($username)";
 
             echo "\n<tr><td>", implode(
                 "</td><td>", [$name, $type, $visibility, $deadlineDatetime]), "</td></tr>";

@@ -2,14 +2,10 @@
 require_once "config.php";
 session_start();
 
-if (isset($_GET["updateID"])) {
-    $successPage = $_SERVER["HTTP_REFERER"];
-    $failurePage = $_SERVER["HTTP_REFERER"];
-}
-else {
-    $successPage = "/views/index.phtml";
-    $failurePage = "/views/index.phtml";
-}
+if (isset($_GET["updateID"]))
+    $redirectPage = $_SERVER["HTTP_REFERER"];
+else
+    $redirectPage = "/views/index.phtml";
 
 $requiredPostVars = ["name", "type", "visibility", "timezone", ];
 
@@ -18,8 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || array_diff($requiredPostVars, array_keys($_POST)))
 {
     $_SESSION["formErrorMsg"] = LANG["invalidPost"];
-    header("Location: $failurePage");
-    die;
+    Util::redirect("$redirectPage");
 }
 
 # Create sanitized vars from POST:
@@ -47,8 +42,7 @@ elseif (isset($numMaxSubmissions) && $numMaxSubmissions >= 1
 }
 
 if (isset($_SESSION["formErrorMsg"])) {
-    header("Location: $failurePage");
-    die;
+    Util::redirect("$redirectPage");
 }
 
 if (isset($_GET["updateID"])) {
@@ -71,6 +65,6 @@ else {
 }
 
 if (isset($_SESSION["formErrorMsg"]))
-    header("Location: $failurePage");
+    Util::redirect("$redirectPage");
 else
-    header("Location: $successPage");
+    Util::redirect("$redirectPage");

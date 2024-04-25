@@ -19,7 +19,7 @@ async function validateInput(input)
         const validationMessage = await apiGet("isUserEmailTaken", input.value);
         input.setCustomValidity(validationMessage);
     }
-    elseif (input.name === "username" && input.value !== input.defaultValue) {
+    else if (input.name === "username" && input.value !== input.defaultValue) {
         const validationMessage = await apiGet("isUsernameTaken", input.value);
         input.setCustomValidity(validationMessage);
     }

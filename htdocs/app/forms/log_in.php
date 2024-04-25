@@ -9,8 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || ! isset($_POST["usernameOrEmail"], $_POST["password"]))
 {
     $_SESSION["formErrorMsg"] = LANG["invalidPost"];
-    header("Location: $failurePage");
-    die;
+    Util::redirect("$failurePage");
 }
 
 $usernameOrEmail = Util::sanitizeFormData($_POST["usernameOrEmail"]);
@@ -24,7 +23,7 @@ if (isset($errorMsg)) {
     else
         $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
 
-    header("Location: $failurePage");
+    Util::redirect("$failurePage");
 }
 else
-    header("Location: $successPage");
+    Util::redirect("$successPage");

@@ -19,8 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
     || array_diff($requiredPostVars, array_keys($_POST)))
 {
     $_SESSION["formErrorMsg"] = LANG["invalidPost"];
-    header("Location: $failurePage");
-    die;
+    Util::redirect("$failurePage");
 }
 
 # Create sanitized vars from POST:
@@ -55,8 +54,7 @@ elseif (! isset($_GET["update"])) {
 }
 
 if (isset($_SESSION["formErrorMsg"])) {
-    header("Location: $failurePage");
-    die;
+    Util::redirect("$failurePage");
 }
 
 if (isset($_GET["update"])) {
@@ -78,6 +76,6 @@ if (isset($errorMsg))
     $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
 
 if (isset($_SESSION["formErrorMsg"]))
-    header("Location: $failurePage");
+    Util::redirect("$failurePage");
 else
-    header("Location: $successPage");
+    Util::redirect("$successPage");

@@ -23,4 +23,10 @@ class Util
             fn($x) => hexdec($x), str_split($hexColor, 2));
         return "$r, $g, $b";
     }
+
+    public static function redirect(string $URL) : void
+    {
+        header("Location: $URL");
+        die;
+    }
 }

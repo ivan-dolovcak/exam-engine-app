@@ -151,7 +151,7 @@ a {
     border-radius: var(--border-radius);
     background: rgb(var(--color-bg));
 }
-.form:invalid button:last-of-type {
+.form:invalid > button:last-of-type {
     cursor: not-allowed;
 }
 .form label {
@@ -178,7 +178,7 @@ input[type="color"] {
     outline-color: rgb(var(--color-accent));
 }
 .form-validate .input:valid:not(.input-novalidate) {
-    background: rgba(var(--color-accent), .5);
+    background: rgba(var(--color-accent), .4);
     color: rgb(var(--color-fg));
 }
 

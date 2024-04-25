@@ -19,7 +19,7 @@ class UserModel
 
     private function __construct() {}
 
-    static function ctorLoad(int $ID): self|false
+    static function ctorLoad(int $ID) : self|false
     {
         $columns = ["username", "email", "passwordHash", "firstName",
             "lastName", "creationDate", "lastLoginTime", ];
@@ -46,7 +46,7 @@ class UserModel
     }
 
     static function signUp(string $username, string $email, string $password,
-        string $firstName, string $lastName): ?string
+        string $firstName, string $lastName) : ?string
     {
         $query = "INSERT INTO `User`(`username`, `email`, `passwordHash`,
                 `firstName`, `lastName`)

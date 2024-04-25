@@ -1,7 +1,7 @@
 <?php
 require_once "config.php";
 
-if ($_SERVER["REQUEST_METHOD"] !== "GET" && ! isset($_GET["request"]))
+if (! isset($_GET["request"]))
     die;
 
 $DB = DB::getInstance();

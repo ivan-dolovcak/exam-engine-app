@@ -21,7 +21,7 @@ session_start();
 
 <?php if (isset($_SESSION["userID"])): ?>
     <?php
-        // Load current user if logged in
+        # Load current user if logged in
         $user = UserModel::ctorLoad($_SESSION["userID"]);
         $fullName = $user->firstName . " " . $user->lastName;
     ?>
@@ -50,6 +50,9 @@ session_start();
         <?=LANG["logInCTA2"]?>
     </p>
 <?php endif; ?>
+
+<div class="form-error-msg"><?=Util::getFormError();?></div>
+
 </section>
 <section>
     <h1><?=LANG["preferences"]?></h1>
@@ -77,7 +80,6 @@ session_start();
     <a class="btn" href="/app/api/update_preferences.php?name=reset">
         <i class="bi bi-x-circle"></i> <?=LANG["resetPreferences"]?></a>
 </section>
-<?=Util::getFormError();?>
 </main>
 
 <?php if (isset($_SESSION["userID"])): ?>

@@ -2,7 +2,7 @@
 require_once "config.php";
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] !== "GET" || ! isset($_GET["name"]))
+if (! isset($_GET["name"]))
     die;
 
 if ($_GET["name"] === "theme"
@@ -29,4 +29,4 @@ if (! isset($_SESSION["formErrorMsg"])) {
 }
 
 # Return to view (previous page):
-header("Location: " . $_SERVER["HTTP_REFERER"]);
+Util::redirect("" . $_SERVER["HTTP_REFERER"]);
