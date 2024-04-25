@@ -106,40 +106,7 @@ session_start();
 <script defer src="/static/js/form_validation.js"></script>
 
 <div id="overlay-edit-profile" class="overlay">
-    <form action="/app/forms/sign_up.php?update" method="post" class="form form-validate">
-        <button type="button" data-overlay="edit-profile" class="btn btn-close-overlay"
-            onclick="this.parentElement.reset();">
-            <i class="bi bi-x-lg"></i></button>
-
-        <h1><?=LANG["editProfile"]?></h1>
-
-        <label for="username"><?=LANG["username"]?></label>
-        <input autofocus required type="text" name="username" id="username"
-            pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
-            title="<?=LANG["invalidUsername"]?>" class="input"
-            value="<?=$user->username?>">
-
-        <label for="email"><?=LANG["email"]?></label>
-        <input required type="email" name="email" id="email" class="input"
-            title="<?=LANG["invalidEmail"]?>"
-            value="<?=$user->email?>">
-
-        <label for="first-name"><?=LANG["firstName"]?></label>
-        <input required type="text" name="firstName" id="first-name"
-            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
-            title="<?=LANG["invalidName"]?>" class="input"
-            value="<?=$user->firstName?>">
-
-        <label for="last-name"><?=LANG["lastName"]?></label>
-        <input required type="text" name="lastName" id="last-name"
-            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
-            title="<?=LANG["invalidName"]?>" class="input"
-            value="<?=$user->lastName?>">
-
-        <button class="btn"><?=LANG["save"]?></button>
-
-        <div class="form-error-msg"></div>
-    </form>
+    <?php $formType = "update"; include "form_sign_up.phtml"; ?>
 </div>
 <?php endif; ?>
 <footer>

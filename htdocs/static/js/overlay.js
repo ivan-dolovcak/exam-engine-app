@@ -15,8 +15,10 @@ function closeOverlay(overlayID)
 for (const btnCloseOverlay of document.getElementsByClassName("btn-close-overlay")) {
     const overlayID = `overlay-${btnCloseOverlay.dataset.overlay}`;
 
-    btnCloseOverlay.addEventListener("click",
-        () => closeOverlay(overlayID));
+    btnCloseOverlay.addEventListener("click", () => {
+        closeOverlay(overlayID);
+        btnCloseOverlay.parentElement.reset();
+    });
     document.getElementById(overlayID).addEventListener("keydown",
         (e) => { if (e.key === "Escape") closeOverlay(overlayID) });
 }

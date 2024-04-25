@@ -1,0 +1,6 @@
+<input hidden type="text" name="timezone" id="timezone">
+
+<script>
+    document.getElementById("timezone").value
+        = Intl.DateTimeFormat().resolvedOptions().timeZone;
+</script>

@@ -16,42 +16,7 @@ session_start();
     <?php include "header.phtml"; ?>
 </header>
 <main>
-    <form action="/app/forms/sign_up.php" method="post" class="form form-validate">
-        <h1><?=LANG["signUp"]?></h1>
-
-        <label for="username"><?=LANG["username"]?></label>
-        <input autofocus required type="text" name="username" id="username"
-            pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
-            title="<?=LANG["invalidUsername"]?>" class="input">
-
-        <label for="email"><?=LANG["email"]?></label>
-        <input required type="email" name="email" id="email" class="input"
-            title="<?=LANG["invalidEmail"]?>">
-
-        <label for="password"><?=LANG["password"]?></label>
-        <div class="input-group">
-            <input required type="password" name="password" id="password"
-                pattern="<?=trim(UserModel::REGEX_VALID_PASSWORD, "/")?>"
-                title="<?=LANG["invalidPassword"]?>" class="input">
-            <button type="button" id="btn-password-peak" class="btn">
-                <i class="bi bi-eye-fill"></i>
-            </button>
-        </div>
-
-        <label for="first-name"><?=LANG["firstName"]?></label>
-        <input required type="text" name="firstName" id="first-name"
-            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
-            title="<?=LANG["invalidName"]?>" class="input">
-
-        <label for="last-name"><?=LANG["lastName"]?></label>
-        <input required type="text" name="lastName" id="last-name"
-            pattern="<?=trim(UserModel::REGEX_VALID_NAME, "/")?>"
-            title="<?=LANG["invalidName"]?>" class="input">
-
-        <button class="btn"><?=LANG["signUp"]?></button>
-
-        <div class="form-error-msg"><?=Util::getFormError();?></div>
-    </form>
+    <?php include "form_sign_up.phtml"; ?>
 </main>
 <footer>
     <?php include "footer.phtml"; ?>

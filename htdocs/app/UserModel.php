@@ -15,6 +15,7 @@ class UserModel
     const REGEX_VALID_NAME = "/^\D{3,40}$/";
     # Between 8 and 50 chars, at least 1 uppercase letter, at least 1 number:
     const REGEX_VALID_PASSWORD = "/^(?=.*\d)(?=.*[A-Z]).{8,50}$/";
+    const UPDATE_VARS = ["username", "email", "firstName", "lastName", ];
 
 
     private function __construct() {}
