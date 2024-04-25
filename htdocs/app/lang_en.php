@@ -3,6 +3,8 @@ const LANG = [
     # general
     "invalidPost" => "Error: invalid form data received.",
     "dbError" => "Database error.",
+    "yes" => "Yes",
+    "no" => "No",
 
     # header.phtml
     "homePage" => "Home",
@@ -71,4 +73,7 @@ const LANG = [
     # document_details.phtml
     "documentDetails" => "Document details",
     "creationDate" => "Creation date",
+    "editDocument" => "Edit document",
+    "deleteDocument" => "Delete document",
+    "deleteDocumentConfirmation" => "Are you sure you want to delete this document?",
 ];
