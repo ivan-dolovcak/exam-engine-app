@@ -40,7 +40,7 @@ if ($numMaxSubmissions)
 if (! preg_match(DocumentModel::REGEX_VALID_NAME, $name)) {
     $_SESSION["formErrorMsg"] = LANG["invalidName"];
 }
-else if (isset($numMaxSubmissions) && $numMaxSubmissions >= 1
+elseif (isset($numMaxSubmissions) && $numMaxSubmissions >= 1
     && $numMaxSubmissions >= 100)
 {
     $_SESSION["formErrorMsg"] = LANG["invalidNumMaxSubmissions"];

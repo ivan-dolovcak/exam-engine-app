@@ -46,7 +46,7 @@ elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)
 {
     $_SESSION["formErrorMsg"] = LANG["invalidEmail"];
 }
-else if (! isset($_GET["update"])) {
+elseif (! isset($_GET["update"])) {
     $DB = DB::getInstance();
     if ($DB->isTaken("User", "username", $username))
         $_SESSION["formErrorMsg"] = LANG["usernameTakenError"];
