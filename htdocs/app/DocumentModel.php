@@ -5,7 +5,7 @@ class DocumentModel
     public string $name;
     public string $type;
     public string $visibility;
-    public int $numMaxSubmissions;
+    public ?int $numMaxSubmissions;
     public ?string $deadlineDatetime;
     public ?string $documentJSON;
     public ?string $solutionJSON;

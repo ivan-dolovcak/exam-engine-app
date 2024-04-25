@@ -103,6 +103,10 @@ li::marker {
 a {
     color: rgb(var(--color-accent));
 }
+.timestamp[title] {
+    text-decoration: underline dashed rgb(var(--color-mid));
+    cursor: help;
+}
 
 .btn {
     display: inline-block;
