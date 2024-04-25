@@ -68,8 +68,8 @@ if (isset($_GET["update"])) {
     }
 
     $errorMsg = $user->update();
-
-} else {
+}
+else {
     $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
         $lastName);
 }

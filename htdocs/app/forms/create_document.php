@@ -2,8 +2,14 @@
 require_once "config.php";
 session_start();
 
-$successPage = "/views/index.phtml";
-$failurePage = "/views/index.phtml";
+if (isset($_GET["updateID"])) {
+    $successPage = $_SERVER["HTTP_REFERER"];
+    $failurePage = $_SERVER["HTTP_REFERER"];
+}
+else {
+    $successPage = "/views/index.phtml";
+    $failurePage = "/views/index.phtml";
+}
 
 $requiredPostVars = ["name", "type", "visibility", "timezone", ];
 
@@ -18,19 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
 
 # Create sanitized vars from POST:
 foreach (array_keys($_POST) as $postVar)
-    if (isset($_POST[$postVar]) && $_POST[$postVar])
-        $$postVar = Util::sanitizeFormData($_POST[$postVar]);
-    else
-        $$postVar = null;
+    $$postVar = Util::sanitizeFormData($_POST[$postVar]);
 
 # Adjust deadline date and time to UTC.
-if (isset($deadlineDatetime)) {
+if ($deadlineDatetime) {
     $deadlineObj = new DateTime($deadlineDatetime, new DateTimeZone($timezone));
     $deadlineObj->setTimezone(new DateTimeZone("UTC"));
     $deadlineDatetime = $deadlineObj->format("Y-m-d H:i:s");
 }
 
-if (isset($numMaxSubmissions))
+if ($numMaxSubmissions)
     $numMaxSubmissions = (int) $numMaxSubmissions;
 
 # Validation
@@ -42,13 +45,30 @@ else if (isset($numMaxSubmissions) && $numMaxSubmissions >= 1
 {
     $_SESSION["formErrorMsg"] = LANG["invalidNumMaxSubmissions"];
 }
+
+if (isset($_SESSION["formErrorMsg"])) {
+    header("Location: $failurePage");
+    die;
+}
+
+if (isset($_GET["updateID"])) {
+    $updateVars = ["name", "type", "visibility", "numMaxSubmissions",
+        "deadlineDatetime", ];
+    $document = DocumentModel::ctorLoad($_GET["updateID"]);
+
+    foreach ($updateVars as $updateVar) {
+        $document->$updateVar = $$updateVar;
+    }
+
+    $errorMsg = $document->update();
+}
 else {
     $errorMsg = DocumentModel::create($name, $type, $visibility,
         $numMaxSubmissions ?? null, $deadlineDatetime ?? null);
-}
 
-if (isset($errorMsg))
-    $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
+    if (isset($errorMsg))
+        $_SESSION["formErrorMsg"] = LANG["dbError"] . ": $errorMsg";
+}
 
 if (isset($_SESSION["formErrorMsg"]))
     header("Location: $failurePage");

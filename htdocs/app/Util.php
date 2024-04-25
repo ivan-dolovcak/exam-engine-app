@@ -9,9 +9,12 @@ class Util
     }
 
     # For preventing XSS-attacks.
-    public static function sanitizeFormData(string $data): string
+    public static function sanitizeFormData(string $data): ?string
     {
-        return htmlspecialchars(stripslashes(trim($data)));
+        $sanitizedData = htmlspecialchars(stripslashes(trim($data)));
+        if (empty($sanitizedData))
+            return null;
+        return $sanitizedData;
     }
 
     public static function colorHex2RGB(string $hexColor) : string {

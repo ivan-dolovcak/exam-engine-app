@@ -15,6 +15,13 @@ if (! $document)
         &bull; <?=$document->name?> &bull; Exam Engine</title>
 
     <script defer src="/static/js/datetime_formatter.js"></script>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("timezone").value
+                = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        })
+    </script>
 </head>
 <body>
 <header>
@@ -24,21 +31,122 @@ if (! $document)
 <section>
     <h1><?=LANG["documentDetails"]?>: <em><?=$document->name?></em></h1>
 
+    <!-- Document details  -->
     <ul>
         <li><?=LANG["type"], ": ",
             LANG[$document->type]?></li>
         <li><?=LANG["visibility"], ": ",
             LANG[$document->visibility]?></li>
         <li><?=LANG["numMaxSubmissions"], ": ",
-            $document->numMaxSubmissions?></li>
+            $document->numMaxSubmissions ?? "N/A"?></li>
         <li><?=LANG["deadlineDatetime"]?>:
             <span class="timestamp"><?=$document->deadlineDatetime?></span></li>
         <li><?=LANG["creationDate"]?>:
             <span class="timestamp" data-format="date">
             <?=$document->creationDate?></span></li>
     </ul>
+
+    <div class="form-error-msg"><?=Util::getFormError();?></div>
+
+<?php if ($document->isAuthorized()): ?>
+    <div class="input-group">
+        <button class="btn btn-open-overlay" data-overlay="edit-document">
+            <i class="bi bi-pencil"></i> <?=LANG["editDocument"]?></button>
+        <button class="btn warning btn-open-overlay"
+            data-overlay="confirm-delete-document">
+            <i class="bi bi-trash"></i> <?=LANG["deleteDocument"]?></button>
+    </div>
+<?php endif; ?>
 </section>
 </main>
+<?php if ($document->isAuthorized()): ?>
+
+<script defer src="/static/js/overlay.js"></script>
+
+<div id="overlay-confirm-delete-document" class="overlay">
+    <div>
+        <button data-overlay="confirm-delete-document" class="btn btn-close-overlay">
+            <i class="bi bi-x-lg"></i></button>
+
+        <h1><?=LANG["deleteDocument"]?></h1>
+        <p><?=LANG["deleteDocumentConfirmation"]?></p>
+        <div class="input-group flex-center">
+            <a href="/app/api/deleting.php?documentID=<?=$_GET["documentID"]?>"
+                class="btn warning">
+               <?=LANG["yes"]?>
+            </a>
+            <button data-overlay="confirm-delete-document"
+                class="btn btn-close-overlay">
+                <?=LANG["no"]?></button>
+        </div>
+    </div>
+</div>
+
+<script defer src="/static/js/form_validation.js"></script>
+
+<div id="overlay-edit-document" class="overlay">
+    <form action="/app/forms/create_document.php?updateID=<?=$_GET["documentID"]?>"
+        method="post" class="form form-validate">
+    <button type="button" data-overlay="edit-document"
+        class="btn btn-close-overlay" onclick="this.parentElement.reset();">
+        <i class="bi bi-x-lg"></i></button>
+
+    <h1><?=LANG["editDocument"]?></h1>
+
+    <label for="name"><?=LANG["name"]?>*</label>
+    <input autofocus required type="text" name="name" id="name"
+        pattern="<?=trim(DocumentModel::REGEX_VALID_NAME, "/")?>"
+        title="<?=LANG["invalidDocumentName"]?>" class="input"
+        value="<?=$document->name?>">
+
+    <label for="type"><?=LANG["type"]?>*</label>
+    <select name="type" id="type" class="input input-novalidate">
+        <?php
+            foreach (["exam", "form"] as $option) {
+                $value = "value='$option'";
+                if ($option === $document->type)
+                    $value = "selected $value";
+                echo "<option $value>", LANG[$option], "</option>";
+            }
+        ?>
+    </select>
+
+    <label for="visibility"><?=LANG["visibility"]?>*</label>
+    <select name="visibility" id="visibility" class="input input-novalidate">
+        <?php
+            foreach (["public", "private", "unlisted"] as $option) {
+                $value = "value='$option'";
+                if ($option === $document->visibility)
+                    $value = "selected $value";
+                echo "<option $value>", LANG[$option], "</option>";
+            }
+        ?>
+    </select>
+
+    <label for="num-max-submissions"><?=LANG["numMaxSubmissions"]?></label>
+    <input type="number" name="numMaxSubmissions"
+        id="num-max-submissions" min="1" max="100"
+        title="<?=LANG["invalidNumMaxSubmissions"]?>" class="input"
+        value="<?=$document->numMaxSubmissions?>">
+
+    <label for="deadline-datetime"><?=LANG["deadlineDatetime"]?></label>
+    <div class="input-group">
+        <input type="datetime-local" name="deadlineDatetime"
+            id="deadline-datetime" class="input input-novalidate"
+            value="<?=$document->deadlineDatetime?>">
+        <button type="button" class="btn"
+            onclick="this.previousElementSibling.value = '';">
+            <i class="bi bi-x-lg"></i></button>
+    </div>
+
+    <input hidden type="text" name="timezone" id="timezone">
+
+    <button class="btn"><?=LANG["editDocument"]?></button>
+
+    <div class="form-error-msg"></div>
+    </form>
+</div>
+<?php endif; ?>
 <footer>
     <?php include "footer.phtml"; ?>
 </footer>

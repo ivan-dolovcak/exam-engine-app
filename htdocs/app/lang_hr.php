@@ -3,6 +3,8 @@ const LANG = [
     # general
     "invalidPost" => "Greška: primljeni pogrešni podatci obrasca.",
     "dbError" => "Greška baze podataka.",
+    "yes" => "Da",
+    "no" => "Ne",
 
     # header.phtml
     "homePage" => "Početna",
@@ -71,4 +73,7 @@ const LANG = [
     # document_details.phtml
     "documentDetails" => "Detalji dokumenta",
     "creationDate" => "Datum izrade",
+    "editDocument" => "Uredi dokument",
+    "deleteDocument" => "Izbriši dokument",
+    "deleteDocumentConfirmation" => "Jeste li sigurni da želite izbrisati ovaj dokument?",
 ];

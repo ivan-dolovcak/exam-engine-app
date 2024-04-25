@@ -126,6 +126,6 @@ class UserModel
             WHERE `ID` = ?";
 
         $DB = DB::getInstance();
-        $DB->execStmt($query, "s", $this->ID);
+        $DB->execStmt($query, "i", $this->ID);
     }
 }

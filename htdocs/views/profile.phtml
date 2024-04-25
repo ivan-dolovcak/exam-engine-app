@@ -9,7 +9,6 @@ session_start();
     <title><?=LANG["profile"]?> &bull; Exam Engine</title>
 
     <script defer src="/static/js/update_preferences.js"></script>
-    <script defer src="/static/js/overlay.js"></script>
     <script defer src="/static/js/datetime_formatter.js"></script>
 </head>
 <body>
@@ -83,6 +82,8 @@ session_start();
 
 <?php if (isset($_SESSION["userID"])): ?>
 
+<script defer src="/static/js/overlay.js"></script>
+
 <div id="overlay-confirm-delete-profile" class="overlay">
     <div>
         <button data-overlay="confirm-delete-profile" class="btn btn-close-overlay">
@@ -91,10 +92,11 @@ session_start();
         <h1><?=LANG["deleteAccount"]?></h1>
         <p><?=LANG["deleteAccountConfirmation"]?></p>
         <div class="input-group flex-center">
-            <a href="/app/forms/delete_user.php" class="btn warning">Yes</a>
+            <a href="/app/forms/delete_user.php" class="btn warning">
+                <?=LANG["yes"]?></a>
             <button data-overlay="confirm-delete-profile"
                 class="btn btn-close-overlay">
-                No</button>
+                <?=LANG["no"]?></button>
         </div>
     </div>
 </div>

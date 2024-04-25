@@ -76,4 +76,44 @@ class DocumentModel
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function isAuthorized() : bool
+    {
+        return $this->authorID === $_SESSION["userID"] ?? null;
+    }
+
+    function delete() : void
+    {
+        $query = "DELETE from `Document`
+            WHERE `ID` = ?";
+
+        $DB = DB::getInstance();
+        $DB->execStmt($query, "i", $this->ID);
+    }
+
+    function update() : ?string
+    {
+        $DB = DB::getInstance();
+        $updatePairs = ["name", "type", "visibility", "deadlineDatetime",
+            "numMaxSubmissions", ];
+        $types = "ssssii";
+
+        foreach ($updatePairs as &$updateVar)
+            $updateVar .= " = ?";
+
+        $query = sprintf("UPDATE `Document`
+            SET %s
+            WHERE `ID` = ?", implode(", ", $updatePairs));
+
+        $DB = DB::getInstance();
+
+        $errorMsg = $DB->execStmt($query, $types, $this->name, $this->type,
+            $this->visibility, $this->deadlineDatetime, $this->numMaxSubmissions,
+            $this->ID);
+
+        if (gettype($errorMsg) === "string")
+            return $errorMsg;
+
+        return null;
+    }
 }

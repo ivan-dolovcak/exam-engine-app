@@ -120,7 +120,7 @@ if (! isset($_SESSION["userID"])) {
 
         <button class="btn"><?=LANG["createNewDocument"]?></button>
 
-        <div class="form-error-msg"></div>
+        <div class="form-error-msg"><?=Util::getFormError();?></div>
     </form>
 </div>
 </body>
