@@ -15,6 +15,18 @@ if (! $document)
         &bull; <?=$document->name?> &bull; Exam Engine</title>
 
     <script defer src="/static/js/datetime_formatter.js"></script>
+
+    <script>
+        function datetimeLocalISOString(datetimeUTC)
+        {
+            if (! datetimeUTC)
+                return;
+            const date = new Date(datetimeUTC + " UTC");
+            const timezoneOffsetMS = new Date().getTimezoneOffset() * 60 * 1000;
+            const localDate = new Date(date.getTime() - timezoneOffsetMS);
+            return localDate.toISOString().split('.')[0];
+        }
+    </script>
 </head>
 <body>
 <header>

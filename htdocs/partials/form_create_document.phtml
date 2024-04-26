@@ -55,7 +55,13 @@
     if ($formType === "update") {
         foreach (DocumentModel::UPDATE_VARS as $inputName) {
             $var = $document->$inputName;
-            echo "document.forms[0].elements['$inputName'].defaultValue = '$var';\n";
+            if (str_contains($inputName, "Date"))
+                $var = "datetimeLocalISOString('$var')";
+            else
+                $var = "'$var'";
+
+            echo "document.forms[0].elements['$inputName'].defaultValue = $var;\n";
+            echo "document.forms[0].elements['$inputName'].value = $var;\n";
         }
     }
 ?>

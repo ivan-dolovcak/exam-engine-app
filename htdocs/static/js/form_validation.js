@@ -37,6 +37,8 @@ async function validateInput(input)
 }
 
 for (const input of mainForm.elements) {
+    if (input.type === "hidden")
+        continue;
     input.addEventListener("keyup", () => {
         setTimeout(async() => validateInput(input), 200);
     });
