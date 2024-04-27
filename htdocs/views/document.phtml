@@ -1,0 +1,33 @@
+<?php
+require_once "config.php";
+session_start();
+
+$documentID = $_GET["documentID"];
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <?php include "head.phtml"; ?>
+    <title><?=LANG["document"]?> &bull; Exam Engine</title>
+
+    <link rel="stylesheet" href="/static/document.css">
+    <script src="/static/document_app/QuestionElement.js"></script>
+    <script defer src="/static/document_app/generator.js"></script>
+</head>
+<body>
+<?php readfile("question_element.html", use_include_path:true); ?>
+<header>
+    <?php include "header.phtml"; ?>
+</header>
+<main>
+<section>
+    <h1><?=LANG["document"]?></h1>
+
+    <div id="document-area"></div>
+</section>
+</main>
+<footer>
+    <?php include "footer.phtml"; ?>
+</footer>
+</body>
+</html>

@@ -76,4 +76,8 @@ const LANG = [
     "editDocument" => "Edit document",
     "deleteDocument" => "Delete document",
     "deleteDocumentConfirmation" => "Are you sure you want to delete this document?",
+
+    # document.phtml
+    "document" => "Document",
+    "openDocument" => "Open document",
 ];

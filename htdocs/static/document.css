@@ -1,0 +1,30 @@
+#document-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    user-select: none;
+    counter-reset: question-ordinal;
+}
+
+.question-element {
+    background: rgb(var(--color-bg-alt));
+    border: 2px solid rgba(var(--color-accent), .4);
+    padding: .5rem;
+    transition: .2s;
+    height: 5rem;
+    border-radius: var(--border-radius);
+}
+.question-element:hover {
+    background: rgb(var(--color-bg));
+}
+
+.question-element .title {
+    color: rgb(var(--color-fg));
+    margin: -.5rem -.5rem 0 -.5rem;
+    padding: 3px 5px;
+    background: rgba(var(--color-accent), .4);
+}
+.question-element .title::before {
+    counter-increment: question-ordinal;
+    content: counter(question-ordinal) ". ";
+}

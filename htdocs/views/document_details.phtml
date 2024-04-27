@@ -2,7 +2,8 @@
 require_once "config.php";
 session_start();
 
-$document = DocumentModel::ctorLoad($_GET["documentID"]);
+$documentID = $_GET["documentID"];
+$document = DocumentModel::ctorLoad($documentID);
 
 if (! $document)
     die("document not found!");
@@ -55,6 +56,8 @@ if (! $document)
 
 <?php if ($document->isAuthorized()): ?>
     <div class="input-group">
+        <a class="btn" href="/views/document.phtml?documentID=<?=$documentID?>">
+            <i class="bi bi-file-earmark"></i> <?=LANG["openDocument"]?></a>
         <button class="btn btn-open-overlay" data-overlay="create-document">
             <i class="bi bi-pencil"></i> <?=LANG["editDocument"]?></button>
         <button class="btn warning btn-open-overlay"

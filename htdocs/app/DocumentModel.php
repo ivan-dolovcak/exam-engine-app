@@ -19,10 +19,14 @@ class DocumentModel
 
     private function __construct() {}
 
-    public static function ctorLoad(int $ID) : self|false
+    public static function ctorLoad(int $ID, bool $doLoadContent = false)
+        : self|false
     {
         $columns = ["name", "type", "visibility", "numMaxSubmissions",
             "deadlineDatetime", "authorID", "creationDate", ];
+
+        if ($doLoadContent)
+            array_push($columns, "documentJSON", "solutionJSON");
 
         $query = sprintf("SELECT %s
             FROM `Document`

@@ -217,7 +217,7 @@ input[type="color"] {
     z-index: -1;
     backdrop-filter: blur(5px);
     opacity: 0;
-    transition: .4s ease-out;
+    transition: height .4s ease-out, opacity .4s, z-index .4s;
 }
 .overlay.fade {
     height: 100vh;

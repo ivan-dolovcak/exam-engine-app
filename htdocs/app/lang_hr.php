@@ -76,4 +76,8 @@ const LANG = [
     "editDocument" => "Uredi dokument",
     "deleteDocument" => "Izbriši dokument",
     "deleteDocumentConfirmation" => "Jeste li sigurni da želite izbrisati ovaj dokument?",
+
+    # document.phtml
+    "document" => "Dokument",
+    "openDocument" => "Otvori dokument",
 ];
