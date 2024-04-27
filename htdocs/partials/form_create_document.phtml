@@ -17,7 +17,7 @@
     <h1><?=$formTitle?></h1>
 
     <label for="name"><?=LANG["name"]?>*</label>
-    <input autofocus required type="text" name="name" id="name"
+    <input required type="text" name="name" id="name"
         pattern="<?=trim(DocumentModel::REGEX_VALID_NAME, "/")?>"
         title="<?=LANG["invalidDocumentName"]?>" class="input"
         value="<?=LANG["defaultDocumentName"]?>">

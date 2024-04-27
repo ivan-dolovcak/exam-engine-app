@@ -19,7 +19,8 @@
     <h1><?=$formTitle?></h1>
 
     <label for="username"><?=LANG["username"]?></label>
-    <input autofocus required type="text" name="username" id="username"
+    <input <?=$formType === "create" ? "autofocus" : null?>
+        required type="text" name="username" id="username"
         pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
         title="<?=LANG["invalidUsername"]?>" class="input">
 
