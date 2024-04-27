@@ -41,8 +41,14 @@
         title="<?=LANG["invalidNumMaxSubmissions"]?>" class="input">
 
     <label for="deadline-datetime"><?=LANG["deadlineDatetime"]?></label>
-    <input type="datetime-local" name="deadlineDatetime"
-        id="deadline-datetime" class="input input-novalidate">
+    <div class="input-group">
+        <input type="datetime-local" name="deadlineDatetime"
+            id="deadline-datetime" class="input input-novalidate">
+        <button type="button" class="btn"
+            onclick="this.previousElementSibling.value = '';">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
 
     <?php readfile("local_timezone.html", use_include_path:true); ?>
 
