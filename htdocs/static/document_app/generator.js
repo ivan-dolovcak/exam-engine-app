@@ -19,6 +19,8 @@ async function generateDocument()
     }
 }
 
+window.addEventListener("beforeunload", (e) => { e.preventDefault(); });
+
 window.addEventListener("DOMContentLoaded", () => {
     generateDocument();
 });

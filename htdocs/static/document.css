@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 1rem;
     user-select: none;
+    -webkit-user-select: none;
     counter-reset: question-ordinal;
 }
 
@@ -11,7 +12,6 @@
     border: 2px solid rgba(var(--color-accent), .4);
     padding: .5rem;
     transition: .2s;
-    height: 5rem;
     border-radius: var(--border-radius);
 }
 .question-element:hover {
@@ -20,11 +20,52 @@
 
 .question-element .title {
     color: rgb(var(--color-fg));
-    margin: -.5rem -.5rem 0 -.5rem;
+    margin: -.5rem -.5rem .5rem -.5rem;
     padding: 3px 5px;
     background: rgba(var(--color-accent), .4);
 }
 .question-element .title::before {
     counter-increment: question-ordinal;
     content: counter(question-ordinal) ". ";
+}
+
+.radio-btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: .5rem;
+    position: relative;
+    cursor: pointer;
+    margin: 1px;
+}
+.radio-btn:hover input:enabled ~ span {
+    box-shadow: 0 0 5px 1px rgb(var(--color-accent));
+}
+.radio-btn input {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: outline-color .15s ease;
+}
+.radio-btn input ~ span {
+    outline: 1px solid rgb(var(--color-mid));
+}
+.radio-btn input:focus ~ span {
+    outline-color: rgb(var(--color-accent));
+}
+.radio-btn input:checked ~ span {
+    background: rgb(var(--color-accent));
+    box-shadow: 0 0 5px 1px rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent));
+}
+.radio-btn span.checkbox, span.radio {
+    order: -1;
+    height: 12px;
+    width: 12px;
+    transition: all .15s ease;
+}
+.radio-btn span.radio {
+    border-radius: 50%;
 }
