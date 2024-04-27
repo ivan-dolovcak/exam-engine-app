@@ -1,0 +1,40 @@
+[
+    {
+        "ID": 2,
+        "ordinal": 2,
+        "title": "Which color are lemons?",
+        "type": "singleChoice",
+        "offeredAnswers": [
+            "red",
+            "blue",
+            "yellow",
+            "green"
+        ]
+    },
+    {
+        "ID": 3,
+        "ordinal": 3,
+        "title": "Which adjectives describe a lemon?",
+        "type": "multiChoice",
+        "offeredAnswers": [
+            "yellow",
+            "sour",
+            "sweet",
+            "annoying",
+            "round"
+        ]
+    },
+    {
+        "ID": 4,
+        "ordinal": 4,
+        "title": "Which color are lemons?",
+        "type": "shortAnswer"
+    },
+    {
+        "ID": 6,
+        "ordinal": 6,
+        "title": "Fill in the following sentence:",
+        "type": "fillIn",
+        "partialText": "Lemon is a @@@ @@@."
+    }
+]
