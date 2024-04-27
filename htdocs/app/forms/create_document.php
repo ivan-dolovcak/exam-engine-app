@@ -31,7 +31,7 @@ if ($deadlineDatetime) {
 if ($numMaxSubmissions)
     $numMaxSubmissions = (int) $numMaxSubmissions;
 
-# Validation
+# Validation.
 if (! preg_match(DocumentModel::REGEX_VALID_NAME, $name)) {
     $_SESSION["formErrorMsg"] = LANG["invalidName"];
 }
@@ -46,6 +46,7 @@ if (isset($_SESSION["formErrorMsg"])) {
 }
 
 if (isset($_GET["updateID"])) {
+    # Document updating.
     $updateVars = ["name", "type", "visibility", "numMaxSubmissions",
         "deadlineDatetime", ];
     $document = DocumentModel::ctorLoad($_GET["updateID"]);
@@ -57,6 +58,7 @@ if (isset($_GET["updateID"])) {
     $errorMsg = $document->update();
 }
 else {
+    # Document creation.
     $errorMsg = DocumentModel::create($name, $type, $visibility,
         $numMaxSubmissions ?? null, $deadlineDatetime ?? null);
 

@@ -11,9 +11,11 @@ class DocumentModel
     public ?string $solutionJSON;
     public readonly int $authorID;
     public readonly string $creationDate;
+
     const REGEX_VALID_NAME = "/^.{4,50}$/";
     const UPDATE_VARS = ["name", "type", "visibility", "deadlineDatetime",
         "numMaxSubmissions", ];
+
 
     private function __construct() {}
 

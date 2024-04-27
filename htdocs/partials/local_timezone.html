@@ -1,6 +1,8 @@
 <input type="hidden" name="timezone" id="timezone">
 
 <script>
+    // Local timezone must be passed to back-end because all timestamps are
+    // saved in UTC in DB.
     document.getElementById("timezone").value
         = Intl.DateTimeFormat().resolvedOptions().timeZone;
 </script>

@@ -31,6 +31,7 @@ if (! isset($_SESSION["userID"])) {
 <section>
     <h1><?=LANG["documents"]?></h1>
 
+    <!-- Start documents-listing -->
     <table id="documents-listing">
     <?php
 
@@ -63,6 +64,7 @@ if (! isset($_SESSION["userID"])) {
         }
     ?>
     </table>
+    <!-- End documents-listing -->
 
     <button class="btn btn-open-overlay" data-overlay="create-document">
         <i class="bi bi-plus-circle"></i> <?=LANG["createNewDocument"]?></button>
@@ -71,8 +73,10 @@ if (! isset($_SESSION["userID"])) {
 <footer>
     <?php include "footer.phtml"; ?>
 </footer>
+<!-- Start overlay -->
 <div id="overlay-create-document" class="overlay">
     <?php include "form_create_document.phtml"; ?>
 </div>
+<!-- End overlay -->
 </body>
 </html>

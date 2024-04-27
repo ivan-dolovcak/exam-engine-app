@@ -73,7 +73,7 @@ session_start();
         </li>
         <li>
             <?=LANG["accentColor"]?>:
-            <input type="color" id="accentColor" class="input config-dropdown" value="#FF0000">
+            <input type="color" id="accentColor" class="input config-dropdown">
         </li>
     </ul>
 
@@ -86,6 +86,7 @@ session_start();
 
 <script defer src="/static/js/overlay.js"></script>
 
+<!-- Start overlay -->
 <div id="overlay-confirm-delete-profile" class="overlay">
     <div>
         <button data-overlay="confirm-delete-profile" class="btn btn-close-overlay">
@@ -102,12 +103,15 @@ session_start();
         </div>
     </div>
 </div>
+<!-- End overlay -->
 
 <script defer src="/static/js/form_validation.js"></script>
 
+<!-- Start overlay -->
 <div id="overlay-edit-profile" class="overlay">
     <?php $formType = "update"; include "form_sign_up.phtml"; ?>
 </div>
+<!-- End overlay -->
 <?php endif; ?>
 <footer>
     <?php include "footer.phtml"; ?>

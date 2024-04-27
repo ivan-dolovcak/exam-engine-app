@@ -1,3 +1,4 @@
+<!-- Start form_sign_up.phtml -->
 <?php
     $formType ??= "create";
     if ($formType === "update") {
@@ -19,6 +20,7 @@
     <h1><?=$formTitle?></h1>
 
     <label for="username"><?=LANG["username"]?></label>
+    <!-- Add autofocus if form is not in overlay: -->
     <input <?=$formType === "create" ? "autofocus" : null?>
         required type="text" name="username" id="username"
         pattern="<?=trim(UserModel::REGEX_VALID_USERNAME, "/")?>"
@@ -64,3 +66,4 @@
     }
 ?>
 </script>
+<!-- End form_sign_up.phtml -->

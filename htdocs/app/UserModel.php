@@ -9,6 +9,7 @@ class UserModel
     public string $lastName;
     public readonly string $creationDate;
     public string $lastLoginTime;
+
     # Only ASCII alphanumeric and _, between 4 and 30 chars:
     const REGEX_VALID_USERNAME = "/^\w{4,30}$/";
     # No digits, between 3 and 40 chars:

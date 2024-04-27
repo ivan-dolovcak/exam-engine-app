@@ -12,6 +12,7 @@ if (isset($_GET["update"])) {
 
 $requiredPostVars = ["username", "email", "firstName", "lastName", ];
 if (! isset($_GET["update"]))
+    # Password field is only required when signing up:
     $requiredPostVars[] = "password";
 
 # Test if all required POST vars are present:
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST"
 foreach ($requiredPostVars as $postVar)
     $$postVar = Util::sanitizeFormData($_POST[$postVar]);
 
-# Validation
+# Validation.
 if (! preg_match(UserModel::REGEX_VALID_USERNAME, $username)) {
     $_SESSION["formErrorMsg"] = LANG["invalidUsername"];
 }
@@ -58,6 +59,7 @@ if (isset($_SESSION["formErrorMsg"])) {
 }
 
 if (isset($_GET["update"])) {
+    # User updating.
     $updateVars = ["username", "email", "firstName", "lastName", ];
     $user = UserModel::ctorLoad($_SESSION["userID"]);
 
@@ -68,6 +70,7 @@ if (isset($_GET["update"])) {
     $errorMsg = $user->update();
 }
 else {
+    # User creation.
     $errorMsg = UserModel::signUp($username, $email, $password, $firstName,
         $lastName);
 }

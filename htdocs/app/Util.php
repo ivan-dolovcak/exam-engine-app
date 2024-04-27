@@ -1,7 +1,7 @@
 <?php
 class Util
 {
-    public static function getFormError(): ?string
+    public static function getFormError() : ?string
     {
         $errMsg = $_SESSION["formErrorMsg"] ?? null;
         unset($_SESSION["formErrorMsg"]);
@@ -9,7 +9,7 @@ class Util
     }
 
     # For preventing XSS-attacks.
-    public static function sanitizeFormData(string $data): ?string
+    public static function sanitizeFormData(string $data) : ?string
     {
         $sanitizedData = htmlspecialchars(stripslashes(trim($data)));
         if (empty($sanitizedData))

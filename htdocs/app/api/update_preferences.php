@@ -3,8 +3,9 @@ require_once "config.php";
 session_start();
 
 if (! isset($_GET["name"]))
-    die;
+    Util::redirect("" . $_SERVER["HTTP_REFERER"]);
 
+# Validating preferences.
 if ($_GET["name"] === "theme"
     && ! in_array($_GET["value"], Preferences::VALID_PREFERENCES["theme"]))
 {

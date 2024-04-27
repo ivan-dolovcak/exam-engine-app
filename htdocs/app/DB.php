@@ -1,7 +1,7 @@
 <?php
 require "sql_auth.php";
 
-# Singleton DB controller.
+# Singleton DB controller with boilerplate code.
 class DB
 {
     private static self $obj;
@@ -14,7 +14,7 @@ class DB
             SQL_HOSTNAME, SQL_USERNAME, SQL_PASSWORD, SQL_DATABASE);
     }
 
-    static function getInstance(): self
+    static function getInstance() : self
     {
         if (! isset(self::$obj))
             self::$obj = new self;
@@ -37,6 +37,7 @@ class DB
         }
     }
 
+    # For testing if column value is unique.
     function isTaken(string $table, string $column, string $value) : bool|string
     {
         $query = "SELECT `$column`

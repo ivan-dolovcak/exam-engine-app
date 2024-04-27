@@ -17,13 +17,13 @@ class Preferences
 
     private function __construct() {}
 
-    static function savePreferences($preferences): void
+    static function savePreferences($preferences) : void
     {
         setcookie(self::COOKIE_NAME, json_encode($preferences),
             strtotime("+1 year"), "/");
     }
 
-    static function loadPreferences(): array
+    static function loadPreferences() : array
     {
         return json_decode($_COOKIE[self::COOKIE_NAME], associative:true);
     }
