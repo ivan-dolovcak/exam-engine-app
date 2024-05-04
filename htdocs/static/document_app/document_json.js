@@ -8,11 +8,12 @@ export function collectAnswersJSON()
     const documentAnswers = {};
 
     for (const questionEl of questionElements) {
-        const ID = questionEl.dataset.ID;
+        const ID = questionEl.data.ID;
 
         let inputs, answers;
-        switch (questionEl.dataset.type) {
+        switch (questionEl.data.type) {
         case "shortAnswer":
+            // Convert empty strings to null:
             if (! questionEl.input.value)
                 documentAnswers[ID] = null;
             else

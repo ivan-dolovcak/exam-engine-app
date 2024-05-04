@@ -1,13 +1,16 @@
 import { QuestionElement } from "./QuestionElement.js";
 import { postSubmission } from "./document_json.js";
 
+// Parsing the GET vars in URL:
 const GET = new URL(location.toString()).searchParams;
+
 export const documentID = GET.get("documentID");
+export const documentGenMode = GET.get("genmode") ?? "view";
 export const baseAPIURL = `/app/api/document.php?documentID=${documentID}`;
 
 async function fetchDocument()
 {
-    const URL = `${baseAPIURL}&request=load`
+    const URL = `${baseAPIURL}&request=load`;
     const response = await fetch(URL);
     return response.json();
 }
@@ -23,28 +26,30 @@ async function generateDocument()
         documentContent = JSON.parse(documentObject.documentJSON);
     }
     catch (e) {
+        // Display error message:
         documentArea.innerText = documentObject.documentJSON;
         return;
     }
 
+    // Set title:
     document.getElementById("document-name").innerText = documentObject.name;
 
+    // Generate question divs:
     for (const questionData of documentContent) {
         const questionEl = new QuestionElement(questionData);
 
         documentArea.appendChild(questionEl);
     }
 
-    const generatingMode = GET.get("mode") ?? "view";
-
     const submitBtn = document.getElementById("btn-document-submit");
-    documentArea.appendChild(submitBtn);
-    switch (generatingMode) {
+    documentArea.appendChild(submitBtn); // Move button to botton of parent div.
+    switch (documentGenMode) {
         case "view":
             submitBtn.addEventListener("click", postSubmission);
     }
 }
 
+// Alert for data loss on reload:
 window.onbeforeunload = (e) => { e.preventDefault(); };
 
 window.addEventListener("DOMContentLoaded", async() => {

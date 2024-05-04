@@ -2,12 +2,7 @@ export class QuestionElement extends HTMLDivElement {
     constructor(questionData) {
         super();
 
-        for (const [key, value] of Object.entries(questionData)) {
-            if (Array.isArray(value))
-                this.dataset[key] = JSON.stringify(value);
-            else
-                this.dataset[key] = value.toString();
-        }
+        this.data = questionData;
     }
 
     createMultiInput(content)
@@ -18,16 +13,16 @@ export class QuestionElement extends HTMLDivElement {
 
         const offeredAnswerSpan = document.createElement("span");
         offeredAnswerSpan.innerText = content;
-        radioContainer.htmlFor = this.dataset.ID.toString() + Math.random();
+        radioContainer.htmlFor = this.data.ID.toString() + Math.random();
         radioContainer.appendChild(offeredAnswerSpan);
 
         const radioBtn = document.createElement("input");
-        if (this.dataset.type === "multiChoice")
+        if (this.data.type === "multiChoice")
             radioBtn.type = "checkbox";
         else
             radioBtn.type = "radio";
         radioBtn.value = content;
-        radioBtn.name = this.dataset.ID.toString();
+        radioBtn.name = this.data.ID.toString();
         radioBtn.id = radioContainer.htmlFor;
         radioContainer.appendChild(radioBtn);
 
@@ -40,7 +35,7 @@ export class QuestionElement extends HTMLDivElement {
     {
         this.input = document.createElement("input");
         this.input.type = "text";
-        this.input.name = this.dataset.ID.toString();
+        this.input.name = this.data.ID.toString();
         this.input.className = "input";
         this.inputsEl.appendChild(this.input);
     }
@@ -54,20 +49,19 @@ export class QuestionElement extends HTMLDivElement {
         this.contentEl = this.querySelector(".content");
         this.inputsEl = this.querySelector(".inputs");
 
-        this.titleEl.innerText = this.dataset.title;
+        this.titleEl.innerText = this.data.title;
 
-        switch (this.dataset.type) {
+        switch (this.data.type) {
         case "singleChoice":
         case "multiChoice":
-            const offeredAnswers = JSON.parse(this.dataset.offeredAnswers);
-            for (const offeredAnswer of offeredAnswers)
+            for (const offeredAnswer of this.data.offeredAnswers)
                 this.createMultiInput(offeredAnswer);
             break;
         case "shortAnswer":
             this.createShortAnswerInput();
             break;
         case "fillIn":
-            const textFragments = this.dataset.partialText.split("@@@");
+            const textFragments = this.data.partialText.split("@@@");
 
             for (const textFragment of textFragments) {
                 this.inputsEl.insertAdjacentText("beforeend", textFragment);
