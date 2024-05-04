@@ -18,9 +18,8 @@ create table `Document` (
     `ID`                  mediumint unsigned not null auto_increment,
     `name`                varchar(50) not null,
     `type`                enum("exam", "form") not null,
-    `visibility`          enum("public", "unlisted", "private")
-                          not null default "private",
-    `numMaxSubmissions`   tinyint unsigned default 1,
+    `visibility`          enum("public", "unlisted", "private") not null,
+    `numMaxSubmissions`   tinyint unsigned,
     `authorID`            mediumint unsigned not null,
     `deadlineDatetime`    datetime,
     `creationDate`        date not null default utc_date(),
@@ -29,5 +28,21 @@ create table `Document` (
     primary key (`ID`),
     constraint `FK_author`
         foreign key (`authorID`) references `User`(`ID`)
+        on delete cascade
+);
+
+create table `Submission` (
+    `ID`                  mediumint unsigned not null auto_increment,
+    `documentID`          mediumint unsigned not null,
+    `userID`              mediumint unsigned not null,
+    `creationDate`        datetime not null default utc_timestamp(),
+    `submissionJSON`      json not null,
+    `gradesJSON`          json,
+    primary key (`ID`),
+    constraint `FK_SubmissionDocument`
+        foreign key (`documentID`) references `Document`(`ID`)
+        on delete cascade,
+    constraint `FK_SubmissionAuthor`
+        foreign key (`userID`) references `User`(`ID`)
         on delete cascade
 );
