@@ -9,8 +9,8 @@
 
 .question-element {
     background: rgb(var(--color-bg-alt));
-    border: 2px solid rgba(var(--color-accent), .4);
-    padding: .5rem;
+    border: 2px solid rgba(var(--color-accent), .9);
+    padding: 1rem .5rem;
     transition: .2s;
     border-radius: var(--border-radius);
 }
@@ -19,10 +19,10 @@
 }
 
 .question-element .title {
-    color: rgb(var(--color-fg));
-    margin: -.5rem -.5rem .5rem -.5rem;
+    color: rgb(var(--color-bg));
+    margin: -1rem -.5rem 1rem -.5rem;
     padding: 3px 5px;
-    background: rgba(var(--color-accent), .4);
+    background: rgba(var(--color-accent), .9);
 }
 .question-element .title::before {
     counter-increment: question-ordinal;

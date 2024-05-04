@@ -14,18 +14,18 @@ class QuestionElement extends HTMLDivElement {
     {
         const radioContainer = document.createElement("label");
         radioContainer.classList.add("radio-btn");
+        this.inputsEl.appendChild(radioContainer);
+
         const offeredAnswerSpan = document.createElement("span");
         offeredAnswerSpan.innerText = content;
-        radioContainer.appendChild(offeredAnswerSpan);
         radioContainer.htmlFor = this.dataset.ID.toString() + Math.random();
-        this.inputsEl.appendChild(radioContainer);
+        radioContainer.appendChild(offeredAnswerSpan);
 
         const radioBtn = document.createElement("input");
         if (this.dataset.type === "multiChoice")
             radioBtn.type = "checkbox";
         else
             radioBtn.type = "radio";
-
         radioBtn.value = content;
         radioBtn.name = this.dataset.ID.toString();
         radioBtn.id = radioContainer.htmlFor;
@@ -48,6 +48,7 @@ class QuestionElement extends HTMLDivElement {
     connectedCallback() {
         const template = document.getElementById("template-question-element");
         this.appendChild(template.content.cloneNode(true));
+        this.className = "question-element";
 
         this.titleEl = this.querySelector(".title");
         this.contentEl = this.querySelector(".content");
