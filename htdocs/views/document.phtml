@@ -11,8 +11,7 @@ $documentID = $_GET["documentID"];
     <title><?=LANG["document"]?> &bull; Exam Engine</title>
 
     <link rel="stylesheet" href="/static/document.css">
-    <script src="/static/document_app/QuestionElement.js"></script>
-    <script defer src="/static/document_app/generator.js"></script>
+    <script type="module" src="/static/document_app/generator.js"></script>
 </head>
 <body>
 <?php readfile("question_element.html", use_include_path:true); ?>
@@ -23,7 +22,11 @@ $documentID = $_GET["documentID"];
 <section>
     <h1 id="document-name"></h1>
 
-    <div id="document-area"></div>
+    <div id="document-area">
+        <button id="btn-document-submit" class="btn">
+            <?=LANG["submitDocument"]?>
+        </button>
+    </div>
 </section>
 </main>
 <footer>

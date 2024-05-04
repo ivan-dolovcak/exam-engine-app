@@ -7,9 +7,14 @@
     counter-reset: question-ordinal;
 }
 
+#document-area > .btn:last-of-type {
+    width: fit-content;
+    align-self: center;
+}
+
 .question-element {
     background: rgb(var(--color-bg-alt));
-    border: 2px solid rgba(var(--color-accent), .9);
+    border: 2px solid rgba(var(--color-accent), .75);
     padding: 1rem .5rem;
     transition: .2s;
     border-radius: var(--border-radius);
@@ -19,10 +24,10 @@
 }
 
 .question-element .title {
-    color: rgb(var(--color-bg));
+    color: rgb(var(--color-fg));
     margin: -1rem -.5rem 1rem -.5rem;
     padding: 3px 5px;
-    background: rgba(var(--color-accent), .9);
+    background: rgba(var(--color-accent), .75);
 }
 .question-element .title::before {
     counter-increment: question-ordinal;

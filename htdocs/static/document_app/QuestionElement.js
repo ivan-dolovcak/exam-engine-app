@@ -1,4 +1,4 @@
-class QuestionElement extends HTMLDivElement {
+export class QuestionElement extends HTMLDivElement {
     constructor(questionData) {
         super();
 
@@ -6,7 +6,7 @@ class QuestionElement extends HTMLDivElement {
             if (Array.isArray(value))
                 this.dataset[key] = JSON.stringify(value);
             else
-                this.dataset[key] = value;
+                this.dataset[key] = value.toString();
         }
     }
 
@@ -57,24 +57,24 @@ class QuestionElement extends HTMLDivElement {
         this.titleEl.innerText = this.dataset.title;
 
         switch (this.dataset.type) {
-            case "singleChoice":
-            case "multiChoice":
-                const offeredAnswers = JSON.parse(this.dataset.offeredAnswers);
-                for (const offeredAnswer of offeredAnswers)
-                    this.createMultiInput(offeredAnswer);
-                break;
-            case "shortAnswer":
+        case "singleChoice":
+        case "multiChoice":
+            const offeredAnswers = JSON.parse(this.dataset.offeredAnswers);
+            for (const offeredAnswer of offeredAnswers)
+                this.createMultiInput(offeredAnswer);
+            break;
+        case "shortAnswer":
+            this.createShortAnswerInput();
+            break;
+        case "fillIn":
+            const textFragments = this.dataset.partialText.split("@@@");
+
+            for (const textFragment of textFragments) {
+                this.inputsEl.insertAdjacentText("beforeend", textFragment);
+
                 this.createShortAnswerInput();
-                break;
-            case "fillIn":
-                const textFragments = this.dataset.partialText.split("@@@");
-
-                for (const textFragment of textFragments) {
-                    this.inputsEl.insertAdjacentText("beforeend", textFragment);
-
-                    this.createShortAnswerInput();
-                }
-                this.inputsEl.lastElementChild.remove();
+            }
+            this.inputsEl.lastElementChild.remove();
         }
     }
 }

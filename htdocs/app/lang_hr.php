@@ -81,4 +81,5 @@ const LANG = [
     # document.phtml
     "document" => "Dokument",
     "emptyDocument" => "Ovaj dokument je prazan.",
+    "submitDocument" => "Predaj dokument",
 ];
