@@ -4,6 +4,7 @@ export class QuestionElement extends HTMLDivElement {
         super();
 
         this.data = questionData;
+        this.id = this.data.ID;
     }
 
     createMultiInput(content)
@@ -41,12 +42,14 @@ export class QuestionElement extends HTMLDivElement {
         this.inputsEl.appendChild(this.input);
     }
 
-    connectedCallback() {
+    connectedCallback()
+    {
         const template = document.getElementById("template-question-element");
         this.appendChild(template.content.cloneNode(true));
         this.className = "question-element";
 
         this.titleEl = this.querySelector(".title");
+        this.headerBtns = this.querySelector(".header-buttons");
         this.contentEl = this.querySelector(".content");
         this.inputsEl = this.querySelector(".inputs");
 

@@ -67,7 +67,7 @@ body {
 }
 
 main {
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-flow: column wrap;
     gap: 1rem;

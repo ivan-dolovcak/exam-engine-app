@@ -51,6 +51,7 @@ async function generateDocument()
 
 // Alert for data loss on reload:
 window.onbeforeunload = (e) => { e.preventDefault(); };
+window.oncontextmenu = (e) => { e.preventDefault(); };
 
 window.addEventListener("DOMContentLoaded", async() => {
     await generateDocument();
