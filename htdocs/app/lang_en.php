@@ -74,6 +74,8 @@ const LANG = [
     "documentDetails" => "Document details",
     "creationDate" => "Creation date",
     "editDocument" => "Edit document",
+    "editDetails" => "Edit details",
+    "editQuestions" => "Edit questions",
     "deleteDocument" => "Delete document",
     "deleteDocumentConfirmation" => "Are you sure you want to delete this document?",
     "openDocument" => "Open document",
@@ -82,4 +84,6 @@ const LANG = [
     "document" => "Document",
     "emptyDocument" => "This document is empty.",
     "submitDocument" => "Submit document",
+    "saveDocument" => "Save document",
+    "discardChanges" => "Discard changes",
 ];

@@ -3,6 +3,7 @@ require_once "config.php";
 session_start();
 
 $documentID = $_GET["documentID"];
+$genMode = $_GET["genmode"] ?? "view";
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,11 +23,25 @@ $documentID = $_GET["documentID"];
 <section>
     <h1 id="document-name"></h1>
 
-    <div id="document-area">
+    <form id="document-area"></form>
+
+    <div class="input-group">
         <button id="btn-document-submit" class="btn">
-            <?=LANG["submitDocument"]?>
+            <i class="bi bi-pencil"></i>
+            <?php
+                echo match ($genMode) {
+                    "view" => LANG["submitDocument"],
+                    "edit" => LANG["editDocument"],
+                };
+            ?>
         </button>
-    </div>
+
+        <?php if ($genMode === "edit"): ?>
+            <a class="btn warning" href="/views/document_details.phtml?documentID=$documentID">
+                <i class="bi bi-trash"></i> <?=LANG["discardChanges"]?></button>
+            </a>
+        <?php endif; ?>
+        </div>
 </section>
 </main>
 <footer>

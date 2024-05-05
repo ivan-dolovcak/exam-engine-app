@@ -7,9 +7,13 @@
     counter-reset: question-ordinal;
 }
 
-#document-area > .btn:last-of-type {
+#document-area:invalid + .input-group #btn-document-submit {
+    cursor: not-allowed;
+}
+
+#document-area + .input-group {
     width: fit-content;
-    align-self: center;
+    margin: 1rem auto 0;
 }
 
 .question-element {

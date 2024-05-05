@@ -54,12 +54,14 @@ if (! $document)
 
     <div class="form-error-msg"><?=Util::getFormError();?></div>
 
-<?php if ($document->isAuthorized()): ?>
     <div class="input-group">
         <a class="btn" href="/views/document.phtml?documentID=<?=$documentID?>">
             <i class="bi bi-file-earmark"></i> <?=LANG["openDocument"]?></a>
+<?php if ($document->isAuthorized()): ?>
         <button class="btn btn-open-overlay" data-overlay="create-document">
-            <i class="bi bi-pencil"></i> <?=LANG["editDocument"]?></button>
+            <i class="bi bi-pencil"></i> <?=LANG["editDetails"]?></button>
+        <a class="btn" href="/views/document.phtml?genmode=edit&documentID=<?=$documentID?>">
+            <i class="bi bi-pencil"></i> <?=LANG["editQuestions"]?></a>
         <button class="btn warning btn-open-overlay"
             data-overlay="confirm-delete-document">
             <i class="bi bi-trash"></i> <?=LANG["deleteDocument"]?></button>

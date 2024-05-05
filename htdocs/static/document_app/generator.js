@@ -42,7 +42,7 @@ async function generateDocument()
     }
 
     const submitBtn = document.getElementById("btn-document-submit");
-    documentArea.appendChild(submitBtn); // Move button to botton of parent div.
+    // documentArea.appendChild(submitBtn); // Move button to botton of parent div.
     switch (documentGenMode) {
         case "view":
             submitBtn.addEventListener("click", postSubmission);
@@ -54,4 +54,9 @@ window.onbeforeunload = (e) => { e.preventDefault(); };
 
 window.addEventListener("DOMContentLoaded", async() => {
     await generateDocument();
+
+    if (documentGenMode === "edit") {
+        const script = document.body.appendChild(document.createElement("script"));
+        script.src = "/static/document_app/editing_mode.js";
+    }
 });
