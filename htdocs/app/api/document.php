@@ -12,4 +12,7 @@ if ($_GET["request"] === "load") {
 }
 elseif ($_GET["request"] === "submission") {
     $submissionJSON = file_get_contents("php://input");
+
+    $_SESSION["formErrorMsg"] = SubmissionModel::create($_GET["documentID"],
+        $submissionJSON);
 }
