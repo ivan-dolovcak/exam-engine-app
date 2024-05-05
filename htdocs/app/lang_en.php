@@ -86,4 +86,8 @@ const LANG = [
     "submitDocument" => "Submit document",
     "saveDocument" => "Save document",
     "discardChanges" => "Discard changes",
+    "singleChoice" => "Single choice",
+    "multiChoice" => "Multiple choice",
+    "shortAnswer" => "Short answer",
+    "fillIn" => "Fill in",
 ];

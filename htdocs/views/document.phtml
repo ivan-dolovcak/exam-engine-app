@@ -16,6 +16,7 @@ $genMode = $_GET["genmode"] ?? "view";
 </head>
 <body>
 <?php readfile("question_element.html", use_include_path:true); ?>
+<?php include "document_menus.phtml"; ?>
 <header>
     <?php include "header.phtml"; ?>
 </header>
@@ -37,7 +38,7 @@ $genMode = $_GET["genmode"] ?? "view";
         </button>
 
         <?php if ($genMode === "edit"): ?>
-            <a class="btn warning" href="/views/document_details.phtml?documentID=$documentID">
+            <a class="btn warning" href="/views/document_details.phtml?documentID=<?=$documentID?>">
                 <i class="bi bi-trash"></i> <?=LANG["discardChanges"]?></button>
             </a>
         <?php endif; ?>

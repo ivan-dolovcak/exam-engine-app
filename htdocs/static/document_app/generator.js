@@ -57,6 +57,7 @@ window.addEventListener("DOMContentLoaded", async() => {
 
     if (documentGenMode === "edit") {
         const script = document.body.appendChild(document.createElement("script"));
+        script.type = "module";
         script.src = "/static/document_app/editing_mode.js";
     }
 });

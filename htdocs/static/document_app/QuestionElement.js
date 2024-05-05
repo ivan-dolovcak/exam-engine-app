@@ -1,5 +1,6 @@
 export class QuestionElement extends HTMLDivElement {
-    constructor(questionData) {
+    constructor(questionData = null)
+    {
         super();
 
         this.data = questionData;
