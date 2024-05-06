@@ -74,6 +74,13 @@ export class QuestionElement extends HTMLDivElement {
             }
             this.inputsEl.lastElementChild.remove();
         }
+
+        this.modify();
+    }
+
+    modify()
+    {
+
     }
 }
 

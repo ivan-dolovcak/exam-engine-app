@@ -29,14 +29,55 @@ function areAllAnswersProvided()
     return false;
 }
 
+function createMoveBtn()
+{
+    const moveBtn = document.createElement("button");
+    moveBtn.type = "button";
+    moveBtn.style.cursor = "grab";
+    moveBtn.innerHTML = "<i class='bi bi-arrows-move'></i>";
+    moveBtn.classList.add("btn");
+
+    return moveBtn;
+}
+
 function createNewQuestionBtn()
 {
     const btnNewQuestion = document.createElement("button");
     btnNewQuestion.type = "button";
+    btnNewQuestion.style.transition = ".2s";
     btnNewQuestion.innerHTML = "<i class='bi bi-plus-lg'></i>";
     btnNewQuestion.classList.add("btn", "dropdown");
     const template = document.getElementById("template-menu-new-question");
     btnNewQuestion.appendChild(template.content.cloneNode(true));
+
+    // Change icon on dragover:
+    btnNewQuestion.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        btnNewQuestion.classList.add("expand");
+    });
+    btnNewQuestion.addEventListener("dragleave", (event) => {
+        btnNewQuestion.classList.remove("expand");
+    });
+
+    // Dragging logic:
+    btnNewQuestion.addEventListener("drop", (event) => {
+        event.preventDefault();
+        btnNewQuestion.classList.remove("expand");
+
+        const questionID = event.dataTransfer.getData("text/plain");
+        const questionEl = document.getElementById(questionID);
+
+        if (event.target === questionEl.previousElementSibling
+            || event.target === questionEl.nextElementSibling)
+        {
+            return;
+        }
+
+        const questionElCopy = new QuestionElement(questionEl.data);
+        questionEl.nextElementSibling.remove(); // Remove "new question" button.
+        questionEl.remove();
+        btnNewQuestion.replaceWith(questionElCopy);
+    });
 
     for (const optionBtn of btnNewQuestion.getElementsByClassName("btn")) {
         optionBtn.addEventListener("click", () => {
@@ -48,7 +89,6 @@ function createNewQuestionBtn()
                 title: optionBtn.innerText,
                 type: questionType,
             };
-
             if (questionType === "multiChoice" || questionType === "singleChoice") {
                 questionData.offeredAnswers = ["Lorem", "Ipsum", "Dolor"];
             }
@@ -57,33 +97,7 @@ function createNewQuestionBtn()
 
             const newQuestion = new QuestionElement(questionData);
 
-            // Add "new question" buttons:
-            const nextEl = btnNewQuestion.nextElementSibling;
-            if (! nextEl || nextEl instanceof QuestionElement)
-                btnNewQuestion.insertAdjacentElement(
-                    "afterend", createNewQuestionBtn());
-
-            const prevEl = btnNewQuestion.previousElementSibling;
-                questionData.ordinal = 1;
-            if (! prevEl || prevEl instanceof QuestionElement)
-                btnNewQuestion.parentElement.insertBefore(
-                    createNewQuestionBtn(), btnNewQuestion);
-
-            // Calculate ordinal:
-            questionData.ordinal = 0;
-            if (prevEl)
-                questionData.ordinal += prevEl.data.ordinal;
-            if (nextEl)
-                questionData.ordinal += nextEl.data.ordinal;
-
-            if (! nextEl)
-                questionData.ordinal = prevEl.data.ordinal + 1;
-            else
-                questionData.ordinal /= 2;
-
             btnNewQuestion.replaceWith(newQuestion);
-            newQuestion.headerBtns.appendChild(
-                createDeleteQuestionBtn(newQuestion.id));
         });
     }
 
@@ -105,6 +119,36 @@ function createDeleteQuestionBtn(questionID)
     return btnDelete;
 }
 
+
+function modify()
+{
+    this.draggable = true;
+
+    this.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("text/plain", event.target.id);
+    });
+
+    let prevEl = this.previousElementSibling;
+    if (prevEl && ! (prevEl instanceof QuestionElement))
+        prevEl = prevEl.previousElementSibling;
+    let nextEl = this.nextElementSibling;
+    if (nextEl && ! (nextEl instanceof QuestionElement))
+        nextEl = nextEl.nextElementSibling;
+
+    // Add "new question" buttons:
+    if (! nextEl || this.nextElementSibling instanceof QuestionElement)
+        this.insertAdjacentElement("afterend", createNewQuestionBtn());
+    if (! prevEl || this.previousElementSibling instanceof QuestionElement)
+        this.insertAdjacentElement("beforebegin", createNewQuestionBtn());
+
+    this.headerBtns.appendChild(createMoveBtn());
+
+    // Add delete buttons:
+    this.headerBtns.appendChild(createDeleteQuestionBtn(this.id));
+}
+
+QuestionElement.prototype.modify = modify;
+
 (() => {
     window.oncontextmenu = () => {}; // Enable the context menu.
 
@@ -124,15 +168,6 @@ function createDeleteQuestionBtn(questionID)
 
     const questionElements = documentArea.getElementsByClassName("question-element");
     for (const questionEl of questionElements) {
-        // Add "new question" buttons:
-        questionEl.parentElement.insertBefore(createNewQuestionBtn(), questionEl);
-
-        // Add delete buttons:
-        questionEl.headerBtns.appendChild(createDeleteQuestionBtn(questionEl.id));
-
-        // Off-by-one error:
-        if (questionEl === questionElements[questionElements.length-1]) {
-            questionEl.parentElement.appendChild(createNewQuestionBtn());
-        }
+        questionEl.modify();
     }
 })();
