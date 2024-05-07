@@ -47,7 +47,6 @@
     margin: 0;
     text-shadow: 1px 1px 1px #000;
     padding: 3px 5px;
-
 }
 .question-element .title::before {
     counter-increment: question-ordinal;
@@ -102,6 +101,9 @@
     display: inline-block;
     z-index: 1;
 }
+.dropdown:hover {
+    filter: none;
+}
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
@@ -127,8 +129,4 @@
 
 .expand {
     scale: 1.5;
-}
-
-.dropdown .bi {
-    pointer-events: none;
 }

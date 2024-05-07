@@ -29,13 +29,17 @@ function areAllAnswersProvided()
     return false;
 }
 
-function createMoveBtn()
+function createMoveBtn(questionID)
 {
     const moveBtn = document.createElement("button");
+    moveBtn.draggable = true;
     moveBtn.type = "button";
     moveBtn.style.cursor = "grab";
     moveBtn.innerHTML = "<i class='bi bi-arrows-move'></i>";
-    moveBtn.classList.add("btn");
+    moveBtn.classList.add("btn", "btn-move");
+    moveBtn.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("text/plain", questionID);
+    });
 
     return moveBtn;
 }
@@ -46,7 +50,7 @@ function createNewQuestionBtn()
     btnNewQuestion.type = "button";
     btnNewQuestion.style.transition = ".2s";
     btnNewQuestion.innerHTML = "<i class='bi bi-plus-lg'></i>";
-    btnNewQuestion.classList.add("btn", "dropdown");
+    btnNewQuestion.classList.add("btn", "dropdown", "btn-new-question");
     const template = document.getElementById("template-menu-new-question");
     btnNewQuestion.appendChild(template.content.cloneNode(true));
 
@@ -67,8 +71,12 @@ function createNewQuestionBtn()
         const questionID = event.dataTransfer.getData("text/plain");
         const questionEl = document.getElementById(questionID);
 
-        if (event.target === questionEl.previousElementSibling
-            || event.target === questionEl.nextElementSibling)
+        let targetBtn = event.target;
+        if (targetBtn.classList.contains("bi")) // icon selected
+            targetBtn = targetBtn.parentElement;
+
+        if (targetBtn.previousElementSibling === questionEl
+            || targetBtn.nextElementSibling === questionEl)
         {
             return;
         }
@@ -122,11 +130,44 @@ function createDeleteQuestionBtn(questionID)
 
 function modify()
 {
-    this.draggable = true;
-
-    this.addEventListener("dragstart", (event) => {
-        event.dataTransfer.setData("text/plain", event.target.id);
+    // Title updating:
+    this.titleEl.contentEditable = true;
+    this.titleEl.addEventListener("blur", (event) => {
+        event.preventDefault();
+        this.data.title = this.titleEl.innerText.trim();
     });
+
+    // Content updating (checkboxes):
+    for (const checkbox of this.querySelectorAll("label > span:first-of-type")) {
+        checkbox.contentEditable = true;
+        checkbox.dataset.initial = checkbox.innerText;
+        checkbox.style.cursor = "text";
+
+        checkbox.addEventListener("click", (event) => event.preventDefault());
+
+        // Editing:
+        checkbox.addEventListener("blur", () => {
+            const optionIndex
+                = this.data.offeredAnswers.indexOf(checkbox.dataset.initial);
+
+            this.data.offeredAnswers[optionIndex] = checkbox.innerText.trim();
+            checkbox.dataset.initial = checkbox.innerText;
+        });
+
+        // Deleting buttons:
+        const deleteBtn = document.createElement("button");
+        deleteBtn.type = "button";
+        deleteBtn.className = "btn";
+        deleteBtn.innerHTML = "<i class='bi bi-trash'></i>";
+        deleteBtn.addEventListener("click", () => {
+            const optionIndex
+                = this.data.offeredAnswers.indexOf(checkbox.innerText);
+
+            this.data.offeredAnswers.splice(optionIndex, 1);
+            deleteBtn.parentElement.remove();
+        });
+        checkbox.parentElement.appendChild(deleteBtn);
+    }
 
     let prevEl = this.previousElementSibling;
     if (prevEl && ! (prevEl instanceof QuestionElement))
@@ -141,7 +182,7 @@ function modify()
     if (! prevEl || this.previousElementSibling instanceof QuestionElement)
         this.insertAdjacentElement("beforebegin", createNewQuestionBtn());
 
-    this.headerBtns.appendChild(createMoveBtn());
+    this.headerBtns.appendChild(createMoveBtn(this.id));
 
     // Add delete buttons:
     this.headerBtns.appendChild(createDeleteQuestionBtn(this.id));
@@ -159,9 +200,10 @@ QuestionElement.prototype.modify = modify;
     const inputs = documentArea.getElementsByTagName("input");
 
     // All answers must be provided:
-    for (const input of inputs)
+    for (const input of inputs) {
         if (input.type !== "checkbox")
             input.required = true;
+    }
 
     const submitBtn = document.getElementById("btn-document-submit");
     submitBtn.addEventListener("click", () => {});
