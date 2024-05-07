@@ -1,40 +1,35 @@
 [
     {
-        "ID": 2,
-        "ordinal": 2,
+        "ID": 0.8851003912254336,
         "title": "Which color are lemons?",
         "type": "singleChoice",
         "offeredAnswers": [
-            "red",
-            "blue",
             "yellow",
-            "green"
+            "orange",
+            "red"
         ]
     },
     {
-        "ID": 3,
-        "ordinal": 3,
-        "title": "Which adjectives describe a lemon?",
+        "ID": 0.9887232768013892,
+        "title": "Which color can apples be?",
         "type": "multiChoice",
         "offeredAnswers": [
+            "red",
+            "blue",
+            "green",
             "yellow",
-            "sour",
-            "sweet",
-            "annoying",
-            "round"
+            "orange"
         ]
     },
     {
-        "ID": 4,
-        "ordinal": 4,
-        "title": "Which color are lemons?",
+        "ID": 0.26522527510755045,
+        "title": "Which color are bananas?",
         "type": "shortAnswer"
     },
     {
-        "ID": 6,
-        "ordinal": 6,
-        "title": "Fill in the following sentence:",
+        "ID": 0.3131934512445752,
+        "title": "Fill in this sentence:",
         "type": "fillIn",
-        "partialText": "Lemon is a @@@ @@@."
+        "partialText": "Lemons are  @@@ @@@  "
     }
 ]

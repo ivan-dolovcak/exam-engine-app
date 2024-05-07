@@ -1,5 +1,5 @@
 import { QuestionElement } from "./QuestionElement.js";
-import { collectQuestionsJSON, editDocumentQuestions, postSubmission } from "./document_json.js";
+import { editDocumentQuestions, postSubmission } from "./document_json.js";
 
 function areAllAnswersProvided()
 {
@@ -145,8 +145,8 @@ function createNewOptionBtn(questionID)
     btnNewOption.classList.add("btn");
     btnNewOption.addEventListener("click", () => {
         const questionEl = document.getElementById(questionID);
-        questionEl.createMultiInput("???");
-        questionEl.data.offeredAnswers.push("???");
+        questionEl.createMultiInput("Lorem ipsum...");
+        questionEl.data.offeredAnswers.push("Lorem ipsum...");
     });
 
     return btnNewOption;
@@ -208,7 +208,7 @@ function modify()
                 event.target.remove();
                 this.data.partialText = this.inputsEl.innerHTML.replaceAll(
                     /<input.*?>/g, "@@@"
-                );
+                ).trim();
                 this.inputsEl.innerHTML = null;
                 this.updateFillIn();
                 return;
@@ -217,11 +217,11 @@ function modify()
             let selection = window.getSelection();
             let range = selection.getRangeAt(0);
             range.deleteContents();
-            range.insertNode(document.createTextNode(" @@@ "));
+            range.insertNode(document.createTextNode("@@@"));
 
             this.data.partialText = this.inputsEl.innerHTML.replaceAll(
                 /<input.*?>/g, "@@@"
-            );
+            ).trim();
             this.inputsEl.innerHTML = null;
             this.updateFillIn();
         });
