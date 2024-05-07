@@ -103,23 +103,19 @@ class DocumentModel
     function update() : ?string
     {
         $DB = DB::getInstance();
-        $updatePairs = ["name", "type", "visibility", "deadlineDatetime",
-            "numMaxSubmissions", ];
-        $types = "ssssii";
 
+        $updatePairs = self::UPDATE_VARS;
+        if (isset($this->documentJSON))
+            array_push($updatePairs, "documentJSON", "solutionJSON");
         foreach ($updatePairs as &$updateVar)
-            $updateVar .= " = ?";
+            $updateVar .= sprintf(' = "%s"',
+                $DB->conn->real_escape_string($this->$updateVar));
 
         $query = sprintf("UPDATE `Document`
             SET %s
             WHERE `ID` = ?", implode(", ", $updatePairs));
 
-        $DB = DB::getInstance();
-
-        $errorMsg = $DB->execStmt($query, $types, $this->name, $this->type,
-            $this->visibility, $this->deadlineDatetime, $this->numMaxSubmissions,
-            $this->ID);
-
+        $errorMsg = $DB->execStmt($query, "i", $this->ID);
         if (gettype($errorMsg) === "string")
             return $errorMsg;
 

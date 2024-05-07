@@ -42,11 +42,7 @@ async function generateDocument()
     }
 
     const submitBtn = document.getElementById("btn-document-submit");
-    // documentArea.appendChild(submitBtn); // Move button to botton of parent div.
-    switch (documentGenMode) {
-        case "view":
-            submitBtn.addEventListener("click", postSubmission);
-    }
+    submitBtn.addEventListener("click", postSubmission);
 }
 
 // Alert for data loss on reload:

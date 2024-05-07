@@ -35,6 +35,35 @@ export function collectAnswersJSON()
     return JSON.stringify(documentAnswers);
 }
 
+export function collectQuestionsJSON()
+{
+    const questionElements
+        = Array.from(document.getElementsByClassName("question-element"));
+
+    const documentQuestions = [];
+
+    for (const questionEl of questionElements)
+        documentQuestions.push(questionEl.data);
+
+    return JSON.stringify(documentQuestions);
+}
+
+export async function editDocumentQuestions()
+{
+    const URL = `${baseAPIURL}&request=editDocumentQuestions`;
+
+    await fetch(URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: "[" + collectQuestionsJSON() + ", " + collectAnswersJSON() + "]"
+    });
+
+    window.onbeforeunload = () => {};
+    location.href = `/views/document_details.phtml?documentID=${documentID}`;
+}
+
 export async function postSubmission()
 {
     const URL = `${baseAPIURL}&request=submission`;

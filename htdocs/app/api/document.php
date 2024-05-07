@@ -16,3 +16,13 @@ elseif ($_GET["request"] === "submission") {
     $_SESSION["formErrorMsg"] = SubmissionModel::create($_GET["documentID"],
         $submissionJSON);
 }
+elseif ($_GET["request"] === "editDocumentQuestions") {
+    $data = file_get_contents("php://input");
+    list($documentJSON, $solutionJSON) = json_decode($data);
+
+    $document = DocumentModel::ctorLoad($_GET["documentID"]);
+    $document->documentJSON = json_encode($documentJSON);
+    $document->solutionJSON = json_encode($solutionJSON);
+
+    $_SESSION["formErrorMsg"] = $document->update();
+}

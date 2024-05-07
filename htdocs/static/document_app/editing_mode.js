@@ -1,32 +1,42 @@
 import { QuestionElement } from "./QuestionElement.js";
+import { collectQuestionsJSON, editDocumentQuestions, postSubmission } from "./document_json.js";
 
 function areAllAnswersProvided()
 {
     const documentArea = document.getElementById("document-area");
 
-    if (! documentArea.checkVisibility())
-        return false;
-
     const questionElements = documentArea.getElementsByClassName("question-element");
+
+    if (! questionElements.length) {
+        return false;
+    }
 
     // Special check for checkboxes: is at least one checked for each question:
     for (const questionEl of questionElements) {
-        if (questionEl.data.type !== "multiChoice")
-            continue;
+        const inputs = questionEl.getElementsByTagName("input");
 
-        let isOneChecked = false;
-        for (const input of questionEl.getElementsByTagName("input")) {
-            if (input.checked) {
-                isOneChecked = true;
-                break;
+        if (questionEl.data.type === "multiChoice") {
+            let isOneChecked = false;
+            for (const input of inputs) {
+                if (input.checked) {
+                    isOneChecked = true;
+                    break;
+                }
             }
-        }
 
-        if (isOneChecked)
-            return true;
+            if (! isOneChecked)
+                return false;
+        }
+        else {
+            for (const input of inputs)
+                input.required = true;
+        }
     }
 
-    return false;
+    if (! documentArea.checkValidity())
+        return false;
+
+    return true;
 }
 
 function createMoveBtn(questionID)
@@ -243,20 +253,15 @@ QuestionElement.prototype.modifyMultiOption = modifyMultiOption;
     window.oncontextmenu = () => {}; // Enable the context menu.
 
     const documentArea = document.getElementById("document-area");
-    documentArea.innerText = null; // Clear empty document message.
     documentArea.style.userSelect = "initial"; // Enable selecting.
     documentArea.classList.add("editing-mode");
 
-    const inputs = documentArea.getElementsByTagName("input");
-
-    // All answers must be provided:
-    for (const input of inputs) {
-        if (input.type !== "checkbox")
-            input.required = true;
-    }
-
     const submitBtn = document.getElementById("btn-document-submit");
-    submitBtn.addEventListener("click", () => {});
+    submitBtn.removeEventListener("click", postSubmission);
+    submitBtn.addEventListener("click", () => {
+        if (areAllAnswersProvided())
+            editDocumentQuestions();
+    });
 
     const questionElements = documentArea.getElementsByClassName("question-element");
     for (const questionEl of questionElements) {
