@@ -39,7 +39,7 @@ $genMode = $_GET["genmode"] ?? "view";
 
         <?php if ($genMode === "edit"): ?>
             <a class="btn warning" href="/views/document_details.phtml?documentID=<?=$documentID?>">
-                <i class="bi bi-trash"></i> <?=LANG["discardChanges"]?></button>
+                <i class="bi bi-x-lg"></i> <?=LANG["discardChanges"]?></button>
             </a>
         <?php endif; ?>
         </div>

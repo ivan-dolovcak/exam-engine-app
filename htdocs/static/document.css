@@ -93,8 +93,13 @@
 .radio-btn span.radio {
     border-radius: 50%;
 }
+.radio-btn input ~ .btn {
+    visibility: hidden;
+}
+.radio-btn input:hover ~ .btn {
+    visibility: visible;
+}
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
     border-radius: var(--border-radius);
     position: relative;
@@ -105,7 +110,6 @@
     filter: none;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;

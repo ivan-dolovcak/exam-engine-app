@@ -127,6 +127,52 @@ function createDeleteQuestionBtn(questionID)
     return btnDelete;
 }
 
+function createNewOptionBtn(questionID)
+{
+    const btnNewOption = document.createElement("button");
+    btnNewOption.type = "button";
+    btnNewOption.innerHTML = "<i class='bi bi-plus-lg'></i>";
+    btnNewOption.classList.add("btn");
+    btnNewOption.addEventListener("click", () => {
+        const questionEl = document.getElementById(questionID);
+        questionEl.createMultiInput("???");
+        questionEl.data.offeredAnswers.push("???");
+    });
+
+    return btnNewOption;
+}
+
+function modifyMultiOption(checkbox)
+{
+    checkbox.contentEditable = true;
+    checkbox.dataset.initial = checkbox.innerText;
+    checkbox.style.cursor = "text";
+
+    checkbox.addEventListener("click", (event) => event.preventDefault());
+
+    // Editing:
+    checkbox.addEventListener("blur", () => {
+        const optionIndex
+            = this.data.offeredAnswers.indexOf(checkbox.dataset.initial);
+
+        this.data.offeredAnswers[optionIndex] = checkbox.innerText.trim();
+        checkbox.dataset.initial = checkbox.innerText;
+    });
+
+    // Deleting buttons:
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.className = "btn";
+    deleteBtn.innerHTML = "<i class='bi bi-x-lg'></i>";
+    deleteBtn.addEventListener("click", () => {
+        const optionIndex
+            = this.data.offeredAnswers.indexOf(checkbox.innerText);
+
+        this.data.offeredAnswers.splice(optionIndex, 1);
+        deleteBtn.parentElement.remove();
+    });
+    checkbox.parentElement.appendChild(deleteBtn);
+}
 
 function modify()
 {
@@ -137,37 +183,9 @@ function modify()
         this.data.title = this.titleEl.innerText.trim();
     });
 
-    // Content updating (checkboxes):
-    for (const checkbox of this.querySelectorAll("label > span:first-of-type")) {
-        checkbox.contentEditable = true;
-        checkbox.dataset.initial = checkbox.innerText;
-        checkbox.style.cursor = "text";
-
-        checkbox.addEventListener("click", (event) => event.preventDefault());
-
-        // Editing:
-        checkbox.addEventListener("blur", () => {
-            const optionIndex
-                = this.data.offeredAnswers.indexOf(checkbox.dataset.initial);
-
-            this.data.offeredAnswers[optionIndex] = checkbox.innerText.trim();
-            checkbox.dataset.initial = checkbox.innerText;
-        });
-
-        // Deleting buttons:
-        const deleteBtn = document.createElement("button");
-        deleteBtn.type = "button";
-        deleteBtn.className = "btn";
-        deleteBtn.innerHTML = "<i class='bi bi-trash'></i>";
-        deleteBtn.addEventListener("click", () => {
-            const optionIndex
-                = this.data.offeredAnswers.indexOf(checkbox.innerText);
-
-            this.data.offeredAnswers.splice(optionIndex, 1);
-            deleteBtn.parentElement.remove();
-        });
-        checkbox.parentElement.appendChild(deleteBtn);
-    }
+    // Add "new option" button:
+    if (this.data.type === "multiChoice" || this.data.type === "singleChoice")
+        this.appendChild(createNewOptionBtn(this.id));
 
     let prevEl = this.previousElementSibling;
     if (prevEl && ! (prevEl instanceof QuestionElement))
@@ -189,6 +207,7 @@ function modify()
 }
 
 QuestionElement.prototype.modify = modify;
+QuestionElement.prototype.modifyMultiOption = modifyMultiOption;
 
 (() => {
     window.oncontextmenu = () => {}; // Enable the context menu.
@@ -211,5 +230,9 @@ QuestionElement.prototype.modify = modify;
     const questionElements = documentArea.getElementsByClassName("question-element");
     for (const questionEl of questionElements) {
         questionEl.modify();
+        // Content updating (checkboxes):
+        for (const checkbox of questionEl.querySelectorAll("label > span:first-of-type")) {
+            questionEl.modifyMultiOption(checkbox);
+        }
     }
 })();

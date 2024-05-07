@@ -31,6 +31,8 @@ export class QuestionElement extends HTMLDivElement {
         const checkmark = document.createElement("span");
         checkmark.classList.add(radioBtn.type);
         radioContainer.appendChild(checkmark);
+
+        this.modifyMultiOption(offeredAnswerSpan);
     }
 
     createShortAnswerInput()
@@ -79,6 +81,11 @@ export class QuestionElement extends HTMLDivElement {
     }
 
     modify()
+    {
+
+    }
+
+    modifyMultiOption(checkbox)
     {
 
     }
