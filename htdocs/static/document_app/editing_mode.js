@@ -213,6 +213,7 @@ QuestionElement.prototype.modifyMultiOption = modifyMultiOption;
     window.oncontextmenu = () => {}; // Enable the context menu.
 
     const documentArea = document.getElementById("document-area");
+    documentArea.innerText = null; // Clear empty document message.
     documentArea.style.userSelect = "initial"; // Enable selecting.
     documentArea.classList.add("editing-mode");
 
@@ -235,4 +236,7 @@ QuestionElement.prototype.modifyMultiOption = modifyMultiOption;
             questionEl.modifyMultiOption(checkbox);
         }
     }
+
+    if (! questionElements.length)
+        documentArea.appendChild(createNewQuestionBtn());
 })();
