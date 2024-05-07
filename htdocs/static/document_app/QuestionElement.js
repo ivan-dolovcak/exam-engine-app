@@ -44,11 +44,25 @@ export class QuestionElement extends HTMLDivElement {
         this.inputsEl.appendChild(this.input);
     }
 
+    updateFillIn()
+    {
+        const textFragments = this.data.partialText.split("@@@");
+
+        for (const textFragment of textFragments) {
+            this.inputsEl.insertAdjacentText("beforeend", textFragment);
+
+            this.createShortAnswerInput();
+        }
+        this.inputsEl.lastElementChild.remove(); // Off-by-one error.
+    }
+
     connectedCallback()
     {
         const template = document.getElementById("template-question-element");
         this.appendChild(template.content.cloneNode(true));
         this.className = "question-element";
+
+        this.spellcheck = false;
 
         this.titleEl = this.querySelector(".title");
         this.headerBtns = this.querySelector(".header-buttons");
@@ -67,14 +81,7 @@ export class QuestionElement extends HTMLDivElement {
             this.createShortAnswerInput();
             break;
         case "fillIn":
-            const textFragments = this.data.partialText.split("@@@");
-
-            for (const textFragment of textFragments) {
-                this.inputsEl.insertAdjacentText("beforeend", textFragment);
-
-                this.createShortAnswerInput();
-            }
-            this.inputsEl.lastElementChild.remove();
+            this.updateFillIn();
         }
 
         this.modify();

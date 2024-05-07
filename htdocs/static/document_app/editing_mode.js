@@ -187,6 +187,36 @@ function modify()
     if (this.data.type === "multiChoice" || this.data.type === "singleChoice")
         this.appendChild(createNewOptionBtn(this.id));
 
+    // Fill-in editing:
+    if (this.data.type === "fillIn") {
+        this.inputsEl.contentEditable = true;
+        this.inputsEl.title = "right click to add box...";
+        this.inputsEl.style.pointer = "add";
+
+        this.inputsEl.addEventListener("contextmenu", (event) => {
+            if (! this.inputsEl.isSameNode(event.target)) {
+                event.target.remove();
+                this.data.partialText = this.inputsEl.innerHTML.replaceAll(
+                    /<input.*?>/g, "@@@"
+                );
+                this.inputsEl.innerHTML = null;
+                this.updateFillIn();
+                return;
+            }
+
+            let selection = window.getSelection();
+            let range = selection.getRangeAt(0);
+            range.deleteContents();
+            range.insertNode(document.createTextNode(" @@@ "));
+
+            this.data.partialText = this.inputsEl.innerHTML.replaceAll(
+                /<input.*?>/g, "@@@"
+            );
+            this.inputsEl.innerHTML = null;
+            this.updateFillIn();
+        });
+    }
+
     let prevEl = this.previousElementSibling;
     if (prevEl && ! (prevEl instanceof QuestionElement))
         prevEl = prevEl.previousElementSibling;
