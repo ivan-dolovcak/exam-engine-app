@@ -1,5 +1,6 @@
 import { QuestionElement } from "./QuestionElement.js";
-import { editDocumentQuestions, postSubmission } from "./document_json.js";
+import { editDocumentQuestions, collectAnswersJSON, postSubmission } from "./document_json.js";
+import { loadAnswers } from "./load_answers.js";
 
 function areAllAnswersProvided()
 {
@@ -78,6 +79,8 @@ function createNewQuestionBtn()
         event.preventDefault();
         btnNewQuestion.classList.remove("expand");
 
+        const answers = JSON.parse(collectAnswersJSON());
+
         const questionID = event.dataTransfer.getData("text/plain");
         const questionEl = document.getElementById(questionID);
 
@@ -95,6 +98,9 @@ function createNewQuestionBtn()
         questionEl.nextElementSibling.remove(); // Remove "new question" button.
         questionEl.remove();
         btnNewQuestion.replaceWith(questionElCopy);
+
+        // Update answers:
+        loadAnswers(answers);
     });
 
     for (const optionBtn of btnNewQuestion.getElementsByClassName("btn")) {
