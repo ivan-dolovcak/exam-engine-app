@@ -33,6 +33,7 @@ $genMode = $_GET["genmode"] ?? "view";
                 echo match ($genMode) {
                     "view" => LANG["submitDocument"],
                     "edit" => LANG["editDocument"],
+                    "review" => "",
                 };
             ?>
         </button>

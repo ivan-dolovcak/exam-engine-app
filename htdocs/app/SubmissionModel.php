@@ -1,6 +1,13 @@
 <?php
 class SubmissionModel
 {
+    public readonly int $ID;
+    public readonly int $documentID;
+    public readonly int $userID;
+    public readonly string $creationDate;
+    public string $submissionJSON;
+    public ?string $gradesJSON;
+
     public static function create(int $documentID, string $submissionJSON)
         : ?string
     {
@@ -17,6 +24,35 @@ class SubmissionModel
             return $errorMsg;
 
         return null;
+    }
+
+    public static function ctorLoad(int $ID, bool $doLoadContent = false)
+        : self|false
+    {
+        $columns = ["documentID" , "userID", "creationDate", ];
+
+        if ($doLoadContent)
+            array_push($columns, "submissionJSON", "gradesJSON");
+
+        $query = sprintf("SELECT %s
+            FROM `Submission`
+            WHERE ID = ?", implode(", ", $columns));
+
+        $DB = DB::getInstance();
+        $result = $DB->execStmt($query, "i", $ID);
+
+        if ($result->num_rows === 0)
+            return false;
+
+        $resultRow = $result->fetch_assoc();
+
+        $instance = new self;
+        $instance->ID = $ID;
+        foreach ($columns as $column) {
+            $instance->$column = $resultRow[$column];
+        }
+
+        return $instance;
     }
 
     public static function listSubmissions(?string $filter) : array

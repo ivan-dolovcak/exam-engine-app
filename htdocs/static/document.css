@@ -53,6 +53,13 @@
     content: counter(question-ordinal) ". ";
 }
 
+.question-element .correct {
+    color: green;
+}
+.question-element .incorrect {
+    color: red;
+}
+
 .radio-btn {
     display: flex;
     align-items: center;

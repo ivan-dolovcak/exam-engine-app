@@ -5,7 +5,11 @@ session_start();
 if (!isset($_GET["documentID"], $_GET["request"]))
     die;
 
-if ($_GET["request"] === "load") {
+if (isset($_GET["submissionID"])) {
+    $submission = SubmissionModel::ctorLoad($_GET["submissionID"], doLoadContent:true);
+    echo json_encode($submission);
+}
+elseif ($_GET["request"] === "load") {
     $document = DocumentModel::ctorLoad($_GET["documentID"], doLoadContent:true);
     $document->documentJSON ??= LANG["emptyDocument"];
     echo json_encode($document);
