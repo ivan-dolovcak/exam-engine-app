@@ -18,4 +18,23 @@ class SubmissionModel
 
         return null;
     }
+
+    public static function listSubmissions(?string $filter) : array
+    {
+        $query = "SELECT `Submission`.`ID` as `submissionID`,
+            `userID`, `firstName`, `lastName`, `username`,
+            `documentID`, `Submission`.`creationDate` as `submissionDate`
+            FROM `Submission`
+            INNER JOIN `User`
+                ON `User`.`ID` = `userID`";
+
+        if (isset($filter))
+            $query .= "WHERE " . $filter;
+
+        $DB = DB::getInstance();
+
+        $result = $DB->execStmt($query, null);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

@@ -79,6 +79,10 @@ const LANG = [
     "deleteDocument" => "Delete document",
     "deleteDocumentConfirmation" => "Are you sure you want to delete this document?",
     "openDocument" => "Open document",
+    "documentSubmissions" => "Document submissions",
+    "submissionDate" => "Submission date",
+    "noSubmissions" => "This document has no submissions.",
+    "viewSubmission" => "View submission",
 
     # document.phtml
     "document" => "Document",

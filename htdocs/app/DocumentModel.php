@@ -71,7 +71,8 @@ class DocumentModel
     {
         $query = "SELECT `Document`.`ID`, `name`, `type`, `visibility`,
             `numMaxSubmissions`, `authorID`, `firstName`, `lastName`, `username`,
-            `deadlineDatetime`, `Document`.`creationDate`
+            `deadlineDatetime`, `Document`.`creationDate`,
+            json_length(solutionJSON) as `numQuestions`
             FROM `Document`
             INNER JOIN `User`
                 ON `User`.`ID` = `authorID`";

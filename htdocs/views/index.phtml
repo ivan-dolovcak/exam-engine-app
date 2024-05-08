@@ -34,7 +34,6 @@ if (! isset($_SESSION["userID"])) {
     <!-- Start documents-listing -->
     <table id="documents-listing">
     <?php
-
         $filter = "`authorID` = {$_SESSION["userID"]} ORDER BY `creationDate`";
 
         $documents = DocumentModel::listDocuments($filter);

@@ -68,6 +68,41 @@ if (! $document)
     </div>
 <?php endif; ?>
 </section>
+<section>
+    <h1><?=LANG["documentSubmissions"]?></h1>
+
+    <table>
+    <?php
+        $filter = "`documentID` = $documentID ORDER BY `submissionDate` DESC";
+
+        $submissions = SubmissionModel::listSubmissions($filter);
+
+        if (count($submissions)) {
+            $headers = ["author", "submissionDate", "viewSubmission"];
+            echo "<tr><th>", implode(
+                "</th><th>", array_map(fn($x) => LANG[$x], $headers)), "</th></tr>";
+        }
+        else {
+            echo "<p>", LANG["noSubmissions"], "</p>";
+        }
+
+        foreach ($submissions as $submission) {
+            foreach ($submission as $key => &$val)
+                $$key = $val;
+
+            $username = "$firstName $lastName
+                (<a href='/views/profile.phtml?userID=$userID'>@$username</a>)";
+
+            $submissionLink = "<a href='/views/document.phtml?documentID=$documentID&submissionID=$submissionID?genmode=review'>view</a>";
+
+            echo "\n<tr><td>", implode(
+                "</td><td>", [$username, "<span class='timestamp'>$submissionDate</span>",
+            $submissionLink]), "</td></tr>";
+        }
+    ?>
+    </table>
+
+</section>
 </main>
 <?php if ($document->isAuthorized()): ?>
 
