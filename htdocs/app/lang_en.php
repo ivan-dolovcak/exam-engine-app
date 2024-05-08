@@ -83,6 +83,7 @@ const LANG = [
     "submissionDate" => "Submission date",
     "noSubmissions" => "This document has no submissions.",
     "viewSubmission" => "View submission",
+    "view" => "View",
 
     # document.phtml
     "document" => "Document",

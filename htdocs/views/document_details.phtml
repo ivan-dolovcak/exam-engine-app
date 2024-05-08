@@ -93,7 +93,7 @@ if (! $document)
             $username = "$firstName $lastName
                 (<a href='/views/profile.phtml?userID=$userID'>@$username</a>)";
 
-            $submissionLink = "<a href='/views/document.phtml?documentID=$documentID&submissionID=$submissionID&genmode=review'>view</a>";
+            $submissionLink = "<a href='/views/document.phtml?documentID=$documentID&submissionID=$submissionID&genmode=review'>" . LANG["view"] . "</a>";
 
             echo "\n<tr><td>", implode(
                 "</td><td>", [$username, "<span class='timestamp'>$submissionDate</span>",

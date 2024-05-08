@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", async() => {
     // Set title:
     document.getElementById("document-name").innerText = documentObject.name;
 
-    let documentContent = null;
+    let documentContent = [];
     const documentArea = document.getElementById("document-area");
     try {
         documentContent = JSON.parse(documentObject.documentJSON);
