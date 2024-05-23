@@ -37,7 +37,6 @@ create table `Submission` (
     `userID`              mediumint unsigned not null,
     `creationDate`        datetime not null default utc_timestamp(),
     `submissionJSON`      json not null,
-    `gradesJSON`          json,
     primary key (`ID`),
     constraint `FK_SubmissionDocument`
         foreign key (`documentID`) references `Document`(`ID`)

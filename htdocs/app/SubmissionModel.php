@@ -32,7 +32,7 @@ class SubmissionModel
         $columns = ["documentID" , "userID", "creationDate", ];
 
         if ($doLoadContent)
-            array_push($columns, "submissionJSON", "gradesJSON");
+            array_push($columns, "submissionJSON");
 
         $query = sprintf("SELECT %s
             FROM `Submission`
